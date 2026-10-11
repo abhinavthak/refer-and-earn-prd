@@ -121,6 +121,7 @@ td code{font-size:12.5px;background:var(--code-bg);padding:1px 6px;border-radius
 .p-sched{background:var(--info-bg);color:var(--info-tx)}
 .p-sent{background:var(--ok-bg);color:var(--ok-tx)}
 .p-void{background:#FBE8C8;color:var(--warn-tx)}
+.p-max{background:var(--line2);color:var(--faint)}
 @media(max-width:880px){
   .jrow,.jvoid{grid-template-columns:1fr;gap:20px}
   .jvoid{margin-top:20px}
@@ -292,6 +293,9 @@ section h2,section h3{scroll-margin-top:16px}
   <div class="whatsnew">
     <h4>What changed in this version · 11 Oct 2026</h4>
     <ul>
+      <li>New gift card status <b>Max reached</b> for friends who enrol after the referrer hits the maximum (0.2, 3.3, 3.5, 4.2, 6.4).</li>
+      <li>Referrers now give their email at sign-up, so every gift card can be emailed (5.5, 8).</li>
+      <li>Friends who already have a profile get no discount (3.2, 7.4). Void and Max reached friends show in the friends table with their status (6.3). Sign-up modal defined (5.5).</li>
       <li>Every campaign value is set by the admin; figures in this PRD are suggested values (3.4, 4.1). The live example now shows the campaign settings panel (3.6).</li>
       <li>No separate reward cap: the end of the last range is the maximum (4.1).</li>
       <li>Non-enrolled referral flow campaigns have no End Date. They run until replaced or deactivated (4.1).</li>
@@ -314,7 +318,7 @@ section h2,section h3{scroll-margin-top:16px}
     <tr><td>Friend</td><td>The person who opens the link and signs up.</td></tr>
     <tr><td>Referral link</td><td>The referrer's personal link, e.g. refer.dyponline.edu/r/HIMANSHU10. It is the only way a referral is counted.</td></tr>
     <tr><td>Profile</td><td>One account per phone number, with one <code>user_id</code>. Referrers, friends and normal users all have the same kind of profile.</td></tr>
-    <tr><td>Gift card status</td><td><b>Pending</b>: friend hasn't enrolled yet. <b>Scheduled</b>: friend paid; the card is waiting for admin approval. <b>Sent</b>: card delivered. <b>Void</b>: no card (friend not eligible, dropped out, refunded or cancelled).</td></tr>
+    <tr><td>Gift card status</td><td><b>Pending</b>: friend hasn't enrolled yet. <b>Scheduled</b>: friend paid; the card is waiting for admin approval. <b>Sent</b>: card delivered. <b>Max reached</b>: friend enrolled, but the referrer already has the maximum number of gift cards, so no card. <b>Void</b>: no card (friend not eligible, dropped out, refunded or cancelled).</td></tr>
     <tr><td>Referral portal</td><td>The admin screens at referral.lmscontent.in, where the team sets up campaigns and approves gift cards (4).</td></tr>
     <tr><td>Referral system</td><td>The existing backend behind the portal. It stores campaigns, referrals and gift cards, and feeds every page.</td></tr>
     <tr><td>Campaign</td><td>The settings for one university: tiers, the friend's discount and a start date. One campaign is <b>live</b> at a time. With no live campaign, the programme is <b>paused</b> (4.1).</td></tr>
@@ -434,7 +438,7 @@ section h2,section h3{scroll-margin-top:16px}
 <text x="182" y="151" font-size="11" fill="#33394A">from banner, email…</text>
 <rect x="172" y="174" width="136" height="46" rx="8" fill="#FAFBFD" stroke="#4A3FA0" stroke-width="1.5"/>
 <text x="182" y="193" font-size="11.5" font-weight="700" fill="#14213D">3 · Signs up:</text>
-<text x="182" y="209" font-size="11" fill="#33394A">name, phone, OTP</text>
+<text x="182" y="209" font-size="10.5" fill="#33394A" textLength="118" lengthAdjust="spacingAndGlyphs">name, phone, email, OTP</text>
 <rect x="330" y="232" width="136" height="46" rx="8" fill="#FAFBFD" stroke="#0E7A63" stroke-width="1.5"/>
 <text x="340" y="251" font-size="11.5" font-weight="700" fill="#14213D">4 · Profile + lead created</text>
 <text x="340" y="267" font-size="11" fill="#33394A">(Referrer Lead ID)</text>
@@ -478,7 +482,7 @@ section h2,section h3{scroll-margin-top:16px}
 <text x="814" y="499" font-size="11" fill="#92660C">or on site → Void</text>
 <rect x="804" y="580" width="116" height="46" rx="8" fill="#FFFBF2" stroke="#F5DE9E" stroke-dasharray="4 3" stroke-width="1.5"/>
 <text x="814" y="599" font-size="11" font-weight="700" fill="#92660C">Maximum reached</text>
-<text x="814" y="615" font-size="11" fill="#92660C">→ no gift card</text>
+<text x="814" y="615" font-size="11" fill="#92660C">→ Max reached</text>
 <rect x="804" y="632" width="116" height="46" rx="8" fill="#FFFBF2" stroke="#F5DE9E" stroke-dasharray="4 3" stroke-width="1.5"/>
 <text x="814" y="651" font-size="11" font-weight="700" fill="#92660C">Cancelled before</text>
 <text x="814" y="667" font-size="11" fill="#92660C">approval → Void</text>
@@ -502,20 +506,20 @@ section h2,section h3{scroll-margin-top:16px}
   <ul>
     <li>A referrer can't refer their own phone number.</li>
     <li>Each friend can have only one referrer: whoever's link they signed up through first.</li>
-    <li>A friend counts only if their phone number is <b>new to the site</b>. Anyone who already has a profile (a referrer, a lead, a past lead or a student) is not eligible.</li>
+    <li>A friend counts only if their phone number is <b>new to the site</b>. Anyone who already has a profile (a referrer, a lead, a past lead or a student) is not eligible, and <b>gets no discount</b>.</li>
     <li>No KYC or PAN is asked from referrers, however much they earn.</li>
   </ul>
   <h3><span class="num">3.3</span>User journey and friend's stages</h3>
 
   <div class="callout info">
     <div class="ttl">ℹ In one paragraph</div>
-    The referrer signs up with their name and phone number (confirmed by OTP) and gets a link. They share it. A friend opens the link, picks a programme, sees their discounted price and signs up (also with OTP). A counsellor calls the friend. When the friend pays the enrolment fee, the referrer's gift card is held. An admin approves it, and it is sent.
+    The referrer signs up with their name, phone number (confirmed by OTP) and email and gets a link. They share it. A friend opens the link, picks a programme, sees their discounted price and signs up (also with OTP). A counsellor calls the friend. When the friend pays the enrolment fee, the referrer's gift card is held. An admin approves it, and it is sent.
   </div>
   <div class="flows">
     <div class="flow">
       <div class="flow-h">Referrer</div>
       <div class="step s1"><b>Opens the landing page</b><span>Reads the offer</span></div>
-      <div class="step s2"><b>Signs up</b><span>Name, phone, OTP</span></div>
+      <div class="step s2"><b>Signs up</b><span>Name, phone, email, OTP</span></div>
       <div class="step s3"><b>Gets and shares the link</b><span>WhatsApp, SMS, email, any app</span></div>
       <div class="step s4"><b>Tracks friends</b><span>On the dashboard</span></div>
       <div class="step s5"><b>Receives gift cards</b><span>By email and SMS, after admin approval</span></div>
@@ -530,7 +534,7 @@ section h2,section h3{scroll-margin-top:16px}
     </div>
   </div>
   <h4 style="font-size:14.5px;margin:20px 0 6px">Friend's stages</h4>
-  <p class="mini">Each friend moves left to right. The label under each stage is what the referrer sees on the dashboard. Dashed boxes are the two ways a friend ends without a gift card.</p>
+  <p class="mini">Each friend moves left to right. The label under each stage is what the referrer sees on the dashboard. Dashed boxes are the three ways a friend ends without a gift card.</p>
   <div class="jflow">
     <div class="jrow" style="grid-template-columns:repeat(5,minmax(0,1fr))">
       <div class="jn c1"><div class="jk">1</div><div class="jt">Joined</div><div class="jd">Friend signed up through the link</div><span class="pill p-pend">Pending</span></div>
@@ -540,8 +544,9 @@ section h2,section h3{scroll-margin-top:16px}
       <div class="jn c4"><div class="jk">5</div><div class="jt">Paid</div><div class="jd">Admin approved; gift card sent by email and SMS</div><span class="pill p-sent">Sent</span></div>
     </div>
     <div class="jvoid" style="grid-template-columns:repeat(5,minmax(0,1fr))">
-      <div class="jv" style="grid-column:1"><div class="jvf">At stage 1</div><div class="jt">Not eligible</div><div class="jd">Already referred, or already has a profile on the site</div><span class="pill p-void">Void</span></div>
+      <div class="jv" style="grid-column:1"><div class="jvf">At stage 1</div><div class="jt">Not eligible</div><div class="jd">Already referred, or already has a profile on the site. No discount</div><span class="pill p-void">Void</span></div>
       <div class="jv" style="grid-column:4"><div class="jvf">After stage 4</div><div class="jt">Refunded or cancelled</div><div class="jd">Refund or cancelled admission before approval. Only this card is cancelled</div><span class="pill p-void">Void</span></div>
+      <div class="jv" style="grid-column:5"><div class="jvf">At stage 4</div><div class="jt">Maximum reached</div><div class="jd">Friend enrolled, but the referrer already has the maximum number of gift cards. Friend keeps the discount</div><span class="pill p-max">Max reached</span></div>
     </div>
   </div>
   <p class="mini">A refund after the card is sent changes nothing: the card is kept.</p>
@@ -560,7 +565,7 @@ section h2,section h3{scroll-margin-top:16px}
     <tr><td>Starter</td><td>1</td><td>₹1,000</td><td>₹1,000</td></tr>
     <tr><td>Silver</td><td>2 to 6</td><td>₹5,000</td><td>₹26,000</td></tr>
     <tr><td>Gold</td><td>7 to 11</td><td>₹7,000</td><td>₹61,000</td></tr>
-    <tr><td>Past the last range</td><td>12 and up (when the last range ends at 11)</td><td>No card. The maximum has been reached.</td><td>—</td></tr>
+    <tr><td>Past the last range</td><td>12 and up (when the last range ends at 11)</td><td>No card. Status <b>Max reached</b>.</td><td>—</td></tr>
   </table></div>
   <h4 style="font-size:14.5px;margin:20px 0 6px">Step 3: hold, wait, send</h4>
   <ul>
@@ -581,7 +586,7 @@ section h2,section h3{scroll-margin-top:16px}
     <tr><td>New Lead</td><td>—</td><td><b>Joined.</b> Referral row created, status Pending, no amount.</td></tr>
     <tr><td>Interested, Prospect, Call Back, Not Contactable, Re-Enquired, Recycled</td><td>—</td><td><b>Counselling.</b> A Void "dropped out" friend coming back through Re-Enquired or Recycled returns to Counselling and Pending.</td></tr>
     <tr><td>Registered, Enrolled</td><td>Registered, Sales Booked, Sales Approve, Admission In Process, Ready For Approval, Sales Confirmed, Awaiting University Registration</td><td><b>Applied.</b></td></tr>
-    <tr><td>—</td><td><b>Confirmed</b>. The only status that means the enrolment fee is paid.</td><td><b>Enrolled.</b> The friend gets a place in line. The amount comes from the campaign live at their sign-up, and the maximum is checked. The card is held as Scheduled, ready to approve.</td></tr>
+    <tr><td>—</td><td><b>Confirmed</b>. The only status that means the enrolment fee is paid.</td><td><b>Enrolled.</b> The friend gets a place in line. The amount comes from the campaign live at their sign-up, and the maximum is checked. The card is held as Scheduled, ready to approve. If the maximum is already reached, no card is held and the status is <b>Max reached</b>.</td></tr>
     <tr><td>Fall Out, Churned (before Confirmed)</td><td>—</td><td><b>Void, "dropped out".</b> No place used.</td></tr>
     <tr><td>—</td><td>Cancelled, Registration Declined, ARU - Audit Failed (before approval)</td><td><b>Void, "cancelled".</b> Card cancelled; the place still counts towards the maximum.</td></tr>
     <tr><td colspan="2">Any change after the card is sent</td><td>No change to the reward.</td></tr>
@@ -653,7 +658,7 @@ section h2,section h3{scroll-margin-top:16px}
     <li>Counts every gift card that is held (Scheduled) or sent. A refunded place still counts.</li>
     <li>Checked when a friend pays the enrolment fee, so two friends enrolling at once can't both take the last place.</li>
     <li><b>Which maximum applies.</b> The maximum of the campaign that was live when the friend signed up. For example, campaign A ends at 11 and campaign B, which replaced it, ends at 8. A referrer already has 9 cards. A friend who signed up under B gets no card, because 9 is past B's maximum. A friend who signed up under A still gets one, at place 10.</li>
-    <li>Once reached, friends still get their discount, but no gift card is held. The dashboard shows "No gift card (maximum reached)".</li>
+    <li>Once reached, friends still get their discount, but no gift card is held. The friend's status is <b>Max reached</b>, and it is final: it never turns into a gift card later, because refunded places are not reused. The dashboard shows "No gift card (maximum reached)".</li>
     <li>The dashboard's "3 of 11 gift cards" line and progress bar use the live campaign's maximum. If the programme is paused, they use the last campaign's.</li>
   </ul>
   <h4 style="font-size:14.5px;margin:20px 0 6px">How tier names work</h4>
@@ -730,8 +735,9 @@ section h2,section h3{scroll-margin-top:16px}
     <tr><td>Approved <span class="tag src">New</span></td><td>Admin approved; the system issues the voucher</td><td>Scheduled</td></tr>
     <tr><td>Disbursed</td><td>Voucher issued (set by the system)</td><td>Sent</td></tr>
     <tr><td>Failed</td><td>Voucher couldn't be issued (set and retried by the system)</td><td>Scheduled</td></tr>
+    <tr><td>Max reached <span class="tag src">New</span></td><td>Admission Confirmed, but the referrer already has the maximum number of cards. Amount ₹0; can't be ticked or approved (set by the system)</td><td>Max reached</td></tr>
   </table></div>
-  <p class="mini">The only new admin action is <b>Approve</b>. Disbursed and Failed are set by the system.</p>
+  <p class="mini">The only new admin action is <b>Approve</b>. Disbursed, Failed and Max reached are set by the system.</p>
   <div class="callout ok">
     <div class="ttl">⚙ Backend requirement</div>
     For the new campaign type, Reward Amount fills in when the friend <b>pays the enrolment fee</b>. Before that the row shows no amount, because the amount depends on the order friends enrol (3.4).
@@ -911,15 +917,17 @@ section h2,section h3{scroll-margin-top:16px}
   </details>
   <h3><span class="num">5.5</span>Sign-up flow (W5)</h3>
   <p class="mini">No enrolment or existing account needed. Anyone 18+ with an Indian mobile number can sign up.</p>
+  <p class="mini"><b>Where it appears.</b> Inline in W5, or in a <b>sign-up modal</b> opened by any Start Referring button outside W5 (hero, how it works, top referrers, closing, sticky). Both use the same three steps and fields below.</p>
   <div class="jflow"><div class="jrow" style="grid-template-columns:repeat(3,minmax(0,1fr))">
-    <div class="jn c1"><div class="jk">STEP 1</div><div class="jt">Details</div><div class="jd">Name and phone number. Tapping Verify and Generate Link sends an OTP.</div></div>
-    <div class="jn c2"><div class="jk">STEP 2</div><div class="jt">OTP</div><div class="jd">Name and phone stay filled. The visitor enters the 4-digit code and taps the button again.</div></div>
+    <div class="jn c1"><div class="jk">STEP 1</div><div class="jt">Details</div><div class="jd">Name, phone number and email. Tapping Verify and Generate Link sends an OTP.</div></div>
+    <div class="jn c2"><div class="jk">STEP 2</div><div class="jt">OTP</div><div class="jd">Name, phone and email stay filled. The visitor enters the 4-digit code and taps the button again.</div></div>
     <div class="jn c4"><div class="jk">STEP 3</div><div class="jt">Link ready</div><div class="jd">The same card now shows the link, share buttons and an editable message.</div></div>
   </div></div>
   <div class="wrap"><table class="fixed"><colgroup><col style="width:22%"><col style="width:10%"><col style="width:40%"><col style="width:28%"></colgroup>
     <tr><th>Field</th><th>Step</th><th>Rule</th><th>Error message</th></tr>
     <tr><td>Full name</td><td>1, 2</td><td>Required</td><td>"Enter your name."</td></tr>
     <tr><td>Phone number</td><td>1, 2</td><td>Required. 10 digits, starting with 6 to 9. Shown with +91.</td><td>"Enter a valid 10-digit mobile number."</td></tr>
+    <tr><td>Email</td><td>1, 2</td><td>Required. Must look like an email address. Gift cards are sent here.</td><td>"Enter a valid email address."</td></tr>
     <tr><td>OTP</td><td>2</td><td>4 boxes. Helper text: "Enter the code sent to +91 &lt;number&gt;".</td><td>"Incorrect OTP. Try again."</td></tr>
     <tr><td>Edit</td><td>2</td><td>Goes back to step 1 to change the number.</td><td>—</td></tr>
     <tr><td>Resend</td><td>2</td><td>"Resend in 0:30" countdown, then tappable.</td><td>—</td></tr>
@@ -934,7 +942,7 @@ section h2,section h3{scroll-margin-top:16px}
   <div class="wrap"><table class="fixed"><colgroup><col style="width:34%"><col style="width:66%"></colgroup>
     <tr><th>Who signs up</th><th>What happens</th></tr>
     <tr><td>New phone number</td><td>A new profile is created and the link is attached to it.</td></tr>
-    <tr><td>Already has a profile, no link yet</td><td>OTP signs them in, and the link is added to their existing profile.</td></tr>
+    <tr><td>Already has a profile, no link yet</td><td>OTP signs them in, and the link is added to their existing profile. The email entered is saved to the profile if it had none.</td></tr>
     <tr><td>Already has a link</td><td>OTP signs them in and shows their existing link. No second link is made.</td></tr>
     <tr><td>Already signed in on the site</td><td>Start Referring skips the details and OTP and goes straight to step 3.</td></tr>
   </table></div>
@@ -1014,7 +1022,7 @@ section h2,section h3{scroll-margin-top:16px}
   <div class="wrap"><table class="fixed wt"><colgroup><col style="width:22%"><col style="width:38%"><col style="width:40%"></colgroup>
     <tr><th>Element</th><th>Example</th><th>How it works</th></tr>
     <tr><td>Title</td><td>"Your friends"</td><td>Fixed text.</td></tr>
-    <tr><td>Filters</td><td>All 6 · In progress 3 · Enrolled 3 · Gift card sent 2</td><td>Each shows a count. In progress = Joined, Counselling or Applied.</td></tr>
+    <tr><td>Filters</td><td>All 6 · In progress 3 · Enrolled 3 · Gift card sent 2</td><td>Each shows a count. In progress = Joined, Counselling or Applied. All counts every row, including Void and Max reached.</td></tr>
     <tr><td>Table</td><td>Columns in 6.3</td><td>One row per friend.</td></tr>
   </table></div></div>
   </details>
@@ -1026,16 +1034,17 @@ section h2,section h3{scroll-margin-top:16px}
     <tr><td>Stage</td><td>Joined, Counselling, Applied, Enrolled</td><td>Where they are (3.3).</td></tr>
     <tr><td>Progress</td><td>"Step 3 of 4"</td><td>Joined = 1, Counselling = 2, Applied = 3, Enrolled = 4.</td></tr>
     <tr><td>Gift card</td><td>"₹5,000" or "Not earned"</td><td>Amount once they enrol.</td></tr>
-    <tr><td>Status</td><td>Pending, Scheduled, Sent</td><td>See 6.4.</td></tr>
+    <tr><td>Status</td><td>Pending, Scheduled, Sent, Max reached, Void</td><td>See 6.4.</td></tr>
     <tr><td>Date</td><td>"28 Oct", "5 Sept", "—"</td><td>Scheduled: the day the friend enrolled. Sent: the Date of Disbursal.</td></tr>
   </table></div>
-  <p><b>Order</b>: Scheduled first, then in progress, then Sent.</p>
+  <p><b>Order</b>: Scheduled first, then in progress, then Sent, then Max reached and Void. Void and Max reached friends stay in the table as their own rows, shown with that status and the reason.</p>
   <h3><span class="num">6.4</span>Status meanings</h3>
   <div class="wrap"><table class="fixed"><colgroup><col style="width:18%"><col style="width:46%"><col style="width:36%"></colgroup>
     <tr><th>Status</th><th>When</th><th>Gift card column</th></tr>
     <tr><td>Pending</td><td>Friend hasn't enrolled yet</td><td>"Not earned"</td></tr>
     <tr><td>Scheduled</td><td>Friend paid; waiting for admin approval</td><td>The amount, with the enrolment date</td></tr>
     <tr><td>Sent</td><td>Admin approved and the card was issued</td><td>The amount, with the Date of Disbursal</td></tr>
+    <tr><td>Max reached</td><td>Friend enrolled after the referrer reached the maximum number of gift cards</td><td>"No gift card (maximum reached)"</td></tr>
     <tr><td>Void</td><td>Not eligible, dropped out, or refunded or cancelled before approval</td><td>"No gift card", with the reason</td></tr>
   </table></div>
   <h3><span class="num">6.5</span>Requirements</h3>
@@ -1125,7 +1134,7 @@ section h2,section h3{scroll-margin-top:16px}
     <tr><th>Case</th><th>Friend sees</th><th>Referrer sees</th></tr>
     <tr><td>Friend uses the referrer's own number</td><td>"Referrers can't use their own link."</td><td>Nothing</td></tr>
     <tr><td>Number already referred by someone</td><td>"This number is already registered with a referral."</td><td>Nothing</td></tr>
-    <tr><td>Number already has a profile on the site</td><td>Sign-up goes through; the counsellor explains what applies</td><td>Row marked Void: not eligible</td></tr>
+    <tr><td>Number already has a profile on the site</td><td>"This number is already registered with us, so the referral discount doesn't apply. A counsellor will call you." No discount is applied, at sign-up or at payment</td><td>Row marked Void: not eligible</td></tr>
     <tr><td>New friend</td><td>"You're in, &lt;name&gt;! Your &lt;discount&gt;% discount on &lt;programme&gt; is locked to &lt;mobile&gt;. You pay ₹Y instead of ₹X. A counsellor will call within 24 hours."</td><td>New row: Joined</td></tr>
   </table></div>
   <ul>
@@ -1167,7 +1176,7 @@ section h2,section h3{scroll-margin-top:16px}
     <tr><th>Field</th><th>Who has it</th><th>Can the user edit it?</th><th>Notes</th></tr>
     <tr><td>Phone (+91)</td><td>Everyone</td><td>No</td><td>The unique ID. Confirmed by OTP at sign-up.</td></tr>
     <tr><td>Name</td><td>Everyone</td><td>Yes</td><td>Shown to friends as "&lt;name&gt; invited you". Changing it doesn't change the link.</td></tr>
-    <tr><td>Email</td><td>Everyone</td><td>Yes</td><td>Where gift cards are emailed. Without it, cards go by SMS only.</td></tr>
+    <tr><td>Email</td><td>Everyone</td><td>Yes</td><td>Required at sign-up for referrers (5.5) and friends (7.3). Where gift cards are emailed; they also go by SMS.</td></tr>
     <tr><td>Highest qualification</td><td>Everyone</td><td>Yes</td><td>Filled in for friends from their sign-up form.</td></tr>
     <tr><td>Referred by</td><td>Friends</td><td>No</td><td>The referrer's phone number, set once at sign-up.</td></tr>
     <tr><td>Referral link</td><td>Referrers</td><td>No</td><td>Created at sign-up. Having one is what makes a profile a referrer.</td></tr>
@@ -1195,7 +1204,7 @@ section h2,section h3{scroll-margin-top:16px}
   <h4 style="font-size:14.5px;margin:18px 0 6px">Landing page: referrer sign-up</h4>
   <div class="wrap"><table class="fixed"><colgroup><col style="width:32%"><col style="width:24%"><col style="width:44%"></colgroup>
     <tr><th>Given</th><th>When</th><th>Then</th></tr>
-    <tr><td>A visitor with a new phone number</td><td>enters name and phone and verifies the OTP</td><td>a profile and a lead are created, the link is shown, and the referrer can share it</td></tr>
+    <tr><td>A visitor with a new phone number</td><td>enters name, phone and email and verifies the OTP</td><td>a profile and a lead are created, the link is shown, and the referrer can share it</td></tr>
     <tr><td>A visitor whose number already has a link</td><td>verifies the OTP</td><td>they see their existing link; no second link is created</td></tr>
     <tr><td>Two referrers with the same first name</td><td>both sign up</td><td>the second gets the same code with -2 on the end</td></tr>
   </table></div>
@@ -1205,7 +1214,7 @@ section h2,section h3{scroll-margin-top:16px}
     <tr><td>A friend opens a valid link</td><td>the page loads</td><td>the invite banner shows the referrer's name and the discount is applied to every programme price</td></tr>
     <tr><td>A friend enters the referrer's own phone number</td><td>taps Sign Up</td><td>sign-up is blocked with "Referrers can't use their own link."</td></tr>
     <tr><td>A friend whose number was already referred</td><td>taps Sign Up</td><td>sign-up is blocked with "This number is already registered with a referral."</td></tr>
-    <tr><td>A friend whose number already has a profile on the site</td><td>completes sign-up</td><td>the sign-up goes through, and the referrer's row shows Void: not eligible</td></tr>
+    <tr><td>A friend whose number already has a profile on the site</td><td>completes sign-up</td><td>they see the "already registered" message, no discount is applied, and the referrer's row shows Void: not eligible</td></tr>
     <tr><td>A new friend</td><td>completes sign-up with a correct OTP</td><td>a lead is created tagged with the referrer, and the referrer's dashboard shows a new row: Joined, Pending</td></tr>
     <tr><td>A friend opens a link with an unknown code</td><td>the page loads</td><td>no invite banner or discount is shown, and a sign-up is an ordinary lead</td></tr>
   </table></div>
@@ -1213,7 +1222,7 @@ section h2,section h3{scroll-margin-top:16px}
   <div class="wrap"><table class="fixed"><colgroup><col style="width:32%"><col style="width:24%"><col style="width:44%"></colgroup>
     <tr><th>Given</th><th>When</th><th>Then</th></tr>
     <tr><td>A non-enrolled referrer whose 3rd friend's admission becomes Confirmed</td><td>the status change arrives</td><td>the friend gets place 3, and the card is held as Scheduled at place 3's amount (Silver in the suggested tiers)</td></tr>
-    <tr><td>A referrer whose cards held or sent have reached the maximum (end of the last range)</td><td>one more friend's admission becomes Confirmed</td><td>no card is held, the friend keeps their discount, and the row shows "No gift card (maximum reached)"</td></tr>
+    <tr><td>A referrer whose cards held or sent have reached the maximum (end of the last range)</td><td>one more friend's admission becomes Confirmed</td><td>no card is held, the friend keeps their discount, and the row shows status Max reached with "No gift card (maximum reached)"</td></tr>
     <tr><td>A friend whose reward is not yet approved</td><td>their admission becomes Cancelled</td><td>only that card turns Void; every other friend keeps their place and amount</td></tr>
     <tr><td>A friend whose card has been sent</td><td>their admission becomes Cancelled</td><td>the reward doesn't change</td></tr>
     <tr><td>A referrer whose own admission is Confirmed</td><td>a new friend signs up</td><td>that friend's referral goes to the existing campaign, not the new campaign type</td></tr>
@@ -1278,7 +1287,7 @@ section h2,section h3{scroll-margin-top:16px}
 
   <div class="wrap"><table class="fixed"><colgroup><col style="width:40%"><col style="width:60%"></colgroup>
     <tr><th>Event</th><th>Send a lead?</th></tr>
-    <tr><td>Friend completes sign-up</td><td>Yes, unless blocked (own number or already referred). If the number already has a profile, no new lead is created; the referral is marked not eligible.</td></tr>
+    <tr><td>Friend completes sign-up</td><td>Yes, unless blocked (own number or already referred). If the number already has a profile, no new lead is created, no discount is locked, and the referral is marked not eligible.</td></tr>
     <tr><td>Referrer signs up</td><td>Yes. The referrer becomes a lead (source: referrer sign-up). This gives them the Referrer Lead ID the reward list needs. If they already have a lead, it is reused.</td></tr>
   </table></div>
   <div class="callout ok">
@@ -1341,8 +1350,9 @@ section h2,section h3{scroll-margin-top:16px}
     <tr><td><code>amount</code></td><td>₹ value</td></tr>
     <tr><td rowspan="2"><code>gift_card_approved</code></td><td rowspan="2">Admin approves (bulk or single)</td><td><code>batch_size</code></td><td>Rows approved together</td></tr>
     <tr><td><code>amount</code></td><td>₹ value</td></tr>
-    <tr><td><code>gift_card_sent</code></td><td>Voucher issued after approval</td><td><code>delivery</code></td><td>email_sms, sms_only</td></tr>
+    <tr><td><code>gift_card_sent</code></td><td>Voucher issued after approval</td><td><code>delivery</code></td><td>email_sms</td></tr>
     <tr><td><code>gift_card_voided</code></td><td>Admission cancelled or refunded before approval</td><td><code>reason</code></td><td>cancelled_before_approval</td></tr>
+    <tr><td><code>gift_card_max_reached</code></td><td>Friend pays enrolment fee after the referrer reached the maximum</td><td><code>max_cards</code></td><td>Campaign maximum, e.g. 11</td></tr>
   </table>
   </div>
 </section>
@@ -1352,6 +1362,7 @@ section h2,section h3{scroll-margin-top:16px}
   <div class="wrap"><table class="fixed"><colgroup><col style="width:22%"><col style="width:78%"></colgroup>
     <tr><th>Date</th><th>Change</th></tr>
     <tr><td>11 Oct 2026</td><td><ul style="margin:0;padding-left:18px">
+      <li>New gift card status Max reached (admin and dashboard), with its own event. Email added to the referrer sign-up; SMS-only delivery removed. No discount for friends with an existing profile. Void rows shown in the friends table and counted in All. Sign-up modal defined.</li>
       <li>Reorganised into five parts (portal, landing page, dashboard, friend link, profile) with an end-to-end flowchart (3.1); duplicated content merged so each rule lives in one place.</li>
       <li>Campaigns: new Non-enrolled referral flow type covering all batches and programmes; tier names, friend benefit and a read-only maximum added; every value admin-configurable, figures in this PRD are suggestions (4.1).</li>
       <li>No separate reward cap: the end of the last range is the maximum, Default Amount fixed at ₹0 (4.1).</li>
