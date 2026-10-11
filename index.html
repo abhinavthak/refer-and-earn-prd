@@ -1,0 +1,1578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Refer and Earn PRD</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#14213D; --txt:#33394A; --mute:#6B7280; --faint:#9AA1B1;
+  --paper:#FFFFFF; --bg:#F6F7FB; --line:#E4E7EF; --line2:#EDEFF5;
+  --teal:#0E8E88; --indigo:#2E2A83; --accent:#2A4BD7;
+  --info-bg:#EFF5FF; --info-bd:#C7DBFF; --info-tx:#1D4ED8;
+  --ok-bg:#EAF7EE; --ok-bd:#BCE4C7; --ok-tx:#15803D;
+  --warn-bg:#FFF7E6; --warn-bd:#F5DE9E; --warn-tx:#92660C;
+  --new-bg:#F3EEFF; --new-bd:#DACBFB; --new-tx:#5B32C4;
+  --code-bg:#F4F5F9;
+  --r:10px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--txt);font:15px/1.65 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{font-family:Sora,Inter,sans-serif;color:var(--ink);letter-spacing:-0.01em;margin:0}
+code,.mono{font-family:"JetBrains Mono",monospace}
+a{color:var(--accent)}
+.hero{background:linear-gradient(115deg,#14ACA3 0%,#1C6FA8 45%,#2E2A83 100%);padding:64px 48px 46px;color:#fff}
+.hero .kicker{font-size:13px;font-weight:600;letter-spacing:.03em;color:rgba(255,255,255,.78);margin-bottom:10px}
+.hero h1{color:#fff;font-size:32px;font-weight:700;max-width:820px}
+.hero p{color:rgba(255,255,255,.86);max-width:620px;margin:12px 0 0;font-size:15px;line-height:1.6}
+.hero .meta{display:flex;gap:18px;flex-wrap:wrap;margin-top:22px;font-size:13px;color:rgba(255,255,255,.8)}
+.hero .meta b{color:#fff;font-weight:600}
+
+.shell{display:grid;grid-template-columns:252px minmax(0,1fr);max-width:1180px;margin:-28px auto 0;gap:0}
+.toc{position:sticky;top:0;align-self:start;max-height:100vh;overflow-y:auto;padding:34px 18px 40px 8px}
+.toc-h{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--faint);padding:0 12px 10px}
+.toc a{display:flex;align-items:baseline;gap:10px;padding:8px 12px;border-radius:8px;color:var(--txt);text-decoration:none;font-size:13px;line-height:1.4;margin-bottom:1px}
+.toc a:hover{background:var(--line2)}
+.toc a .idx{font-size:11px;color:var(--faint);min-width:14px;flex:none;font-variant-numeric:tabular-nums}
+.toc a .lbl{flex:1;min-width:0}
+.toc a .dot{width:6px;height:6px;border-radius:50%;background:var(--warn-tx);flex:none;align-self:center}
+
+.main{padding:34px 40px 90px;min-width:0}
+section{margin-bottom:52px;scroll-margin-top:18px}
+section h2{font-size:22px;padding-bottom:10px;border-bottom:1px solid var(--line);margin-bottom:16px}
+section h2 .num{color:var(--faint);font-weight:500;margin-right:9px}
+h3{font-size:16.5px;margin:26px 0 10px}
+h3 .num{color:var(--faint);font-weight:500;margin-right:6px}
+p{margin:0 0 12px}
+ul,ol{margin:0 0 14px;padding-left:22px}
+li{margin-bottom:5px}
+.lead{font-size:16px;color:var(--txt)}
+
+.callout{border-radius:var(--r);padding:14px 16px;margin:16px 0;border:1px solid;font-size:14.5px;line-height:1.6}
+.callout.info{background:var(--info-bg);border-color:var(--info-bd);color:#1E3A6E}
+.callout.ok{background:var(--ok-bg);border-color:var(--ok-bd);color:#0F5A2A}
+.callout .ttl{font-weight:600;display:flex;align-items:center;gap:8px;margin-bottom:4px}
+.callout.warn{background:var(--warn-bg);border-color:var(--warn-bd);color:#5C3D06}
+.callout.warn .ttl{color:var(--warn-tx)}
+.tag{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;padding:2px 9px;border-radius:20px;line-height:1.7}
+.tag.gap{background:var(--warn-bg);color:var(--warn-tx);border:1px solid var(--warn-bd)}
+.tag.src{background:var(--ok-bg);color:var(--ok-tx);border:1px solid var(--ok-bd)}
+.tag.ex{background:var(--bg2,#f1f1f4);color:#555;border:1px solid #ddd}
+.tag.ph{background:none;border:0;color:#6B62B8;margin-left:7px;padding:0;font-size:9.5px;font-weight:700;letter-spacing:.08em;line-height:1;white-space:nowrap;vertical-align:2px}
+
+table{width:100%;border-collapse:collapse;margin:14px 0 18px;background:var(--paper);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;font-size:14px}
+th,td{padding:10px 14px;text-align:left;border-bottom:1px solid var(--line2);vertical-align:top}
+th{background:#FAFBFD;font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--mute);font-weight:700}
+.fixed{table-layout:fixed}
+.fixed th{white-space:normal;line-height:1.4}
+.event-table{table-layout:fixed}
+.event-table td{vertical-align:middle}
+.event-table td code{font-size:11.5px;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+td code{font-size:12.5px;background:var(--code-bg);padding:1px 6px;border-radius:5px}
+.center{text-align:center}
+.mini{font-size:12.5px;color:var(--mute)}
+.wrap{overflow-x:auto}
+.sec-table{min-width:720px;font-size:13.5px}
+.sec-table td{padding:12px 12px}
+.cl{margin:0;padding-left:16px}
+.cl li{margin-bottom:3px}
+.wdg{border:1px solid var(--line);border-radius:var(--r);background:var(--paper);margin:14px 0;overflow:hidden}
+.wdg-h{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 10px;padding:12px 14px;background:#FAFBFD;border-bottom:1px solid var(--line2)}
+.wdg-h b{font-family:Sora,Inter,sans-serif;color:var(--ink);font-size:14.5px}
+.wid{font-size:11px;font-weight:700;color:#fff;background:var(--indigo);border-radius:6px;padding:1px 7px}
+.whh{font-size:10.5px;font-weight:600;color:var(--mute);border:1px solid var(--line);border-radius:20px;padding:0 7px}
+.wj{flex-basis:100%;font-size:13px;color:var(--mute)}
+.wdg table{border:0;border-radius:0;margin:0}
+.wt{min-width:600px;font-size:13.5px}
+.rq{display:inline-block;font-size:11px;font-weight:700;padding:1px 9px;border-radius:20px;white-space:nowrap}
+.rq.r{background:#FDE7E7;color:#B42318}.rq.o{background:var(--line2);color:var(--mute)}.rq.a{background:var(--info-bg);color:var(--info-tx)}
+.cta{display:inline-block;background:var(--ink);color:#fff;font-size:11.5px;font-weight:600;padding:2px 9px;border-radius:20px;margin:0 4px 5px 0;line-height:1.4;max-width:100%}
+
+.flows{display:flex;gap:28px;flex-wrap:wrap}
+.flow{display:flex;flex-direction:column;gap:10px;flex:1;min-width:260px;max-width:400px;margin:12px 0 20px}
+.flow-h{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--mute);margin-bottom:2px}
+.flow .step{border-radius:9px;padding:12px 16px;color:#fff;position:relative}
+.flow .step b{display:block;font-size:14px;font-weight:600}
+.flow .step span{font-size:12.5px;opacity:.85}
+.flow .step:not(:last-child)::after{content:"";position:absolute;left:50%;bottom:-11px;width:1.5px;height:10px;background:var(--faint)}
+.s1{background:#4B5261}.s2{background:#4A3FA0}.s3{background:#4A3FA0}.s4{background:#B0522A}.s5{background:#0E7A63}
+
+.jflow{margin:14px 0 10px}
+.jrow,.jvoid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:24px}
+.jvoid{margin-top:30px}
+.jn,.jv{position:relative;border-radius:9px;padding:10px 11px 12px;font-size:12.5px;line-height:1.45}
+.jn{background:var(--paper);border:1px solid var(--line);border-top:3px solid var(--faint)}
+.jn.c1{border-top-color:#4B5261}.jn.c2{border-top-color:#4A3FA0}.jn.c3{border-top-color:#B0522A}.jn.c4{border-top-color:#0E7A63}
+.jn:not(:last-child)::after{content:"";position:absolute;right:-20px;top:50%;width:14px;height:14px;transform:translateY(-50%);background:no-repeat center/14px url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M1 7h11M8 3l4 4-4 4' fill='none' stroke='%239AA1B1' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")}
+.jv{background:var(--warn-bg);border:1.5px dashed var(--warn-bd)}
+.jv::before{content:"";position:absolute;left:50%;top:-31px;height:30px;border-left:1.5px dashed var(--warn-tx)}
+.jk{font-size:10.5px;font-weight:700;color:var(--faint);letter-spacing:.04em}
+.jvf{font-size:10.5px;font-weight:700;color:var(--warn-tx);text-transform:uppercase;letter-spacing:.04em}
+.jt{font-family:Sora,Inter,sans-serif;font-weight:600;color:var(--ink);font-size:13px;margin:2px 0 4px}
+.jd{color:var(--mute);margin-bottom:8px}
+.pill{display:inline-block;font-size:10.5px;font-weight:700;padding:1px 9px;border-radius:20px;white-space:nowrap}
+.p-pend{background:var(--line2);color:var(--mute)}
+.p-sched{background:var(--info-bg);color:var(--info-tx)}
+.p-sent{background:var(--ok-bg);color:var(--ok-tx)}
+.p-void{background:#FBE8C8;color:var(--warn-tx)}
+@media(max-width:880px){
+  .jrow,.jvoid{grid-template-columns:1fr;gap:20px}
+  .jvoid{margin-top:20px}
+  .jv{grid-column:auto!important}
+  .jv::before{display:none}
+  .jn:not(:last-child)::after{right:auto;left:50%;top:auto;bottom:-18px;transform:translateX(-50%) rotate(90deg)}
+}
+
+.oq-list{border:1px solid var(--warn-bd);background:var(--warn-bg);border-radius:var(--r);padding:6px 18px 6px 36px}
+.oq-list li{margin:10px 0}
+.oq-list b{color:var(--warn-tx)}
+
+/* live simulator */
+.calc{border:1px solid var(--line);border-radius:12px;background:var(--paper);padding:20px 22px 24px;margin:18px 0}
+.calc-head{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px;margin-bottom:16px}
+.calc-head h4{font-size:15px;margin:0 0 3px}
+.calc-head p{margin:0;font-size:13px;color:var(--mute)}
+.presets{display:flex;gap:8px;flex-wrap:wrap}
+.presets button{border:1px solid var(--line);background:#fff;border-radius:20px;padding:6px 13px;font-size:12.5px;font-weight:500;cursor:pointer;color:var(--txt);font-family:inherit}
+.presets button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.presets button:hover:not(.on){background:var(--line2)}
+.controls{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-bottom:18px}
+.ctl label{display:block;font-size:12px;font-weight:600;color:var(--mute);margin-bottom:6px}
+.ctl .field{display:flex;align-items:center;height:40px;border:1px solid var(--line);border-radius:8px;background:#fff;padding:0 12px}
+.ctl input[type=range]{width:100%}
+.ctl select{width:100%;height:38px;border:0;padding:0 28px 0 0;font-size:14px;font-weight:500;font-family:inherit;color:var(--ink);cursor:pointer;appearance:none;-webkit-appearance:none;-moz-appearance:none;background:transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%236B7280' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right 2px center}
+.ctl .field{transition:border-color .15s,box-shadow .15s}
+.ctl .field:focus-within{border-color:var(--accent);box-shadow:0 0 0 3px rgba(42,75,215,.12)}
+.ctl .field:has(select):hover{border-color:var(--faint)}
+.ctl input[type=range]{accent-color:var(--indigo)}
+.ctl select:focus{outline:none}
+.ctl .val{font-weight:700;color:var(--ink);margin-left:10px;min-width:22px;text-align:right}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:8px}
+.cell{border:1px solid var(--line);border-radius:9px;padding:10px 12px;font-size:12.5px}
+.cell .who{color:var(--mute);font-size:11.5px}
+.cell .amt{font-weight:700;color:var(--ink);font-size:14px;margin-top:2px;white-space:nowrap}
+.cell .tier{display:inline-block;margin-top:4px;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;padding:1px 8px;border-radius:20px;white-space:nowrap}
+.t-Starter{background:#EEF0F4;color:#4B5261}
+.t-Silver{background:#E8EEF8;color:#2F4A7A}
+.t-Gold{background:#FFF3D6;color:#8A5A00}
+.t-void{background:var(--warn-bg);color:var(--warn-tx)}
+.t-cap{background:var(--line2);color:var(--faint)}
+.cell.void{background:#FFFBF2}
+.cell.void .amt{color:var(--faint);text-decoration:line-through}
+.t-c0{background:#EEF0F4;color:#4B5261}.t-c1{background:#E8EEF8;color:#2F4A7A}.t-c2{background:#FFF3D6;color:#8A5A00}.t-c3{background:#EAF7EE;color:#15803D}
+.cset{border:1px solid var(--line);border-radius:10px;background:#FAFBFD;padding:14px 16px}
+.cset-h{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 12px;margin-bottom:10px}
+.cset-h b{font-family:Sora,Inter,sans-serif;color:var(--ink);font-size:14.5px}
+.cset-h button{margin-left:auto;border:1px solid var(--line);background:#fff;border-radius:20px;padding:5px 12px;font-size:12px;font-weight:600;color:var(--indigo);cursor:pointer;font-family:inherit}
+.cset-t{width:100%;min-width:460px;border:0;margin:0;background:none;font-size:13px}
+.cset-t th,.cset-t td{padding:5px 6px;border:0;background:none}
+.cset-t th{font-size:11px;text-transform:none;letter-spacing:0;color:var(--mute)}
+.cset-t td:first-child{color:var(--mute);font-size:12px;white-space:nowrap}
+.cset input{width:100%;height:34px;border:1px solid var(--line);border-radius:7px;padding:0 9px;font-size:13.5px;font-family:inherit;color:var(--ink);background:#fff}
+.cset input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(42,75,215,.12)}
+.cset-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-top:10px}
+.cset-row label{font-size:11.5px;font-weight:600;color:var(--mute);display:flex;flex-direction:column;gap:5px}
+.cset-ro{display:flex;flex-direction:column;justify-content:flex-end;gap:5px;font-size:11.5px;font-weight:600;color:var(--mute)}
+.cset-ro b{height:34px;display:flex;align-items:center;font-size:15px;color:var(--ink)}
+.cset-err{margin-top:10px;padding:8px 12px;border-radius:8px;background:var(--warn-bg);border:1px solid var(--warn-bd);color:var(--warn-tx);font-size:12.5px}
+.calc-result{margin-top:16px;padding:13px 16px;border-radius:9px;background:var(--bg);font-size:14px;font-weight:600;color:var(--ink);border:1px solid var(--line)}
+.calc-note{margin-top:10px;font-size:12px;color:var(--mute)}
+
+.tldr{background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--indigo);border-radius:var(--r);padding:16px 20px;margin:4px 0 22px}
+.tldr h4{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--indigo);margin:0 0 10px}
+.tldr dl{display:grid;grid-template-columns:150px 1fr;gap:8px 16px;margin:0;font-size:14.5px}
+.tldr dt{font-weight:600;color:var(--ink)}.tldr dd{margin:0}
+@media(max-width:600px){.tldr dl{grid-template-columns:1fr}.tldr dt{margin-top:6px}}
+details.fields{margin:10px 0 16px}
+details.fields>summary{display:inline-flex;align-items:center;gap:6px;height:36px;padding:0 16px;border:1px solid var(--line);background:var(--paper);border-radius:20px;font-size:13px;font-weight:600;color:var(--indigo);cursor:pointer;list-style:none}
+details.fields>summary::-webkit-details-marker{display:none}
+details.fields>summary::after{content:"▾";transition:transform .15s}
+details.fields[open]>summary::after{transform:rotate(180deg)}
+details.fields[open]>summary{margin-bottom:6px}
+.foot-links{display:flex;gap:16px;flex-wrap:wrap;font-size:13.5px;color:var(--mute);border-top:1px solid var(--line);padding-top:20px;margin-top:8px}
+
+@media(max-width:880px){.shell{grid-template-columns:1fr}.toc{position:static;max-height:none}.main{padding:26px 20px 70px}.hero{padding:44px 22px 34px}}
+
+/* hero status card */
+.hero-in{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:40px;align-items:end;max-width:1300px}
+.hero-status{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);border-radius:14px;padding:16px 18px;font-size:13px;color:rgba(255,255,255,.88)}
+.hero-status .hs-row{display:flex;justify-content:space-between;align-items:baseline;gap:14px;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.14)}
+.hero-status .hs-row:last-child{border-bottom:0}
+.hero-status b{color:#fff;font-weight:600;text-align:right}
+.hero-status .hs-row>span:first-child{white-space:nowrap}
+.hs-pill{display:inline-block;background:#FDE7B0;color:#7A5200;border-radius:20px;padding:0 9px;font-size:11.5px;font-weight:700}
+@media(max-width:980px){.hero-in{grid-template-columns:1fr}.hero-status{max-width:420px}}
+/* section links */
+a.xref{color:inherit;text-decoration:underline;text-decoration-color:rgba(74,63,160,.45);text-underline-offset:2px;text-decoration-thickness:1px}
+a.xref:hover{color:#4A3FA0;text-decoration-color:#4A3FA0}
+.hero a.xref{text-decoration-color:rgba(255,255,255,.6)}.hero a.xref:hover{color:#fff}
+section h2,section h3{scroll-margin-top:16px}
+.flash{animation:flash 1.6s ease-out}
+@keyframes flash{0%{background:#FFF3C4}100%{background:transparent}}
+/* toc active + subsections */
+.toc a.on{background:#ECEAF8;color:#2E2A83;font-weight:600}
+.toc .sub{display:none;margin:2px 0 8px 24px;border-left:1px solid var(--line)}
+.toc .grp.open .sub{display:block}
+.toc .sub a{font-size:12.5px;padding:5px 10px;color:var(--mute)}
+.toc .sub a.on{background:none;color:#2E2A83;font-weight:600}
+/* what changed */
+.whatsnew{border:1px solid #CFE6DA;background:#F2FAF6;border-radius:14px;padding:16px 20px;margin:18px 0 8px}
+.whatsnew h4{margin:0 0 8px;font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:#17694A}
+.whatsnew ul{margin:0;padding-left:18px}
+.whatsnew li{margin:4px 0;font-size:14px}
+.whatsnew .mini{margin-top:8px}
+/* lifecycle diagram */
+.lifecycle{overflow-x:auto;margin:10px 0 14px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px}
+.lifecycle svg{display:block;min-width:720px;width:100%;height:auto}
+/* print */
+@media print{
+  @page{margin:14mm}
+  body{background:#fff}
+  .toc,.presets,.cset button,.ctl,.calc-head .presets{display:none!important}
+  .shell{display:block}
+  .main{padding:0;max-width:none}
+  .hero{background:none!important;color:#111;padding:0 0 14px;border-bottom:2px solid #2E2A83}
+  .hero h1,.hero .meta b,.hero-status b{color:#111}
+  .hero p,.hero .kicker,.hero .meta,.hero-status{color:#333}
+  .hero-status{background:none;border:1px solid #ccc;max-width:360px;margin-top:12px}
+  .hero{margin-bottom:22px}
+  .hero-status .hs-row{border-color:#ddd}
+  a.xref{text-decoration:none}
+  table,.wdg,.callout,.cell,.lifecycle,svg,tr{break-inside:avoid}
+  h2,h3,h4{break-after:avoid}
+  section{break-before:auto}
+  .wrap{overflow:visible}
+}
+</style>
+</head>
+<body>
+
+<div class="hero"><div class="hero-in"><div>
+  <div class="kicker">PRODUCT SPEC · UPGRAD GROWTH · PARTNER UNIVERSITY SITES</div>
+  <h1>Refer and Earn</h1>
+  <p>Share a link. Your friend gets a discount on fees. You get a gift card when they enrol. This spec covers all five parts, from the admin portal to the friend's sign-up, with a live gift card calculator in 3.6.</p>
+  <div class="meta">
+    <span><b>Owner</b>: Abhinav Thakur (PM)</span>
+    <span><b>Design</b>: TBD</span>
+    <span><b>Product</b>: Priyabrata Bhuyan (Director)</span>
+    <span><b>Engineering</b>: Abhishek Aman (Director)</span>
+  </div>
+  </div>
+  <div class="hero-status">
+    <div class="hs-row"><span>Status</span><span class="hs-pill">In review</span></div>
+    <div class="hs-row"><span>Last updated</span><b>11 Oct 2026</b></div>
+    <div class="hs-row"><span>Sign-off</span><b>Pending: Product, Engineering, Design</b></div>
+    <div class="hs-row"><span>Reward system POC</span><b>Jayesh Karli</b></div>
+  </div>
+</div></div>
+
+<div class="shell">
+  <aside class="toc"><div id="toc-card"></div></aside>
+  <main class="main" id="main">
+<section id="overview">
+  <h2><span class="num">0.</span>Overview &amp; stakeholders</h2>
+  <div class="tldr">
+    <h4>At a glance</h4>
+    <dl>
+      <dt>What</dt><dd>A personal referral link for partner university sites. The friend gets a discount on fees (10% by default). The referrer gets an e-gift card after the friend enrols and an admin approves it.</dd>
+      <dt>Rewards</dt><dd>The admin sets the tiers and the friend's discount in each campaign (4.1). The last tier decides the maximum number of gift cards. Suggested values, used in every example here: ₹1,000 for friend 1, ₹5,000 each for friends 2 to 6, ₹7,000 each for friends 7 to 11. That is at most 11 cards, or ₹61,000.</dd>
+      <dt>Parts</dt><dd>Five parts: referral portal for admins (4), landing page (5), dashboard (6), friend link page (7) and profile (8).</dd>
+      <dt>How to read</dt><dd>Section 3 holds the rules every part follows. Sections 4 to 8 cover one part each. Section 9 lists the tests that prove it works.</dd>
+      <dt>Built on</dt><dd>Existing referral system (must accept non-enrolled referrers), existing voucher vendor, CRM, fee system, OTP/SMS.</dd>
+      <dt>Key risks</dt><dd>The referral system must be changed to support non-enrolled referrers. People may refer themselves using a second number (3.7).</dd>
+      <dt>Still to settle</dt><dd>Nothing open. Engineering decides OTP limits and admin roles (10).</dd>
+    </dl>
+  </div>
+  <div class="whatsnew">
+    <h4>What changed in this version · 11 Oct 2026</h4>
+    <ul>
+      <li>Every campaign value is set by the admin; figures in this PRD are suggested values (3.4, 4.1). The live example now shows the campaign settings panel (3.6).</li>
+      <li>No separate reward cap: the end of the last range is the maximum (4.1).</li>
+      <li>Non-enrolled referral flow campaigns have no End Date. They run until replaced or deactivated (4.1).</li>
+      <li>Paused state when a campaign is deactivated with no replacement, on every page (4.1, 5.6, 6.5, 7.4).</li>
+      <li>A live campaign is locked; each friend gets the terms of the campaign live when they signed up (4.1).</li>
+      <li>Bulk approve marked as existing (4.2); photo removed from the profile (8).</li>
+      <li>Duplicated content merged: reward rules folded into 3.4, stage mapping into 3.5, admin field list into 4.1; Scope and repeated edge cases removed. Sections 3.2 onwards renumbered.</li>
+      <li>Rewards simulator (W7) now built in and reads tiers from the campaign; images may not show amounts. Nothing on the page needs updating by hand when tiers change (5.3).</li>
+      <li>Rewritten in plain language: short sentences, one term per idea ("live" campaign, "paused" programme), long rules split into lists, and new key terms in 0.2.</li>
+    </ul>
+    <div class="mini">Full history in the change log (B).</div>
+  </div>
+  <h3><span class="num">0.1</span>Problem</h3>
+  <p>Partner university sites have <b>no referral programme today</b>. Students, alumni and their families already recommend these degrees. But nobody tracks it, nobody gets credit, and there is no reason to recommend more. Referred people show up as ordinary leads, or not at all.</p>
+  <p>Refer and Earn fixes this with one personal link. The link proves who referred whom and gives the friend a visible discount. The referrer is paid only after the friend really enrols.</p>
+  <h3><span class="num">0.2</span>Key terms</h3>
+  <div class="wrap"><table class="fixed"><colgroup><col style="width:26%"><col style="width:74%"></colgroup>
+    <tr><th>Term</th><th>Meaning</th></tr>
+    <tr><td>Referrer</td><td>The person who shares the link. Anyone 18+ with an Indian mobile number. They do not need to be a student.</td></tr>
+    <tr><td>Friend</td><td>The person who opens the link and signs up.</td></tr>
+    <tr><td>Referral link</td><td>The referrer's personal link, e.g. refer.dyponline.edu/r/HIMANSHU10. It is the only way a referral is counted.</td></tr>
+    <tr><td>Profile</td><td>One account per phone number, with one <code>user_id</code>. Referrers, friends and normal users all have the same kind of profile.</td></tr>
+    <tr><td>Gift card status</td><td><b>Pending</b>: friend hasn't enrolled yet. <b>Scheduled</b>: friend paid; the card is waiting for admin approval. <b>Sent</b>: card delivered. <b>Void</b>: no card (friend not eligible, dropped out, refunded or cancelled).</td></tr>
+    <tr><td>Referral portal</td><td>The admin screens at referral.lmscontent.in, where the team sets up campaigns and approves gift cards (4).</td></tr>
+    <tr><td>Referral system</td><td>The existing backend behind the portal. It stores campaigns, referrals and gift cards, and feeds every page.</td></tr>
+    <tr><td>Campaign</td><td>The settings for one university: tiers, the friend's discount and a start date. One campaign is <b>live</b> at a time. With no live campaign, the programme is <b>paused</b> (4.1).</td></tr>
+    <tr><td>Place in line</td><td>The order in which a referrer's friends enrol. Friend 1 is the first to pay the enrolment fee. The place decides the gift card amount (3.4).</td></tr>
+    <tr><td>Maximum</td><td>The most gift cards one referrer can earn. It is the end of the campaign's last tier, e.g. 11.</td></tr>
+    <tr><td>Tier</td><td>A band of places that pays the same gift card amount, e.g. Silver = friends 2 to 6 at ₹5,000 each. The number of tiers, their places, amounts and names (e.g. Starter, Silver, Gold) are all set in campaign settings (4.1).</td></tr>
+  </table></div>
+  <h3><span class="num">0.3</span>Stakeholders</h3>
+  <div class="wrap"><table class="fixed"><colgroup><col style="width:50%"><col style="width:50%"></colgroup>
+    <tr><th>Name</th><th>Role</th></tr>
+    <tr><td>Abhinav Thakur</td><td>Product Manager · Owner</td></tr>
+    <tr><td>TBD</td><td>Product Designer · Sign-off pending</td></tr>
+    <tr><td>Priyabrata Bhuyan</td><td>Director of Product · Sign-off pending</td></tr>
+    <tr><td>Abhishek Aman</td><td>Director of Engineering · Sign-off pending</td></tr>
+    <tr><td>Jayesh Karli</td><td>Point of contact for the existing reward system</td></tr>
+  </table></div>
+  <h3><span class="num">0.4</span>Reference links</h3>
+  <div class="wrap"><table class="fixed"><colgroup><col style="width:30%"><col style="width:70%"></colgroup>
+    <tr><th>Content</th><th>Link</th></tr>
+    <tr><td>Live prototype</td><td><a href="https://abhinavthak.github.io/refer-and-earn-prototype/" target="_blank" rel="noopener">refer-and-earn-prototype</a> <span class="tag src">Demo OTP 1234</span></td></tr>
+    <tr><td>Figma</td><td><a href="https://www.figma.com/design/qaf6Kz0KF0k4TEYbwQ0hGB/D.-Y-Patil?node-id=1236-2167&t=ZydwLrDZ2gCBq8ct-1" target="_blank" rel="noopener">D. Y Patil</a></td></tr>
+    <tr><td>Existing referral system</td><td><a href="https://referral.lmscontent.in/login" target="_blank" rel="noopener">referral.lmscontent.in</a></td></tr>
+    <tr><td>Jira</td><td><span class="mini">Not linked yet</span></td></tr>
+  </table></div>
+</section>
+<section id="metrics">
+  <h2><span class="num">1.</span>Key metrics to track</h2>
+  <div class="wrap"><table class="fixed"><colgroup><col style="width:30%"><col style="width:70%"></colgroup>
+    <tr><th>Metric</th><th>How it is measured</th></tr>
+    <tr><td>Link creation rate</td><td>% of landing page visitors who get a link</td></tr>
+    <tr><td>Sharing</td><td>Shares per referrer in their first 7 days</td></tr>
+    <tr><td>Invite conversion</td><td>% of friend page visits that end in a completed sign-up</td></tr>
+    <tr><td>Referral to enrolment</td><td>% of referred friends who enrol, compared with other lead sources</td></tr>
+    <tr><td>Cost per referred enrolment</td><td>Gift card value paid ÷ referred enrolments, compared with paid channels</td></tr>
+    <tr><td>Support load</td><td>Referral-related support tickets per 100 enrolments</td></tr>
+    <tr><td>Clean payouts</td><td>Gift cards that had to be taken back after sending. Should always be 0</td></tr>
+  </table></div>
+</section>
+<section id="user-stories">
+  <h2><span class="num">2.</span>User stories</h2>
+  <h3><span class="num">2.1</span>Visitor (thinking about referring)</h3>
+  <ul>
+    <li>I want to understand in seconds what I get and what my friend gets.</li>
+    <li>I want to see how much I could earn.</li>
+    <li>I want my link quickly, without long forms or enrolling myself.</li>
+    <li>I want to trust this is real: stories, top referrers, clear rules.</li>
+  </ul>
+  <h3><span class="num">2.2</span>Referrer</h3>
+  <ul>
+    <li>I want to share my link in one tap on WhatsApp or any app.</li>
+    <li>I want to see where each friend is without calling the university.</li>
+    <li>I want to know when each gift card will arrive and how much it is.</li>
+    <li>I want to know how far I am from the next tier and the maximum.</li>
+  </ul>
+  <h3><span class="num">2.3</span>Friend</h3>
+  <ul>
+    <li>I want to know who invited me and that the discount is real.</li>
+    <li>I want to see my price before giving my details.</li>
+    <li>I want to speak to a counsellor before deciding.</li>
+  </ul>
+  <h3><span class="num">2.4</span>Business team</h3>
+  <ul>
+    <li>I want every reward approved by a person before it is paid, so we never pay for an enrolment that is reversed.</li>
+    <li>I want a maximum reward per referrer, so the cost is known in advance.</li>
+    <li>I want every referred lead tagged with its referrer in the CRM, so referrals can be compared with other channels.</li>
+    <li>I want self-referrals, duplicates and people already on the site blocked automatically.</li>
+  </ul>
+  <h3><span class="num">2.5</span>Marketing team</h3>
+  <ul>
+    <li>I want one referrer page that the homepage banner, footer, email and WhatsApp campaigns can all point to.</li>
+    <li>I want to see which of those channels brings the most referrers.</li>
+    <li>I want a ready-made share message so referrers spread the offer with no effort.</li>
+    <li>I want stories, a leaderboard and an activity ticker on the page to build trust.</li>
+    <li>I want amounts on the page to come from the campaign, so we never promise something we don't pay.</li>
+    <li>I want time-limited bonus campaigns later. <span class="tag ph">v2</span></li>
+  </ul>
+</section>
+<section id="solution-approach">
+  <h2><span class="num">3.</span>How it works</h2>
+
+  <p>Four ideas hold the whole programme together:</p>
+  <ol>
+    <li><b>The link is the proof.</b> A referral counts only if the friend signs up through the referrer's link. No codes, no manual claims.</li>
+    <li><b>The friend sees the discount straight away.</b> Opening the link applies the campaign's discount (e.g. 10%) to every programme price. If the programme is paused, the link opens without a discount (4.1).</li>
+    <li><b>Pay only after approval.</b> The gift card is held from the day the friend pays the enrolment fee. An admin approves it (4.2), and it goes out by email and SMS. The referrer never claims anything, and nothing is taken back.</li>
+    <li><b>One account per phone number.</b> Students, leads and referrers all share the same kind of profile. A profile becomes a referrer the moment it gets a link (8).</li>
+  </ol>
+  <h3><span class="num">3.1</span>How the parts connect</h3>
+  <p>How a referral moves through all five parts, from campaign setup to the gift card:</p>
+  <div class="wrap" style="margin:14px 0 8px;border:1px solid var(--line);border-radius:12px;background:var(--bg);padding:10px">
+<svg viewBox="0 0 934 770" width="100%" role="img" aria-label="End-to-end flow across the five parts" style="min-width:820px;display:block;font-family:Inter,system-ui,sans-serif">
+<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#6B7280"/></marker>
+<marker id="ahv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#92660C"/></marker></defs>
+<rect x="6" y="6" width="152" height="758" rx="10" fill="#FFFFFF" stroke="#E4E7EF"/>
+<rect x="6" y="6" width="152" height="40" rx="10" fill="#4B5261"/><rect x="6" y="30" width="152" height="16" fill="#4B5261"/>
+<text x="82.0" y="31" text-anchor="middle" font-size="12" font-weight="700" fill="#fff">Portal (admin) · 4</text>
+<rect x="164" y="6" width="152" height="758" rx="10" fill="#FFFFFF" stroke="#E4E7EF"/>
+<rect x="164" y="6" width="152" height="40" rx="10" fill="#4A3FA0"/><rect x="164" y="30" width="152" height="16" fill="#4A3FA0"/>
+<text x="240.0" y="31" text-anchor="middle" font-size="12" font-weight="700" fill="#fff">Landing page · 5</text>
+<rect x="322" y="6" width="152" height="758" rx="10" fill="#FFFFFF" stroke="#E4E7EF"/>
+<rect x="322" y="6" width="152" height="40" rx="10" fill="#0E7A63"/><rect x="322" y="30" width="152" height="16" fill="#0E7A63"/>
+<text x="398.0" y="31" text-anchor="middle" font-size="12" font-weight="700" fill="#fff">Profile &amp; CRM · 8</text>
+<rect x="480" y="6" width="152" height="758" rx="10" fill="#FFFFFF" stroke="#E4E7EF"/>
+<rect x="480" y="6" width="152" height="40" rx="10" fill="#B0522A"/><rect x="480" y="30" width="152" height="16" fill="#B0522A"/>
+<text x="556.0" y="31" text-anchor="middle" font-size="12" font-weight="700" fill="#fff">Dashboard · 6</text>
+<rect x="638" y="6" width="152" height="758" rx="10" fill="#FFFFFF" stroke="#E4E7EF"/>
+<rect x="638" y="6" width="152" height="40" rx="10" fill="#1C6FA8"/><rect x="638" y="30" width="152" height="16" fill="#1C6FA8"/>
+<text x="714.0" y="31" text-anchor="middle" font-size="12" font-weight="700" fill="#fff">Friend link · 7</text>
+<rect x="796" y="6" width="132" height="758" rx="10" fill="#FFF7E6" stroke="#E4E7EF"/>
+<rect x="796" y="6" width="132" height="40" rx="10" fill="#92660C"/><rect x="796" y="30" width="132" height="16" fill="#92660C"/>
+<text x="862.0" y="31" text-anchor="middle" font-size="12" font-weight="700" fill="#fff">Exceptions</text>
+<rect x="14" y="58" width="136" height="46" rx="8" fill="#FAFBFD" stroke="#4B5261" stroke-width="1.5"/>
+<text x="24" y="77" font-size="11.5" font-weight="700" fill="#14213D">1 · Admin sets up</text>
+<text x="24" y="93" font-size="11" fill="#33394A">the campaign</text>
+<rect x="172" y="116" width="136" height="46" rx="8" fill="#FAFBFD" stroke="#4A3FA0" stroke-width="1.5"/>
+<text x="182" y="135" font-size="11.5" font-weight="700" fill="#14213D">2 · Visitor arrives</text>
+<text x="182" y="151" font-size="11" fill="#33394A">from banner, email…</text>
+<rect x="172" y="174" width="136" height="46" rx="8" fill="#FAFBFD" stroke="#4A3FA0" stroke-width="1.5"/>
+<text x="182" y="193" font-size="11.5" font-weight="700" fill="#14213D">3 · Signs up:</text>
+<text x="182" y="209" font-size="11" fill="#33394A">name, phone, OTP</text>
+<rect x="330" y="232" width="136" height="46" rx="8" fill="#FAFBFD" stroke="#0E7A63" stroke-width="1.5"/>
+<text x="340" y="251" font-size="11.5" font-weight="700" fill="#14213D">4 · Profile + lead created</text>
+<text x="340" y="267" font-size="11" fill="#33394A">(Referrer Lead ID)</text>
+<rect x="488" y="290" width="136" height="46" rx="8" fill="#FAFBFD" stroke="#B0522A" stroke-width="1.5"/>
+<text x="498" y="309" font-size="11.5" font-weight="700" fill="#14213D">5 · Link shown;</text>
+<text x="498" y="325" font-size="11" fill="#33394A">referrer shares it</text>
+<rect x="646" y="348" width="136" height="46" rx="8" fill="#FAFBFD" stroke="#1C6FA8" stroke-width="1.5"/>
+<text x="656" y="367" font-size="11.5" font-weight="700" fill="#14213D">6 · Friend opens link;</text>
+<text x="656" y="383" font-size="11" fill="#33394A">10% shown on prices</text>
+<rect x="646" y="406" width="136" height="46" rx="8" fill="#FAFBFD" stroke="#1C6FA8" stroke-width="1.5"/>
+<text x="656" y="425" font-size="11.5" font-weight="700" fill="#14213D">7 · Friend signs up</text>
+<text x="656" y="441" font-size="11" fill="#33394A">with OTP</text>
+<rect x="330" y="464" width="136" height="46" rx="8" fill="#FAFBFD" stroke="#0E7A63" stroke-width="1.5"/>
+<text x="340" y="483" font-size="11.5" font-weight="700" fill="#14213D">8 · Friend lead created,</text>
+<text x="340" y="499" font-size="11" fill="#33394A">tagged to the referrer</text>
+<rect x="330" y="522" width="136" height="46" rx="8" fill="#FAFBFD" stroke="#0E7A63" stroke-width="1.5"/>
+<text x="340" y="541" font-size="11.5" font-weight="700" fill="#14213D">9 · CRM statuses move</text>
+<text x="340" y="557" font-size="11" fill="#33394A">friend through stages</text>
+<rect x="330" y="580" width="136" height="46" rx="8" fill="#FAFBFD" stroke="#0E7A63" stroke-width="1.5"/>
+<text x="340" y="599" font-size="11.5" font-weight="700" fill="#14213D">10 · Admission Confirmed:</text>
+<text x="340" y="615" font-size="11" fill="#33394A">card held (Scheduled)</text>
+<rect x="14" y="638" width="136" height="46" rx="8" fill="#FAFBFD" stroke="#4B5261" stroke-width="1.5"/>
+<text x="24" y="657" font-size="11.5" font-weight="700" fill="#14213D">11 · Admin approves</text>
+<text x="24" y="673" font-size="11" fill="#33394A">in bulk</text>
+<rect x="488" y="696" width="136" height="46" rx="8" fill="#FAFBFD" stroke="#B0522A" stroke-width="1.5"/>
+<text x="498" y="715" font-size="11.5" font-weight="700" fill="#14213D">12 · Voucher issued;</text>
+<text x="498" y="731" font-size="11" fill="#33394A">dashboard shows Sent</text>
+<path d="M82.0,104 V110.0 H240.0 V115" fill="none" stroke="#6B7280" stroke-width="1.4" marker-end="url(#ah)"/>
+<path d="M240.0,162 V173" fill="none" stroke="#6B7280" stroke-width="1.4" marker-end="url(#ah)"/>
+<path d="M240.0,220 V226.0 H398.0 V231" fill="none" stroke="#6B7280" stroke-width="1.4" marker-end="url(#ah)"/>
+<path d="M398.0,278 V284.0 H556.0 V289" fill="none" stroke="#6B7280" stroke-width="1.4" marker-end="url(#ah)"/>
+<path d="M556.0,336 V342.0 H714.0 V347" fill="none" stroke="#6B7280" stroke-width="1.4" marker-end="url(#ah)"/>
+<path d="M714.0,394 V405" fill="none" stroke="#6B7280" stroke-width="1.4" marker-end="url(#ah)"/>
+<path d="M714.0,452 V458.0 H398.0 V463" fill="none" stroke="#6B7280" stroke-width="1.4" marker-end="url(#ah)"/>
+<path d="M398.0,510 V521" fill="none" stroke="#6B7280" stroke-width="1.4" marker-end="url(#ah)"/>
+<path d="M398.0,568 V579" fill="none" stroke="#6B7280" stroke-width="1.4" marker-end="url(#ah)"/>
+<path d="M398.0,626 V632.0 H82.0 V637" fill="none" stroke="#6B7280" stroke-width="1.4" marker-end="url(#ah)"/>
+<path d="M82.0,684 V690.0 H556.0 V695" fill="none" stroke="#6B7280" stroke-width="1.4" marker-end="url(#ah)"/>
+<rect x="804" y="464" width="116" height="46" rx="8" fill="#FFFBF2" stroke="#F5DE9E" stroke-dasharray="4 3" stroke-width="1.5"/>
+<text x="814" y="483" font-size="11" font-weight="700" fill="#92660C">Already referred</text>
+<text x="814" y="499" font-size="11" fill="#92660C">or on site → Void</text>
+<rect x="804" y="580" width="116" height="46" rx="8" fill="#FFFBF2" stroke="#F5DE9E" stroke-dasharray="4 3" stroke-width="1.5"/>
+<text x="814" y="599" font-size="11" font-weight="700" fill="#92660C">Maximum reached</text>
+<text x="814" y="615" font-size="11" fill="#92660C">→ no gift card</text>
+<rect x="804" y="632" width="116" height="46" rx="8" fill="#FFFBF2" stroke="#F5DE9E" stroke-dasharray="4 3" stroke-width="1.5"/>
+<text x="814" y="651" font-size="11" font-weight="700" fill="#92660C">Cancelled before</text>
+<text x="814" y="667" font-size="11" fill="#92660C">approval → Void</text>
+<path d="M466,487.0 H635.0 V487.0 H803" fill="none" stroke="#92660C" stroke-width="1.3" stroke-dasharray="4 3" marker-end="url(#ahv)"/>
+<path d="M466,603.0 H635.0 V603.0 H803" fill="none" stroke="#92660C" stroke-width="1.3" stroke-dasharray="4 3" marker-end="url(#ahv)"/>
+<path d="M466,618 H635.0 V655.0 H803" fill="none" stroke="#92660C" stroke-width="1.3" stroke-dasharray="4 3" marker-end="url(#ahv)"/>
+</svg>
+  </div>
+  <p class="mini">Read top to bottom. Each column is one part; arrows show the hand-offs. The dashboard updates at steps 8, 9, 10 and 12 as the friend moves along. Amounts, discount and maximum at every step come from step 1.</p>
+  <p>What each part takes in and hands on:</p>
+  <div class="wrap"><table class="fixed"><colgroup><col style="width:26%"><col style="width:37%"><col style="width:37%"></colgroup>
+    <tr><th>Part</th><th>Takes in</th><th>Hands on</th></tr>
+    <tr><td><b>Referral portal (admin)</b> · 4</td><td>The team's campaign settings; rewards that are ready to approve</td><td>Discount, tiers and maximum to every page; approved rewards to the voucher vendor</td></tr>
+    <tr><td><b>Referral landing page</b> · 5</td><td>Campaign settings (for the copy); visitors from the entry points</td><td>A new profile and a referral link, then the visitor to the dashboard</td></tr>
+    <tr><td><b>Referral website dashboard</b> · 6</td><td>The referrer's link, friends and rewards</td><td>The link, shared out to friends</td></tr>
+    <tr><td><b>Friend referral link</b> · 7</td><td>The referral code in the URL; campaign discount</td><td>A new friend profile and lead, tagged with the referrer</td></tr>
+    <tr><td><b>Profile</b> · 8</td><td>Sign-ups from the landing page and the friend link</td><td>One user_id and lead per phone number, used by every other part</td></tr>
+  </table></div>
+  <p class="mini">The rules below connect the friend link to the portal. CRM status changes move each friend through their stages (3.3, 3.5). The reward logic (3.4) decides when a gift card is ready to approve.</p>
+  <h3><span class="num">3.2</span>Who counts</h3>
+  <ul>
+    <li>A referrer can't refer their own phone number.</li>
+    <li>Each friend can have only one referrer: whoever's link they signed up through first.</li>
+    <li>A friend counts only if their phone number is <b>new to the site</b>. Anyone who already has a profile (a referrer, a lead, a past lead or a student) is not eligible.</li>
+    <li>No KYC or PAN is asked from referrers, however much they earn.</li>
+  </ul>
+  <h3><span class="num">3.3</span>User journey and friend's stages</h3>
+
+  <div class="callout info">
+    <div class="ttl">ℹ In one paragraph</div>
+    The referrer signs up with their name and phone number (confirmed by OTP) and gets a link. They share it. A friend opens the link, picks a programme, sees their discounted price and signs up (also with OTP). A counsellor calls the friend. When the friend pays the enrolment fee, the referrer's gift card is held. An admin approves it, and it is sent.
+  </div>
+  <div class="flows">
+    <div class="flow">
+      <div class="flow-h">Referrer</div>
+      <div class="step s1"><b>Opens the landing page</b><span>Reads the offer</span></div>
+      <div class="step s2"><b>Signs up</b><span>Name, phone, OTP</span></div>
+      <div class="step s3"><b>Gets and shares the link</b><span>WhatsApp, SMS, email, any app</span></div>
+      <div class="step s4"><b>Tracks friends</b><span>On the dashboard</span></div>
+      <div class="step s5"><b>Receives gift cards</b><span>By email and SMS, after admin approval</span></div>
+    </div>
+    <div class="flow">
+      <div class="flow-h">Friend</div>
+      <div class="step s1"><b>Opens the link</b><span>Sees who invited them</span></div>
+      <div class="step s2"><b>Picks a programme</b><span>Sees their discounted price</span></div>
+      <div class="step s3"><b>Signs up</b><span>Details and OTP</span></div>
+      <div class="step s4"><b>Talks to a counsellor</b><span>Call within 24 hours</span></div>
+      <div class="step s5"><b>Enrols and pays</b><span>Discount applied; reward ready to approve</span></div>
+    </div>
+  </div>
+  <h4 style="font-size:14.5px;margin:20px 0 6px">Friend's stages</h4>
+  <p class="mini">Each friend moves left to right. The label under each stage is what the referrer sees on the dashboard. Dashed boxes are the two ways a friend ends without a gift card.</p>
+  <div class="jflow">
+    <div class="jrow" style="grid-template-columns:repeat(5,minmax(0,1fr))">
+      <div class="jn c1"><div class="jk">1</div><div class="jt">Joined</div><div class="jd">Friend signed up through the link</div><span class="pill p-pend">Pending</span></div>
+      <div class="jn c2"><div class="jk">2</div><div class="jt">Counselling</div><div class="jd">Counsellor has spoken to them</div><span class="pill p-pend">Pending</span></div>
+      <div class="jn c2"><div class="jk">3</div><div class="jt">Applied</div><div class="jd">Application sent to the university</div><span class="pill p-pend">Pending</span></div>
+      <div class="jn c3"><div class="jk">4</div><div class="jt">Enrolled</div><div class="jd">Enrolment fee paid. Gift card held, ready for admin approval</div><span class="pill p-sched">Scheduled</span></div>
+      <div class="jn c4"><div class="jk">5</div><div class="jt">Paid</div><div class="jd">Admin approved; gift card sent by email and SMS</div><span class="pill p-sent">Sent</span></div>
+    </div>
+    <div class="jvoid" style="grid-template-columns:repeat(5,minmax(0,1fr))">
+      <div class="jv" style="grid-column:1"><div class="jvf">At stage 1</div><div class="jt">Not eligible</div><div class="jd">Already referred, or already has a profile on the site</div><span class="pill p-void">Void</span></div>
+      <div class="jv" style="grid-column:4"><div class="jvf">After stage 4</div><div class="jt">Refunded or cancelled</div><div class="jd">Refund or cancelled admission before approval. Only this card is cancelled</div><span class="pill p-void">Void</span></div>
+    </div>
+  </div>
+  <p class="mini">A refund after the card is sent changes nothing: the card is kept.</p>
+  <p class="mini">Each stage is set by the friend's Lead Sales Status and Lead Admission Status in the CRM. The full mapping, and what each change does to the reward, is in 3.5.</p>
+  <h3><span class="num">3.4</span>Reward logic</h3>
+
+  <div class="callout ok">
+    <div class="ttl">⚙ Backend requirement</div>
+    Gift cards run on the <b>existing referral system</b>, through campaigns of a new type: Non-enrolled referral flow (4.1). The campaign holds the tiers, their amounts and names, and the friend's discount. The numbers below are the suggested settings. If the admin changes them, the amounts change too (try it in 3.6). Every page reads these values from the campaign; nothing is typed in by hand. The reward is always an <b>e-gift card</b> from the existing voucher vendor, never cash.
+  </div>
+  <h4 style="font-size:14.5px;margin:20px 0 6px">Step 1: place in line</h4>
+  <p>Each eligible friend who pays the enrolment fee gets a place in line. The first to enrol is place 1. Sign-up order doesn't matter. Friends who were not eligible get no place. A friend who is refunded keeps their place, and it isn't given to anyone else.</p>
+  <h4 style="font-size:14.5px;margin:20px 0 6px">Step 2: place decides the amount</h4>
+  <div class="wrap"><table class="fixed"><colgroup><col style="width:25%"><col style="width:25%"><col style="width:25%"><col style="width:25%"></colgroup>
+    <tr><th>Tier</th><th>Places</th><th>Each</th><th>Total so far</th></tr>
+    <tr><td>Starter</td><td>1</td><td>₹1,000</td><td>₹1,000</td></tr>
+    <tr><td>Silver</td><td>2 to 6</td><td>₹5,000</td><td>₹26,000</td></tr>
+    <tr><td>Gold</td><td>7 to 11</td><td>₹7,000</td><td>₹61,000</td></tr>
+    <tr><td>Past the last range</td><td>12 and up (when the last range ends at 11)</td><td>No card. The maximum has been reached.</td><td>—</td></tr>
+  </table></div>
+  <h4 style="font-size:14.5px;margin:20px 0 6px">Step 3: hold, wait, send</h4>
+  <ul>
+    <li>Friend pays the enrolment fee → the card is held at their place's amount. Status Scheduled.</li>
+    <li>An admin approves it in bulk (4.2) → the card is sent by email and SMS.</li>
+    <li>Nobody can change the amount once it is held, before or after it is sent.</li>
+  </ul>
+  <h4 style="font-size:14.5px;margin:20px 0 6px">Step 4: refunds</h4>
+  <ul>
+    <li>Refund or cancelled admission (Cancelled, Registration Declined, ARU - Audit Failed) before approval → only that card is cancelled (Void). Nobody else's place or amount changes.</li>
+    <li>Refund after the card is sent → nothing changes. The card is kept.</li>
+    <li>Because a refunded place isn't reused, it still counts towards the maximum. So a referrer with one refund can earn one card fewer than the maximum: 10 instead of 11.</li>
+  </ul>
+  <h3><span class="num">3.5</span>What each status change does</h3>
+  <p>The friend's stage is read from the two status fields on their lead in the CRM. Whenever either changes, the referral system applies the matching row.</p>
+  <div class="wrap"><table class="fixed"><colgroup><col style="width:24%"><col style="width:32%"><col style="width:44%"></colgroup>
+    <tr><th>Lead Sales Status</th><th>Lead Admission Status</th><th>Stage and what happens</th></tr>
+    <tr><td>New Lead</td><td>—</td><td><b>Joined.</b> Referral row created, status Pending, no amount.</td></tr>
+    <tr><td>Interested, Prospect, Call Back, Not Contactable, Re-Enquired, Recycled</td><td>—</td><td><b>Counselling.</b> A Void "dropped out" friend coming back through Re-Enquired or Recycled returns to Counselling and Pending.</td></tr>
+    <tr><td>Registered, Enrolled</td><td>Registered, Sales Booked, Sales Approve, Admission In Process, Ready For Approval, Sales Confirmed, Awaiting University Registration</td><td><b>Applied.</b></td></tr>
+    <tr><td>—</td><td><b>Confirmed</b>. The only status that means the enrolment fee is paid.</td><td><b>Enrolled.</b> The friend gets a place in line. The amount comes from the campaign live at their sign-up, and the maximum is checked. The card is held as Scheduled, ready to approve.</td></tr>
+    <tr><td>Fall Out, Churned (before Confirmed)</td><td>—</td><td><b>Void, "dropped out".</b> No place used.</td></tr>
+    <tr><td>—</td><td>Cancelled, Registration Declined, ARU - Audit Failed (before approval)</td><td><b>Void, "cancelled".</b> Card cancelled; the place still counts towards the maximum.</td></tr>
+    <tr><td colspan="2">Any change after the card is sent</td><td>No change to the reward.</td></tr>
+  </table></div>
+  <p class="mini">Admission statuses take priority over sales statuses: a Lead Sales Status of Enrolled on its own doesn't hold a card. "Ready For Approval" here is the admission approval, not the reward approval in 4.2.</p>
+  <h3><span class="num">3.6</span>Live example: how gift cards add up</h3>
+
+  <p>Section 3.4, running live. The top panel shows the campaign settings as the admin sees them in the portal (4.1), filled with the suggested values. Below it, pick a number of friends or a friend who cancels, and the amounts update.</p>
+  <p>Try changing a range, amount or tier name, or emptying a range. The example recalculates. Invalid settings show the error the portal would give.</p>
+  <div id="calc-root"></div>
+  <h3><span class="num">3.7</span>Fraud controls</h3>
+  <p>Fake accounts don't pay off here, because every gift card needs a paid enrolment and a person's approval. The real risks are:</p>
+  <ul>
+    <li>someone referring themselves with a second number</li>
+    <li>small groups referring each other</li>
+    <li>agents posting links in public to collect gift cards for students who would have enrolled anyway</li>
+  </ul>
+  <div class="wrap"><table class="fixed"><colgroup><col style="width:26%"><col style="width:54%"><col style="width:20%"></colgroup>
+    <tr><th>Control</th><th>What it does (as used by other referral programmes)</th><th>Status</th></tr>
+    <tr><td>Phone verification</td><td>Every referrer and friend confirms their number with an OTP</td><td>In spec</td></tr>
+    <tr><td>Self-referral and duplicate block</td><td>You can't refer yourself; a friend can have only one referrer</td><td>In spec</td></tr>
+    <tr><td>Reward on real enrolment</td><td>Paid only after the enrolment fee, not on sign-up</td><td>In spec</td></tr>
+    <tr><td>Manual approval</td><td>A person approves every reward before it is paid</td><td>In spec</td></tr>
+    <tr><td>Maximum reward</td><td>Maximum gift cards per referrer: the end of the campaign's last range (suggested 11)</td><td>In spec</td></tr>
+    <tr><td>Vouchers, not cash</td><td>Harder to abuse than cash</td><td>In spec</td></tr>
+    <tr><td>Device check</td><td>Each sign-up stores a device ID (a browser and device fingerprint). Flag the referral when:<br>• the friend uses the <b>same device as the referrer</b>, or<br>• <b>2 or more of one referrer's friends</b> use the same device.</td><td>In spec</td></tr>
+    <tr><td>Sign-up logs</td><td>Every sign-up is logged with its time, network (IP), device ID and referrer. This lets the team look into bursts of sign-ups. Logged only, not flagged.</td><td>In spec</td></tr>
+    <tr><td>Number pattern check</td><td>Looks at one referrer's friends who joined in the last 7 days. Flag the referrals when:<br>• <b>3 or more phone numbers differ only in the last 2 digits</b>, e.g. 98765432<b>10</b>, 98765432<b>11</b>, 98765432<b>12</b>, or<br>• <b>3 or more emails differ only by a number</b> at the same domain, e.g. rahul1@, rahul2@, rahul3@gmail.com.</td><td>In spec</td></tr>
+    <tr><td>Fraud policy in the terms</td><td>States that self-referral and multiple accounts are banned and rewards can be cancelled</td><td>In spec</td></tr>
+  </table></div>
+  <p class="mini">Thresholds above are starting values and should be adjustable without a release. A flag never blocks the friend's sign-up or discount; it only marks the referral in the admin list (4.2). The admin leaves flagged rows unapproved, or approves them if the flag turns out to be wrong.</p>
+</section>
+
+<section id="portal">
+  <h2><span class="num">4.</span>Referral portal (admin)</h2>
+  <p>The existing admin portal (referral.lmscontent.in), used by the team to set up rewards and approve them. No new screens: fields are added to existing ones.</p>
+  <div class="callout info">
+    <div class="ttl">↔ How it connects</div>
+    Its campaign settings feed the landing page copy (5), the dashboard tiers and maximum (6) and the friend's discount (7). It receives rewards once they are ready (3.4), and approved rewards show as Sent on the dashboard.
+  </div>
+  <h3><span class="num">4.1</span>Setting up the campaign</h3>
+  <p>Gift cards are set up as a <b>campaign</b> in the referral portal (Create new campaign). We add a new campaign type, <b>Non-enrolled referral flow</b>. A campaign of this type:</p>
+  <ul>
+    <li>covers one university, across all its batches and programmes</li>
+    <li>adds two settings: tier names and the friend's discount</li>
+    <li>has no separate reward cap, because the last range sets the maximum</li>
+    <li>has no End Date, and runs until it is replaced or switched off</li>
+  </ul>
+  <p>Everything else in the form stays as it is. General and Sales campaigns don't change.</p>
+  <div class="wrap"><table class="fixed"><colgroup><col style="width:24%"><col style="width:38%"><col style="width:38%"></colgroup>
+    <tr><th>Field</th><th>Today</th><th>For this programme</th></tr>
+    <tr><td>Campaign Name</td><td>Free text</td><td>University and period, e.g. <i>DY Patil Online · Refer and Earn · Oct 2026 tiers</i></td></tr>
+    <tr><td>University</td><td>Pick one</td><td>DY Patil University Online</td></tr>
+    <tr><td>Batch</td><td>Pick one</td><td><b>All batches</b>. For the new type, this field must allow "All", like Program.</td></tr>
+    <tr><td>Program</td><td>Pick one</td><td><b>All programmes</b> of the university. For the new type, this field must allow "All", since one campaign covers every programme.</td></tr>
+    <tr><td>Start Date / End Date</td><td>Dates</td><td><b>Start Date only</b>. For the new type, End Date is hidden: the campaign runs until it is replaced or deactivated.</td></tr>
+    <tr><td>Campaign Type</td><td>General or Sales</td><td><b>Non-enrolled referral flow</b> <span class="tag src">New</span></td></tr>
+    <tr><td>Referral Ranges</td><td>4 ranges, each Start, End, Amount</td><td>Suggested: 1–1: ₹1,000 · 2–6: ₹5,000 · 7–9: ₹7,000 · 10–11: ₹7,000. The admin sets these per campaign. Ranges start at 1 with no gaps or overlaps. To use fewer than four, leave the last ones empty. <b>The end of the last range is the maximum</b> number of gift cards per referrer (11 here).</td></tr>
+    <tr><td>Tier name (per range)</td><td>—</td><td><span class="tag src">New</span> A name box next to each range, filled in by the admin. It is the label referrers see on the dashboard and landing page instead of numbers. Suggested: range 1 = <b>Starter</b>, range 2 = <b>Silver</b>, ranges 3 and 4 = <b>Gold</b>. Gold uses two ranges only because the form has four; when ranges next to each other share a name and amount, they show as one tier ("Gold · Friends 7 to 11"). Shown only for the new type.</td></tr>
+    <tr><td>Default Amount</td><td>Amount for referrals after the last range</td><td><b>Hidden, fixed at ₹0</b> for the new type, so nothing is ever paid past the last range. This is what makes the last range the maximum.</td></tr>
+    <tr><td>Maximum (read-only)</td><td>—</td><td><span class="tag src">New</span> Shown under the ranges for the new type: maximum gift cards (end of the last range, e.g. 11) and maximum total (e.g. ₹61,000). Not editable; it lets the admin check the ranges before saving.</td></tr>
+    <tr><td>Friend benefit</td><td>—</td><td><span class="tag src">New</span> Set by the admin per campaign; default <b>10% discount</b> on the programme fee, 1% to 100%. Shown only for the new type, next to the referral ranges.</td></tr>
+    <tr><td>Active toggle</td><td>On / off</td><td><span class="tag ex">Exists</span> Used as is to deactivate. Extra rules for this type are in the lifecycle table below.</td></tr>
+    <tr><td>Delete</td><td>—</td><td><span class="tag src">New</span> Button with confirmation, only for a campaign waiting to start.</td></tr>
+    <tr><td>All fields after Start Date</td><td>Editable</td><td><span class="tag src">New</span> Read-only except Campaign Name once the campaign is live (rule below).</td></tr>
+  </table></div>
+  <h4 style="font-size:14.5px;margin:20px 0 6px">How the maximum works</h4>
+  <ul>
+    <li>Counts every gift card that is held (Scheduled) or sent. A refunded place still counts.</li>
+    <li>Checked when a friend pays the enrolment fee, so two friends enrolling at once can't both take the last place.</li>
+    <li><b>Which maximum applies.</b> The maximum of the campaign that was live when the friend signed up. For example, campaign A ends at 11 and campaign B, which replaced it, ends at 8. A referrer already has 9 cards. A friend who signed up under B gets no card, because 9 is past B's maximum. A friend who signed up under A still gets one, at place 10.</li>
+    <li>Once reached, friends still get their discount, but no gift card is held. The dashboard shows "No gift card (maximum reached)".</li>
+    <li>The dashboard's "3 of 11 gift cards" line and progress bar use the live campaign's maximum. If the programme is paused, they use the last campaign's.</li>
+  </ul>
+  <h4 style="font-size:14.5px;margin:20px 0 6px">How tier names work</h4>
+  <ul>
+    <li>Referrers see the name typed for each range. It appears on the dashboard's gift card levels, its "Done" and "You're here" tags, and the landing page.</li>
+    <li>Ranges with the same name show as one tier. So 7–9 and 10–11, both named Gold, appear as "Gold · Friends 7 to 11".</li>
+  </ul>
+  <h4 style="font-size:14.5px;margin:20px 0 6px">How the friend benefit works</h4>
+  <ul>
+    <li>This is the discount shown on the landing page, the friend link page and the price table.</li>
+    <li>The fee system applies the same discount when the friend pays.</li>
+  </ul>
+  <h4 style="font-size:14.5px;margin:20px 0 6px">No end date: a campaign runs until it is replaced or deactivated</h4>
+  <p>A Non-enrolled referral flow campaign has a Start Date but <b>no End Date</b>. It runs until an admin switches it off or a new campaign replaces it.</p>
+  <div class="lifecycle"><svg viewBox="0 0 770 220" xmlns="http://www.w3.org/2000/svg" font-family="Inter,system-ui,sans-serif" role="img" aria-label="Campaign lifecycle"><defs><marker id="lcA" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#6B7280"/></marker></defs><rect x="20" y="20" width="170" height="54" rx="10" fill="#F1EFFB" stroke="#4A3FA0" stroke-width="1.5"/><text x="105.0" y="43" text-anchor="middle" font-size="13" font-weight="700" fill="#14213D">Waiting to start</text><text x="105.0" y="61" text-anchor="middle" font-size="11" fill="#4B5261">Editable · can be deleted</text><rect x="300" y="20" width="170" height="54" rx="10" fill="#E9F7EF" stroke="#17694A" stroke-width="1.5"/><text x="385.0" y="43" text-anchor="middle" font-size="13" font-weight="700" fill="#14213D">Live</text><text x="385.0" y="61" text-anchor="middle" font-size="11" fill="#4B5261">Locked except the name</text><rect x="580" y="20" width="170" height="54" rx="10" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/><text x="665.0" y="43" text-anchor="middle" font-size="13" font-weight="700" fill="#14213D">Replaced</text><text x="665.0" y="61" text-anchor="middle" font-size="11" fill="#4B5261">Ended automatically</text><rect x="20" y="150" width="170" height="54" rx="10" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/><text x="105.0" y="173" text-anchor="middle" font-size="13" font-weight="700" fill="#14213D">Deleted</text><text x="105.0" y="191" text-anchor="middle" font-size="11" fill="#4B5261">Never went live</text><rect x="300" y="150" width="170" height="54" rx="10" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/><text x="385.0" y="173" text-anchor="middle" font-size="13" font-weight="700" fill="#14213D">Deactivated</text><text x="385.0" y="191" text-anchor="middle" font-size="11" fill="#4B5261">Toggle off (existing setting)</text><rect x="580" y="150" width="170" height="54" rx="10" fill="#FFF7E6" stroke="#92660C" stroke-width="1.5"/><text x="665.0" y="173" text-anchor="middle" font-size="13" font-weight="700" fill="#14213D">Programme paused</text><text x="665.0" y="191" text-anchor="middle" font-size="11" fill="#4B5261">Until a campaign is live again</text><line x1="190" y1="47" x2="296" y2="47" stroke="#6B7280" stroke-width="1.5" marker-end="url(#lcA)"/><text x="243" y="40" text-anchor="middle" font-size="11" font-weight="600" fill="#4A3FA0">Start Date</text><line x1="470" y1="47" x2="576" y2="47" stroke="#6B7280" stroke-width="1.5" marker-end="url(#lcA)"/><text x="523" y="40" text-anchor="middle" font-size="11" font-weight="600" fill="#4A3FA0">Next one starts</text><line x1="105" y1="74" x2="105" y2="146" stroke="#6B7280" stroke-width="1.5" marker-end="url(#lcA)"/><text x="112" y="114" text-anchor="start" font-size="11" font-weight="600" fill="#4A3FA0">Admin deletes</text><line x1="385" y1="74" x2="385" y2="146" stroke="#6B7280" stroke-width="1.5" marker-end="url(#lcA)"/><text x="378" y="114" text-anchor="end" font-size="11" font-weight="600" fill="#4A3FA0">Toggle off</text><line x1="440" y1="150" x2="440" y2="78" stroke="#6B7280" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#lcA)"/><text x="447" y="114" text-anchor="start" font-size="11" font-weight="600" fill="#4A3FA0">Toggle on, if nothing else live</text><line x1="470" y1="177" x2="576" y2="177" stroke="#6B7280" stroke-width="1.5" marker-end="url(#lcA)"/><text x="523" y="170" text-anchor="middle" font-size="11" font-weight="600" fill="#4A3FA0">No replacement</text></svg></div>
+  <p class="mini">Campaign lifecycle for the Non-enrolled referral flow. Per university, at most one campaign is Live and one is Waiting to start. Friends keep the terms of the campaign that was Live when they signed up, whatever happens to it later.</p>
+  <div class="wrap"><table class="fixed"><colgroup><col style="width:30%"><col style="width:70%"></colgroup>
+    <tr><th>Situation</th><th>What happens</th></tr>
+    <tr><td>Changing the rewards</td><td>The admin creates a new campaign with a future Start Date. On that date it goes live and the old one is <b>deactivated automatically</b>, so there is never a gap.</td></tr>
+    <tr><td>Deactivate <span class="tag ex">Exists</span></td><td>Uses the existing on/off toggle in campaign settings, so there is nothing new to build. Switching it off ends the campaign at once. It can be switched back on only if no other campaign of this type is live or waiting for that university. It then resumes on its original terms. A replaced campaign is switched off automatically.</td></tr>
+    <tr><td>No live campaign (switched off with no replacement, or before the first Start Date)</td><td>The programme is <b>paused</b> for new referrals:<br>• Landing page: "Referrals are paused right now" replaces the Start Referring button.<br>• Friend links: open without the discount. A sign-up is an ordinary lead with no referral credit.<br>• Dashboard: still shows every friend and gift card. Share buttons are hidden behind the same note.<br><b>The backend handles this.</b> The referral system reports the programme as paused, and all three pages switch on their own.</td></tr>
+    <tr><td>Resuming after a pause</td><td>The programme resumes on its own when a campaign is live again, either a new one or the old one switched back on. Existing links work again, so nobody needs to re-share. The landing page, banner, footer link and share buttons come back automatically.</td></tr>
+    <tr><td>Campaign waiting to start</td><td>Can be edited or deleted until its Start Date.</td></tr>
+    <tr><td>Entry points while paused</td><td>The <b>backend</b> hides the homepage banner and the footer "Refer and Earn" link. <b>Marketing</b> pauses referral emails and WhatsApp messages. Anyone who still reaches the landing page sees the paused message.</td></tr>
+  </table></div>
+  <h4 style="font-size:14.5px;margin:20px 0 6px">Rules for the Non-enrolled referral flow type</h4>
+  <p class="mini">These apply only to this campaign type. General and Sales campaigns work as they do today.</p>
+  <ul>
+    <li><b>One count per referrer.</b> A referrer's place in line carries over from one campaign to the next at the same university.</li>
+    <li><b>Sign-up decides the terms.</b> A friend gets the discount, amounts and maximum of the campaign that was live when they signed up. This holds even if that campaign is later replaced or switched off. Their discount never expires.</li>
+    <li><b>A live campaign is locked.</b> Before its Start Date, everything can be edited. After it, only the Campaign Name can change. To change the tiers or discount, the admin schedules a new campaign, which replaces this one on its Start Date.</li>
+    <li><b>Referrer Type comes from the referrer's lead.</b> A referrer is <b>Enrolled</b> if their Lead Admission Status is Confirmed (fee paid); otherwise <b>Non-enrolled</b>. It is checked when the friend's lead is created. Non-enrolled referrers use this campaign type; Enrolled referrers stay on the existing campaign, as today.</li>
+    <li><b>Referrers who enrol mid-way.</b> Once a referrer's admission is Confirmed, their later friends go to the existing campaign. Count and maximum from this campaign type don't carry over. Accepted.</li>
+    <li><b>Same discount for every programme.</b> The discount applies to all programmes in the campaign. So a heading like "Get 10% off", built from the campaign's value, is true everywhere.</li>
+  </ul>
+  <h4 style="font-size:14.5px;margin:20px 0 6px">Form checks</h4>
+  <div class="wrap"><table class="fixed"><colgroup><col style="width:30%"><col style="width:70%"></colgroup>
+    <tr><th>Applies to</th><th>The form refuses to save unless</th></tr>
+    <tr><td>All campaign types</td><td>Ranges start at 1, with no gaps or overlaps · each End is at least its Start · every amount is above ₹0 · End Date is after Start Date (General and Sales only)</td></tr>
+    <tr><td>Non-enrolled referral flow</td><td>Every used range has a tier name · empty ranges come only at the end · Default Amount is ₹0 · discount is 1% to 100% · Batch and Program are All · no End Date · the university has no other live campaign of this type, and at most one waiting to start</td></tr>
+  </table></div>
+  <h3><span class="num">4.2</span>Approving rewards</h3>
+  <p>Gift cards are not sent on their own. Once a friend's admission is Confirmed, the reward waits in the existing <b>Referrals &amp; Rewards</b> list until an admin approves it. Approved rewards are then issued by the voucher vendor.</p>
+  <h4 style="font-size:14.5px;margin:20px 0 6px">The list today</h4>
+  <div class="wrap"><table class="fixed"><colgroup><col style="width:28%"><col style="width:72%"></colgroup>
+    <tr><th>Column</th><th>What it holds</th></tr>
+    <tr><td>Referrer Name</td><td>Who referred</td></tr>
+    <tr><td>Referrer Lead ID</td><td>The referrer's lead ID in the CRM</td></tr>
+    <tr><td>Referee Lead ID</td><td>The friend's lead ID in the CRM</td></tr>
+    <tr><td>Reward Amount</td><td>Gift card amount, e.g. ₹3,000</td></tr>
+    <tr><td>Transaction ID</td><td>Voucher reference, filled once issued</td></tr>
+    <tr><td>Lead Drop Date</td><td>The day the friend's lead was created</td></tr>
+    <tr><td>Date of Disbursal</td><td>The day the reward was issued</td></tr>
+    <tr><td>Reward Status</td><td>e.g. Pending</td></tr>
+    <tr><td>Referrer Type</td><td>Enrolled or Non-enrolled</td></tr>
+    <tr><td>Campaign Name, University, Course</td><td>Which campaign, university and programme the referral belongs to, e.g. DEFAULT_CAMP_DY_PATIL</td></tr>
+    <tr><td>Filters</td><td>Program, Referrer Lead ID, Campaign, Lead Sales Status, Lead Admission Status, Referrer Type</td></tr>
+  </table></div>
+  <h4 style="font-size:14.5px;margin:20px 0 6px">What we add for the Non-enrolled referral flow</h4>
+  <div class="wrap"><table class="fixed"><colgroup><col style="width:28%"><col style="width:72%"></colgroup>
+    <tr><th>Addition</th><th>Details</th></tr>
+    <tr><td>Bulk approve <span class="tag ex">Exists</span></td><td>Already in the portal; used as it is for this flow. The only change is the rule in the next row.</td></tr>
+    <tr><td>Only ready rows can be approved <span class="tag src">New</span></td><td>A row can be approved only if the friend's Lead Admission Status is Confirmed and the admission hasn't been cancelled. Other rows can't be ticked.</td></tr>
+    <tr><td>More filters <span class="tag src">New</span></td><td>Reward Status, "ready to approve" and fraud flag, added to the existing filters.</td></tr>
+    <tr><td>New columns <span class="tag src">New</span></td><td>Campaign, tier name, enrolment date and fraud flag.</td></tr>
+    <tr><td>After approval <span class="tag src">New</span></td><td>The voucher vendor issues the card; Transaction ID and Date of Disbursal fill in, and the referrer's dashboard shows Sent. If issuing fails, the system marks it Failed and retries.</td></tr>
+    <tr><td>Record of who did it <span class="tag src">New</span></td><td>Each approval stores who did it and when.</td></tr>
+  </table></div>
+  <h4 style="font-size:14.5px;margin:20px 0 6px">Reward Status and what the referrer sees</h4>
+  <div class="wrap"><table class="fixed"><colgroup><col style="width:26%"><col style="width:44%"><col style="width:30%"></colgroup>
+    <tr><th>Reward Status (admin)</th><th>When</th><th>Referrer's dashboard</th></tr>
+    <tr><td>Pending</td><td>Friend signed up; not enrolled yet</td><td>Pending</td></tr>
+    <tr><td>Pending (ready to approve)</td><td>Admission Confirmed, not cancelled</td><td>Scheduled</td></tr>
+    <tr><td>Approved <span class="tag src">New</span></td><td>Admin approved; the system issues the voucher</td><td>Scheduled</td></tr>
+    <tr><td>Disbursed</td><td>Voucher issued (set by the system)</td><td>Sent</td></tr>
+    <tr><td>Failed</td><td>Voucher couldn't be issued (set and retried by the system)</td><td>Scheduled</td></tr>
+  </table></div>
+  <p class="mini">The only new admin action is <b>Approve</b>. Disbursed and Failed are set by the system.</p>
+  <div class="callout ok">
+    <div class="ttl">⚙ Backend requirement</div>
+    For the new campaign type, Reward Amount fills in when the friend <b>pays the enrolment fee</b>. Before that the row shows no amount, because the amount depends on the order friends enrol (3.4).
+  </div>
+</section>
+
+<section id="referrer-site">
+  <h2><span class="num">5.</span>Referral landing page</h2>
+
+  <p>The public landing page that explains the offer and signs people up for a link.</p>
+  <div class="callout info">
+    <div class="ttl">↔ How it connects</div>
+    Reads its amounts and discount from the campaign (4.1). Signing up creates a profile and lead (8) and the referral link, then sends the referrer to the dashboard (6).
+  </div>
+  <h3><span class="num">5.1</span>Entry points</h3>
+
+  <p>People reach the programme only through these five places. All of them open the landing page (5). A referrer who is already signed in can go straight to their dashboard (6).</p>
+  <div class="wrap"><table class="fixed"><colgroup><col style="width:30%"><col style="width:70%"></colgroup>
+    <tr><th>Entry point</th><th>Where</th></tr>
+    <tr><td>Standalone page</td><td>Direct link to the landing page, e.g. refer.dyponline.edu</td></tr>
+    <tr><td>Homepage banner</td><td>Banner on the university homepage</td></tr>
+    <tr><td>Footer</td><td>"Refer and Earn" link in the university site footer</td></tr>
+    <tr><td>Email campaigns</td><td>Start Referring button in marketing emails</td></tr>
+    <tr><td>WhatsApp campaigns</td><td>Start Referring link in marketing messages</td></tr>
+  </table></div>
+  <div class="callout ok">
+    <div class="ttl">⚙ Backend requirement</div>
+    Each of these links carries a source tag (<code>standalone</code>, <code>homepage_banner</code>, <code>footer</code>, <code>email</code>, <code>whatsapp</code>). It is saved on the referrer's profile when they get their link, so we can see which channel brings the most referrers.
+  </div>
+  <p class="mini">Friends reach their page only through a referrer's link (7).</p>
+  <p class="mini"><b>While paused</b> (4.1): the backend hides the homepage banner and footer link, and marketing pauses referral emails and WhatsApp messages. Both come back when a campaign is live again.</p>
+  <h3><span class="num">5.2</span>Page structure</h3>
+  <p>The page is built from <b>widgets</b>: ready-made sections the team fills in per university in the CMS. They appear in the order below, as in the <a href="https://www.figma.com/design/qaf6Kz0KF0k4TEYbwQ0hGB/D.-Y-Patil?node-id=1236-2167&t=ZydwLrDZ2gCBq8ct-1" target="_blank" rel="noopener">Figma</a>. The header and footer are copied automatically from the university's main site.</p>
+  <div class="wrap"><table class="fixed"><colgroup><col style="width:9%"><col style="width:26%"><col style="width:65%"></colgroup>
+    <tr><th>#</th><th>Widget</th><th>What it does</th></tr>
+    <tr><td><span class="mini">W1</span></td><td><b>Header</b></td><td>Copied from the university site. Nothing to fill in.</td></tr>
+    <tr><td><span class="mini">W2</span></td><td><b>Hero</b></td><td>Sells the offer and starts sign-up.</td></tr>
+    <tr><td><span class="mini">W3</span></td><td><b>Activity ticker</b></td><td>Scrolling strip of recent referral activity.</td></tr>
+    <tr><td><span class="mini">W4</span></td><td><b>How it works</b></td><td>Three steps from sharing to getting a gift card.</td></tr>
+    <tr><td><span class="mini">W5</span></td><td><b>Sign-up</b></td><td>Signs the visitor up, then gives them their link.</td></tr>
+    <tr><td><span class="mini">W6</span></td><td><b>Top referrers</b></td><td>This quarter's leaderboard, entered by hand.</td></tr>
+    <tr><td><span class="mini">W7</span></td><td><b>Rewards simulator</b></td><td>Slider showing how gift cards add up. Built in; reads the tiers from the live campaign.</td></tr>
+    <tr><td><span class="mini">W8</span></td><td><b>How your friend joins</b></td><td>The friend's side in three steps.</td></tr>
+    <tr><td><span class="mini">W9</span></td><td><b>Stories</b></td><td>Quotes from referrers.</td></tr>
+    <tr><td><span class="mini">W10</span></td><td><b>Programmes</b></td><td>Programmes with their discounted fee.</td></tr>
+    <tr><td><span class="mini">W11</span></td><td><b>Closing CTA</b></td><td>Last push to start referring.</td></tr>
+    <tr><td><span class="mini">W12</span></td><td><b>FAQ</b></td><td>Common questions.</td></tr>
+    <tr><td><span class="mini">W13</span></td><td><b>Footer</b></td><td>Copied from the university site. Nothing to fill in.</td></tr>
+  </table></div>
+  <h3><span class="num">5.3</span>Numbers in the page copy</h3>
+  <div class="callout ok">
+    <div class="ttl">⚙ Backend requirement</div>
+    Never type amounts, the discount or the university name into the copy. Use these placeholders, which fill in from the campaign (4.1): <code>{university_name}</code>, <code>{discount_pct}</code>, <code>{max_tier_amount}</code>, <code>{link}</code>. When the campaign changes, every widget updates.
+  </div>
+  <div class="callout ok">
+    <div class="ttl">⚙ Nothing on the page holds a fixed amount</div>
+    When a new campaign starts, the whole page updates on its own. Two rules make sure of that:
+    <ul style="margin:8px 0 0">
+      <li><b>Images carry no numbers.</b> The hero image (W2) and the W8 image must not show amounts, percentages or tier names. Amounts go only in text, through the placeholders above.</li>
+      <li><b>The rewards simulator (W7) is built in.</b> It reads the tiers, amounts and maximum from the live campaign, like the live example in 3.6. Nobody edits it in the CMS.</li>
+    </ul>
+  </div>
+  <h3><span class="num">5.4</span>Widget fields: landing page</h3>
+  <p class="mini">Only what is in the Figma. <b>Required</b>: the widget won't publish without it. <b>Optional</b>: hidden if left empty. <b>Auto</b>: filled by the system. Amounts and the discount in any copy fill in automatically (5.3).</p>
+  <details class="fields"><summary>View fields for all 13 widgets</summary>
+  <div class="wdg"><div class="wdg-h"><span class="wid">W1</span><b>Header</b><span class="wj">Copied from the university site.</span></div>
+  <div class="wrap"><table class="fixed wt"><colgroup><col style="width:24%"><col style="width:16%"><col style="width:12%"><col style="width:48%"></colgroup>
+    <tr><th>Field</th><th>Type</th><th>Input</th><th>What it is</th></tr>
+    <tr><td>Whole header</td><td>Copied</td><td><span class="rq a">Auto</span></td><td>The university site's own header. Nothing to fill in.</td></tr>
+  </table></div></div>
+  <div class="wdg"><div class="wdg-h"><span class="wid">W2</span><b>Hero</b><span class="wj">Sells the offer and starts sign-up.</span></div>
+  <div class="wrap"><table class="fixed wt"><colgroup><col style="width:24%"><col style="width:16%"><col style="width:12%"><col style="width:48%"></colgroup>
+    <tr><th>Field</th><th>Type</th><th>Input</th><th>What it is</th></tr>
+    <tr><td>Eyebrow</td><td>Text</td><td><span class="rq o">Optional</span></td><td>Small label above the heading. Figma: <i>Turn referrals into rewards</i>.</td></tr>
+    <tr><td>Heading</td><td>Text</td><td><span class="rq r">Required</span></td><td>The main promise, with the top reward highlighted. Figma: <i>Up to ₹7,000 for every friend who enrols</i>.</td></tr>
+    <tr><td>Description</td><td>Text</td><td><span class="rq r">Required</span></td><td>One or two lines on what the referrer and the friend each get.</td></tr>
+    <tr><td>Main button</td><td>Label</td><td><span class="rq r">Required</span></td><td>Takes the visitor to sign-up (W5). Figma: <i>Start Referring</i>.</td></tr>
+    <tr><td>Second button</td><td>Label</td><td><span class="rq o">Optional</span></td><td>Scrolls to How it works (W4). Figma: <i>See How it Works</i>.</td></tr>
+    <tr><td>Background image</td><td>Image upload</td><td><span class="rq o">Optional</span></td><td>Uploaded per university. If empty, the dark red background is used.</td></tr>
+    <tr><td>Hero image</td><td>Image</td><td><span class="rq r">Required</span></td><td>The picture on the right. <b>No amounts, percentages or tier names in the image</b> (5.3), so the Figma graphics "For 11 friends ₹61,000" and "Card unlocks in 30 days" must be removed. Visuals only.</td></tr>
+  </table></div></div>
+  <div class="wdg"><div class="wdg-h"><span class="wid">W3</span><b>Activity ticker</b><span class="wj">Scrolling strip of recent activity, entered in the CMS.</span></div>
+  <div class="wrap"><table class="fixed wt"><colgroup><col style="width:24%"><col style="width:16%"><col style="width:12%"><col style="width:48%"></colgroup>
+    <tr><th>Field</th><th>Type</th><th>Input</th><th>What it is</th></tr>
+    <tr><td>Photo</td><td>Image</td><td><span class="rq o">Optional</span></td><td>Small round photo for each item.</td></tr>
+    <tr><td>Name and city</td><td>Text</td><td><span class="rq r">Required</span></td><td>Who it is. Figma: <i>Kavya from Pune</i>.</td></tr>
+    <tr><td>What happened</td><td>Text</td><td><span class="rq r">Required</span></td><td>The activity. Figma: <i>₹5,000 gift card sent</i>.</td></tr>
+  </table></div></div>
+  <div class="wdg"><div class="wdg-h"><span class="wid">W4</span><b>How it works</b><span class="wj">Three steps from sharing to getting a gift card.</span></div>
+  <div class="wrap"><table class="fixed wt"><colgroup><col style="width:24%"><col style="width:16%"><col style="width:12%"><col style="width:48%"></colgroup>
+    <tr><th>Field</th><th>Type</th><th>Input</th><th>What it is</th></tr>
+    <tr><td>Eyebrow</td><td>Text</td><td><span class="rq o">Optional</span></td><td>Small label above the heading.</td></tr>
+    <tr><td>Heading</td><td>Text</td><td><span class="rq r">Required</span></td><td>Section title. Figma: <i>How it works</i>.</td></tr>
+    <tr><td>Subheading</td><td>Text</td><td><span class="rq o">Optional</span></td><td>One line under the title.</td></tr>
+    <tr><td>Steps</td><td>3 × icon, title, text</td><td><span class="rq r">Required</span></td><td>The three steps: get your link, your friend enrols, get your gift card.</td></tr>
+    <tr><td>Button</td><td>Label</td><td><span class="rq o">Optional</span></td><td>Takes the visitor to sign-up (W5).</td></tr>
+  </table></div></div>
+  <div class="wdg"><div class="wdg-h"><span class="wid">W5</span><b>Sign-up</b><span class="wj">Sign-up card. The picture panel stays the same; the form changes across three steps (5.5).</span></div>
+  <div class="wrap"><table class="fixed wt"><colgroup><col style="width:24%"><col style="width:16%"><col style="width:12%"><col style="width:48%"></colgroup>
+    <tr><th>Field</th><th>Type</th><th>Input</th><th>What it is</th></tr>
+    <tr><td>Badge</td><td>Text</td><td><span class="rq o">Optional</span></td><td>Small pill on the picture panel.</td></tr>
+    <tr><td>Panel headline</td><td>Text</td><td><span class="rq r">Required</span></td><td>Big title on the picture panel. Figma: <i>Share your link</i>.</td></tr>
+    <tr><td>Panel tagline</td><td>Text</td><td><span class="rq o">Optional</span></td><td>Line under the headline.</td></tr>
+    <tr><td>Benefits</td><td>3 × icon, title, line</td><td><span class="rq o">Optional</span></td><td>Three short selling points on the panel.</td></tr>
+    <tr><td>Panel image</td><td>Image</td><td><span class="rq r">Required</span></td><td>The picture on the left.</td></tr>
+    <tr><td>Form title</td><td>Text</td><td><span class="rq r">Required</span></td><td>Title above the form. Figma: <i>Create your invite link</i>.</td></tr>
+    <tr><td>Terms line</td><td>Text + link</td><td><span class="rq r">Required</span></td><td>Link to the programme terms. No checkbox.</td></tr>
+    <tr><td>Form button</td><td>Label</td><td><span class="rq r">Required</span></td><td>Figma: <i>Verify and Generate Link</i>.</td></tr>
+    <tr><td>Footnote</td><td>Text</td><td><span class="rq o">Optional</span></td><td>Small line under the button.</td></tr>
+    <tr><td>Link step title</td><td>Text</td><td><span class="rq r">Required</span></td><td>Title once the link is ready. Figma: <i>Your invite link</i>.</td></tr>
+    <tr><td>Message label</td><td>Text</td><td><span class="rq o">Optional</span></td><td>Label above the share message.</td></tr>
+    <tr><td>Default message</td><td>Text</td><td><span class="rq r">Required</span></td><td>The ready-made message friends receive. It includes the link and discount automatically.</td></tr>
+    <tr><td>Dashboard button</td><td>Label</td><td><span class="rq r">Required</span></td><td>Opens the dashboard. Figma: <i>Track My Referral</i>.</td></tr>
+    <tr><td>Form fields, link, share buttons</td><td>Fixed</td><td><span class="rq a">Auto</span></td><td>Built in, not edited in the CMS. See 5.5.</td></tr>
+  </table></div></div>
+  <div class="wdg"><div class="wdg-h"><span class="wid">W6</span><b>Top referrers</b><span class="wj">This quarter's leaderboard, typed in by hand.</span></div>
+  <div class="wrap"><table class="fixed wt"><colgroup><col style="width:24%"><col style="width:16%"><col style="width:12%"><col style="width:48%"></colgroup>
+    <tr><th>Field</th><th>Type</th><th>Input</th><th>What it is</th></tr>
+    <tr><td>Eyebrow</td><td>Text</td><td><span class="rq o">Optional</span></td><td>Small label above the heading.</td></tr>
+    <tr><td>Heading</td><td>Text</td><td><span class="rq r">Required</span></td><td>Section title. Figma: <i>This quarter's top referrers</i>.</td></tr>
+    <tr><td>Subheading</td><td>Text</td><td><span class="rq o">Optional</span></td><td>One line under the title.</td></tr>
+    <tr><td>Entries</td><td>7 × name, friends, total</td><td><span class="rq r">Required</span></td><td>The top 7 referrers, in rank order. Places 1 to 3 show on the podium, 4 to 7 in a list.</td></tr>
+    <tr><td>Closing heading</td><td>Text</td><td><span class="rq o">Optional</span></td><td>Line below the board. Figma: <i>Think you can make it to the top?</i></td></tr>
+    <tr><td>Closing line</td><td>Text</td><td><span class="rq o">Optional</span></td><td>One line under it.</td></tr>
+    <tr><td>Button</td><td>Label</td><td><span class="rq o">Optional</span></td><td>Takes the visitor to sign-up (W5).</td></tr>
+  </table></div></div>
+  <div class="wdg"><div class="wdg-h"><span class="wid">W7</span><b>Rewards simulator</b><span class="wj">Built into the page. Reads the tiers from the live campaign.</span></div>
+  <div class="wrap"><table class="fixed wt"><colgroup><col style="width:24%"><col style="width:16%"><col style="width:12%"><col style="width:48%"></colgroup>
+    <tr><th>Field</th><th>Type</th><th>Input</th><th>What it is</th></tr>
+    <tr><td>Simulator</td><td>Built in</td><td><span class="rq a">Auto</span></td><td>Slider for the number of friends, with each tier, amount and the running total, as in the Figma. Tiers, amounts and maximum come from the live campaign (4.1), so it updates on its own. Nothing to fill in. Hidden while the programme is paused.</td></tr>
+  </table></div></div>
+  <div class="wdg"><div class="wdg-h"><span class="wid">W8</span><b>How your friend joins</b><span class="wj">The friend's side in three steps.</span></div>
+  <div class="wrap"><table class="fixed wt"><colgroup><col style="width:24%"><col style="width:16%"><col style="width:12%"><col style="width:48%"></colgroup>
+    <tr><th>Field</th><th>Type</th><th>Input</th><th>What it is</th></tr>
+    <tr><td>Image</td><td>Image</td><td><span class="rq r">Required</span></td><td>The picture on the left. Same rule as the hero: no amounts, percentages or tier names (5.3).</td></tr>
+    <tr><td>Eyebrow</td><td>Text</td><td><span class="rq o">Optional</span></td><td>Small label above the heading.</td></tr>
+    <tr><td>Heading</td><td>Text</td><td><span class="rq r">Required</span></td><td>Section title. Figma: <i>How your friend joins</i>.</td></tr>
+    <tr><td>Steps</td><td>3 × title, text</td><td><span class="rq r">Required</span></td><td>Open the link, pick a programme and see the price, book a counselling session. Numbered automatically.</td></tr>
+  </table></div></div>
+  <div class="wdg"><div class="wdg-h"><span class="wid">W9</span><b>Stories</b><span class="wj">Quotes from referrers.</span></div>
+  <div class="wrap"><table class="fixed wt"><colgroup><col style="width:24%"><col style="width:16%"><col style="width:12%"><col style="width:48%"></colgroup>
+    <tr><th>Field</th><th>Type</th><th>Input</th><th>What it is</th></tr>
+    <tr><td>Eyebrow</td><td>Text</td><td><span class="rq o">Optional</span></td><td>Small label above the heading.</td></tr>
+    <tr><td>Heading</td><td>Text</td><td><span class="rq r">Required</span></td><td>Section title. Figma: <i>Stories from referrers</i>.</td></tr>
+    <tr><td>Subheading</td><td>Text</td><td><span class="rq o">Optional</span></td><td>One line under the title.</td></tr>
+    <tr><td>Quote</td><td>Text</td><td><span class="rq r">Required</span></td><td>What the person said.</td></tr>
+    <tr><td>Photo</td><td>Image</td><td><span class="rq o">Optional</span></td><td>Small round photo.</td></tr>
+    <tr><td>Name</td><td>Text</td><td><span class="rq r">Required</span></td><td>Who said it.</td></tr>
+    <tr><td>Role and city</td><td>Text</td><td><span class="rq r">Required</span></td><td>e.g. parent, student or referrer, and where they live.</td></tr>
+  </table></div></div>
+  <div class="wdg"><div class="wdg-h"><span class="wid">W10</span><b>Programmes</b><span class="wj">Programmes with their discounted fee.</span></div>
+  <div class="wrap"><table class="fixed wt"><colgroup><col style="width:24%"><col style="width:16%"><col style="width:12%"><col style="width:48%"></colgroup>
+    <tr><th>Field</th><th>Type</th><th>Input</th><th>What it is</th></tr>
+    <tr><td>Eyebrow</td><td>Text</td><td><span class="rq o">Optional</span></td><td>Small label above the heading.</td></tr>
+    <tr><td>Heading</td><td>Text</td><td><span class="rq r">Required</span></td><td>Section title. Figma: <i>Programmes your friends can choose</i>.</td></tr>
+    <tr><td>Subheading</td><td>Text</td><td><span class="rq o">Optional</span></td><td>One line under the title.</td></tr>
+    <tr><td>Table</td><td>System</td><td><span class="rq a">Auto</span></td><td>Each programme with its length, full fee, fee after discount and saving. Comes from the programme list.</td></tr>
+  </table></div></div>
+  <div class="wdg"><div class="wdg-h"><span class="wid">W11</span><b>Closing CTA</b><span class="wj">Last push to start referring.</span></div>
+  <div class="wrap"><table class="fixed wt"><colgroup><col style="width:24%"><col style="width:16%"><col style="width:12%"><col style="width:48%"></colgroup>
+    <tr><th>Field</th><th>Type</th><th>Input</th><th>What it is</th></tr>
+    <tr><td>Heading</td><td>Text</td><td><span class="rq r">Required</span></td><td>Figma: <i>Ready to start earning?</i></td></tr>
+    <tr><td>Line</td><td>Text</td><td><span class="rq o">Optional</span></td><td>One line under the heading.</td></tr>
+    <tr><td>Button</td><td>Label</td><td><span class="rq r">Required</span></td><td>Takes the visitor to sign-up (W5).</td></tr>
+  </table></div></div>
+  <div class="wdg"><div class="wdg-h"><span class="wid">W12</span><b>FAQ</b><span class="wj">Common questions.</span></div>
+  <div class="wrap"><table class="fixed wt"><colgroup><col style="width:24%"><col style="width:16%"><col style="width:12%"><col style="width:48%"></colgroup>
+    <tr><th>Field</th><th>Type</th><th>Input</th><th>What it is</th></tr>
+    <tr><td>Heading</td><td>Text</td><td><span class="rq r">Required</span></td><td>Section title.</td></tr>
+    <tr><td>Questions</td><td>Question + answer</td><td><span class="rq r">Required</span></td><td>The first one is open when the page loads.</td></tr>
+  </table></div></div>
+  <div class="wdg"><div class="wdg-h"><span class="wid">W13</span><b>Footer</b><span class="wj">Copied from the university site.</span></div>
+  <div class="wrap"><table class="fixed wt"><colgroup><col style="width:24%"><col style="width:16%"><col style="width:12%"><col style="width:48%"></colgroup>
+    <tr><th>Field</th><th>Type</th><th>Input</th><th>What it is</th></tr>
+    <tr><td>Whole footer</td><td>Copied</td><td><span class="rq a">Auto</span></td><td>The university site's own footer. Nothing to fill in.</td></tr>
+  </table></div></div>
+  </details>
+  <h3><span class="num">5.5</span>Sign-up flow (W5)</h3>
+  <p class="mini">No enrolment or existing account needed. Anyone 18+ with an Indian mobile number can sign up.</p>
+  <div class="jflow"><div class="jrow" style="grid-template-columns:repeat(3,minmax(0,1fr))">
+    <div class="jn c1"><div class="jk">STEP 1</div><div class="jt">Details</div><div class="jd">Name and phone number. Tapping Verify and Generate Link sends an OTP.</div></div>
+    <div class="jn c2"><div class="jk">STEP 2</div><div class="jt">OTP</div><div class="jd">Name and phone stay filled. The visitor enters the 4-digit code and taps the button again.</div></div>
+    <div class="jn c4"><div class="jk">STEP 3</div><div class="jt">Link ready</div><div class="jd">The same card now shows the link, share buttons and an editable message.</div></div>
+  </div></div>
+  <div class="wrap"><table class="fixed"><colgroup><col style="width:22%"><col style="width:10%"><col style="width:40%"><col style="width:28%"></colgroup>
+    <tr><th>Field</th><th>Step</th><th>Rule</th><th>Error message</th></tr>
+    <tr><td>Full name</td><td>1, 2</td><td>Required</td><td>"Enter your name."</td></tr>
+    <tr><td>Phone number</td><td>1, 2</td><td>Required. 10 digits, starting with 6 to 9. Shown with +91.</td><td>"Enter a valid 10-digit mobile number."</td></tr>
+    <tr><td>OTP</td><td>2</td><td>4 boxes. Helper text: "Enter the code sent to +91 &lt;number&gt;".</td><td>"Incorrect OTP. Try again."</td></tr>
+    <tr><td>Edit</td><td>2</td><td>Goes back to step 1 to change the number.</td><td>—</td></tr>
+    <tr><td>Resend</td><td>2</td><td>"Resend in 0:30" countdown, then tappable.</td><td>—</td></tr>
+    <tr><td>Terms</td><td>1, 2</td><td>Text with a link. Tapping the button means the visitor accepts them.</td><td>—</td></tr>
+    <tr><td>Verify and Generate Link</td><td>1, 2</td><td>Step 1: sends the OTP. Step 2: checks it and creates the link.</td><td>—</td></tr>
+    <tr><td>Copy</td><td>3</td><td>Copies the link.</td><td>—</td></tr>
+    <tr><td>WhatsApp, SMS, Email, Share</td><td>3</td><td>Opens that app with the message. Share opens the phone's share menu, or copies if there isn't one.</td><td>—</td></tr>
+    <tr><td>Message</td><td>3</td><td>Pre-filled with the default message. Any edits are used for every share button.</td><td>—</td></tr>
+    <tr><td>Track My Referral</td><td>3</td><td>Opens the dashboard.</td><td>—</td></tr>
+  </table></div>
+  <p>The link looks like <code>refer.&lt;domain&gt;/r/&lt;FIRSTNAME&gt;10</code>, e.g. <code>/r/HIMANSHU10</code>. Referrers can't choose their own. If two people would get the same link, the second gets a number on the end: <code>/r/HIMANSHU10-2</code>.</p>
+  <div class="wrap"><table class="fixed"><colgroup><col style="width:34%"><col style="width:66%"></colgroup>
+    <tr><th>Who signs up</th><th>What happens</th></tr>
+    <tr><td>New phone number</td><td>A new profile is created and the link is attached to it.</td></tr>
+    <tr><td>Already has a profile, no link yet</td><td>OTP signs them in, and the link is added to their existing profile.</td></tr>
+    <tr><td>Already has a link</td><td>OTP signs them in and shows their existing link. No second link is made.</td></tr>
+    <tr><td>Already signed in on the site</td><td>Start Referring skips the details and OTP and goes straight to step 3.</td></tr>
+  </table></div>
+  <h3><span class="num">5.6</span>Requirements</h3>
+  <ul>
+    <li>A sticky Start Referring button appears when the main one scrolls out of view.</li>
+    <li>Works on a 390px-wide phone screen with no sideways scrolling.</li>
+    <li>Copy uses short, plain sentences.</li>
+    <li><b>Paused</b> (4.1): the page stays up. "Referrals are paused right now" replaces both Start Referring buttons, sign-up is not offered, and the rewards simulator is hidden. It returns to normal when a campaign is live again.</li>
+  </ul>
+</section>
+
+<section id="dashboard">
+  <h2><span class="num">6.</span>Referral website dashboard</h2>
+
+  <p>The referrer's home after signing up. It is a <b>single fixed page</b>, not built from widgets, and has nothing to fill in the CMS.</p>
+  <ul>
+    <li>Reached from Track My Referral after sign-up.</li>
+    <li>Returning referrers sign in with their phone number and OTP, like the site's normal login. Tapping Start Referring on the landing page also works.</li>
+  </ul>
+  <div class="callout info">
+    <div class="ttl">↔ How it connects</div>
+    Opened from Track My Referral on the landing page (5.5). Shows the referral link that friends open (7), each friend's stage from the CRM (3.3) and rewards as the portal approves them (4.2). Sits on top of the user profile (8).
+  </div>
+  <div class="callout ok">
+    <div class="ttl">⚙ Backend requirement</div>
+    All dashboard data comes from the <b>existing referral system</b>: friends, stages, amounts, statuses, dates, tier names and the maximum.
+  </div>
+  <h3><span class="num">6.1</span>Layout</h3>
+  <p>Five blocks, top to bottom, as in the Figma. D3 and D4 sit side by side on desktop.</p>
+  <div class="wrap"><table class="fixed"><colgroup><col style="width:9%"><col style="width:26%"><col style="width:65%"></colgroup>
+    <tr><th>#</th><th>Block</th><th>What it shows</th></tr>
+    <tr><td><span class="mini">D1</span></td><td><b>Page header</b></td><td>Title and a Share my link button.</td></tr>
+    <tr><td><span class="mini">D2</span></td><td><b>Summary tiles</b></td><td>Gift cards earned, friends who joined, friends enrolled.</td></tr>
+    <tr><td><span class="mini">D3</span></td><td><b>Invite link card</b></td><td>The link, share buttons and the message.</td></tr>
+    <tr><td><span class="mini">D4</span></td><td><b>Gift card levels</b></td><td>Which tier they are on and how close they are to the maximum.</td></tr>
+    <tr><td><span class="mini">D5</span></td><td><b>Your friends</b></td><td>A row for every friend who signed up through the link.</td></tr>
+  </table></div>
+  <h3><span class="num">6.2</span>Block details</h3>
+  <p class="mini">Examples are the Figma copy, for a referrer with 6 friends of whom 3 have enrolled.</p>
+  <details class="fields"><summary>View details for D1 to D5</summary>
+  <div class="wdg"><div class="wdg-h"><span class="wid">D1</span><b>Page header</b><span class="wj"></span></div>
+  <div class="wrap"><table class="fixed wt"><colgroup><col style="width:22%"><col style="width:38%"><col style="width:40%"></colgroup>
+    <tr><th>Element</th><th>Example</th><th>How it works</th></tr>
+    <tr><td>Eyebrow</td><td>"MY REFERRALS"</td><td>Fixed text.</td></tr>
+    <tr><td>Heading</td><td>"How it works"</td><td>Fixed text.</td></tr>
+    <tr><td>Line</td><td>"Track your friends and gift cards in one place."</td><td>Fixed text.</td></tr>
+    <tr><td>Share my link</td><td>Button</td><td>Opens the share options in D3.</td></tr>
+  </table></div></div>
+  <div class="wdg"><div class="wdg-h"><span class="wid">D2</span><b>Summary tiles</b><span class="wj"></span></div>
+  <div class="wrap"><table class="fixed wt"><colgroup><col style="width:22%"><col style="width:38%"><col style="width:40%"></colgroup>
+    <tr><th>Element</th><th>Example</th><th>How it works</th></tr>
+    <tr><td>Gift cards earned</td><td>"₹11,000"</td><td>Scheduled + Sent cards added up.</td></tr>
+    <tr><td>Friends who joined</td><td>"6"</td><td>Everyone who signed up through the link, except Void.</td></tr>
+    <tr><td>Friends enrolled</td><td>"3 of 11"</td><td>Enrolled friends out of the maximum (end of the campaign's last range).</td></tr>
+  </table></div></div>
+  <div class="wdg"><div class="wdg-h"><span class="wid">D3</span><b>Invite link card</b><span class="wj"></span></div>
+  <div class="wrap"><table class="fixed wt"><colgroup><col style="width:22%"><col style="width:38%"><col style="width:40%"></colgroup>
+    <tr><th>Element</th><th>Example</th><th>How it works</th></tr>
+    <tr><td>Banner</td><td>"Friends Save 10% With Your Link"</td><td>The campaign's friend benefit.</td></tr>
+    <tr><td>Title</td><td>"Your invite link"</td><td>Fixed text.</td></tr>
+    <tr><td>Link + Copy</td><td>https://refer.&lt;domain&gt;/r/&lt;CODE&gt;</td><td>Can't be edited. Copy copies it.</td></tr>
+    <tr><td>Share buttons</td><td>WhatsApp, SMS, Email, Share, Telegram, X, Facebook</td><td>Each opens that app with the message below.</td></tr>
+    <tr><td>Message</td><td>"Message (edit before sharing)"</td><td>Pre-filled; edits are used for every button.</td></tr>
+  </table></div></div>
+  <div class="wdg"><div class="wdg-h"><span class="wid">D4</span><b>Gift card levels</b><span class="wj"></span></div>
+  <div class="wrap"><table class="fixed wt"><colgroup><col style="width:22%"><col style="width:38%"><col style="width:40%"></colgroup>
+    <tr><th>Element</th><th>Example</th><th>How it works</th></tr>
+    <tr><td>Title</td><td>"Gift card levels"</td><td>Fixed text.</td></tr>
+    <tr><td>Next reward</td><td>"Your next friend to enrol earns you a ₹5,000 gift card."</td><td>The amount for the next friend in line.</td></tr>
+    <tr><td>Tiers</td><td>Starter · Friend 1 · ₹1,000<br>Silver · Friends 2 to 6 · ₹5,000 each<br>Gold · Friends 7 to 11 · ₹7,000 each</td><td>Names and amounts from the campaign (4.1). "Done" on tiers already filled, "You're here" on the tier the next friend falls in.</td></tr>
+    <tr><td>Maximum line</td><td>"3 of 11 gift cards · ₹11,000 of ₹61,000"</td><td>Cards so far against the maximum and maximum total from the campaign.</td></tr>
+    <tr><td>Progress bar</td><td>Bar</td><td>Cards so far ÷ maximum.</td></tr>
+    <tr><td>Remaining</td><td>"8 more gift cards available."</td><td>Maximum minus cards so far.</td></tr>
+  </table></div></div>
+  <div class="wdg"><div class="wdg-h"><span class="wid">D5</span><b>Your friends</b><span class="wj"></span></div>
+  <div class="wrap"><table class="fixed wt"><colgroup><col style="width:22%"><col style="width:38%"><col style="width:40%"></colgroup>
+    <tr><th>Element</th><th>Example</th><th>How it works</th></tr>
+    <tr><td>Title</td><td>"Your friends"</td><td>Fixed text.</td></tr>
+    <tr><td>Filters</td><td>All 6 · In progress 3 · Enrolled 3 · Gift card sent 2</td><td>Each shows a count. In progress = Joined, Counselling or Applied.</td></tr>
+    <tr><td>Table</td><td>Columns in 6.3</td><td>One row per friend.</td></tr>
+  </table></div></div>
+  </details>
+  <h3><span class="num">6.3</span>Friends table</h3>
+  <div class="wrap"><table class="fixed wt"><colgroup><col style="width:16%"><col style="width:30%"><col style="width:54%"></colgroup>
+    <tr><th>Column</th><th>Example</th><th>How it works</th></tr>
+    <tr><td>Friend</td><td>"Imran Khan"</td><td>Friend's name.</td></tr>
+    <tr><td>Programme</td><td>"MCA"</td><td>Programme they picked.</td></tr>
+    <tr><td>Stage</td><td>Joined, Counselling, Applied, Enrolled</td><td>Where they are (3.3).</td></tr>
+    <tr><td>Progress</td><td>"Step 3 of 4"</td><td>Joined = 1, Counselling = 2, Applied = 3, Enrolled = 4.</td></tr>
+    <tr><td>Gift card</td><td>"₹5,000" or "Not earned"</td><td>Amount once they enrol.</td></tr>
+    <tr><td>Status</td><td>Pending, Scheduled, Sent</td><td>See 6.4.</td></tr>
+    <tr><td>Date</td><td>"28 Oct", "5 Sept", "—"</td><td>Scheduled: the day the friend enrolled. Sent: the Date of Disbursal.</td></tr>
+  </table></div>
+  <p><b>Order</b>: Scheduled first, then in progress, then Sent.</p>
+  <h3><span class="num">6.4</span>Status meanings</h3>
+  <div class="wrap"><table class="fixed"><colgroup><col style="width:18%"><col style="width:46%"><col style="width:36%"></colgroup>
+    <tr><th>Status</th><th>When</th><th>Gift card column</th></tr>
+    <tr><td>Pending</td><td>Friend hasn't enrolled yet</td><td>"Not earned"</td></tr>
+    <tr><td>Scheduled</td><td>Friend paid; waiting for admin approval</td><td>The amount, with the enrolment date</td></tr>
+    <tr><td>Sent</td><td>Admin approved and the card was issued</td><td>The amount, with the Date of Disbursal</td></tr>
+    <tr><td>Void</td><td>Not eligible, dropped out, or refunded or cancelled before approval</td><td>"No gift card", with the reason</td></tr>
+  </table></div>
+  <h3><span class="num">6.5</span>Requirements</h3>
+  <ul>
+    <li>The row moves to Sent once an admin approves and the card is issued (4.2).</li>
+    <li>All amounts, tier names and the maximum come from the campaign; counts come from the referrer's data.</li>
+    <li>On phones, the table turns into a list of cards. Labels and amounts never wrap onto two lines.</li>
+    <li><b>Paused</b> (4.1): friends, gift cards and statuses still show, and approvals carry on. Share buttons and the link are hidden behind a "Referrals are paused right now" note. Gift card levels show the last campaign's tiers.</li>
+  </ul>
+</section>
+
+<section id="friend-link">
+  <h2><span class="num">7.</span>Friend referral link</h2>
+
+  <p>The page a friend sees when they open a link. The discount comes from the link itself; there is no code to type. Like the dashboard, it is a <b>single fixed page</b>, not built from widgets.</p>
+  <div class="callout info">
+    <div class="ttl">↔ How it connects</div>
+    Opened from a referrer's link (6). Reads the discount from the campaign (4.1). Signing up creates the friend's profile and lead (8), which then moves through the stages (3.3) and appears on the referrer's dashboard (6).
+  </div>
+  <h3><span class="num">7.1</span>Layout</h3>
+  <p>On desktop, F2 and F3 sit on the left and the sign-up form (F4) on the right.</p>
+  <div class="wrap"><table class="fixed"><colgroup><col style="width:9%"><col style="width:26%"><col style="width:65%"></colgroup>
+    <tr><th>#</th><th>Block</th><th>What it shows</th></tr>
+    <tr><td><span class="mini">F1</span></td><td><b>Header</b></td><td>Same as the university site.</td></tr>
+    <tr><td><span class="mini">F2</span></td><td><b>Price card</b></td><td>The friend's discounted price for the programme they pick.</td></tr>
+    <tr><td><span class="mini">F3</span></td><td><b>Highlights</b></td><td>Three trust points.</td></tr>
+    <tr><td><span class="mini">F4</span></td><td><b>Sign-up form</b></td><td>Who invited them, and the friend's sign-up.</td></tr>
+    <tr><td><span class="mini">F5</span></td><td><b>University banner</b></td><td>Link to the university's main site.</td></tr>
+    <tr><td><span class="mini">F6</span></td><td><b>FAQ</b></td><td>Questions for the friend (copy to follow; the Figma copy is a placeholder).</td></tr>
+    <tr><td><span class="mini">F7</span></td><td><b>Footer</b></td><td>Same as the university site.</td></tr>
+  </table></div>
+  <h3><span class="num">7.2</span>Block details</h3>
+  <p class="mini"><b>Source</b>: Fixed = written into the page. Rules = the university's settings. Programmes = the university's programme list. System = worked out automatically.</p>
+  <details class="fields"><summary>View details for F2 to F5</summary>
+  <div class="wdg"><div class="wdg-h"><span class="wid">F2</span><b>Price card</b><span class="wj"></span></div>
+  <div class="wrap"><table class="fixed wt"><colgroup><col style="width:24%"><col style="width:16%"><col style="width:12%"><col style="width:48%"></colgroup>
+    <tr><th>Element</th><th>Type</th><th>Source</th><th>What it is</th></tr>
+    <tr><td>Heading</td><td>Text</td><td>Campaign</td><td>The offer, with the discount from the campaign's friend benefit highlighted. Figma: <i>Get 10% off your online degree</i>.</td></tr>
+    <tr><td>Line</td><td>Text</td><td>Fixed</td><td>Tells the friend to pick a programme.</td></tr>
+    <tr><td>Programme buttons</td><td>Buttons</td><td>Programmes</td><td>One per programme. The first is selected when the page opens.</td></tr>
+    <tr><td>Programme details</td><td>Text</td><td>Programmes</td><td>Name, mode and length, e.g. MBA · Online · 2 years.</td></tr>
+    <tr><td>You save</td><td>Amount</td><td>System</td><td>The discount in rupees for the selected programme.</td></tr>
+    <tr><td>You pay</td><td>Amount</td><td>System</td><td>The fee after discount, with the full fee crossed out.</td></tr>
+    <tr><td>Footnote</td><td>Text</td><td>Fixed</td><td>Confirms the discount is already applied.</td></tr>
+  </table></div></div>
+  <div class="wdg"><div class="wdg-h"><span class="wid">F3</span><b>Highlights</b><span class="wj"></span></div>
+  <div class="wrap"><table class="fixed wt"><colgroup><col style="width:24%"><col style="width:16%"><col style="width:12%"><col style="width:48%"></colgroup>
+    <tr><th>Element</th><th>Type</th><th>Source</th><th>What it is</th></tr>
+    <tr><td>Items</td><td>3 × icon, title, line</td><td>Rules</td><td>Three trust points set per university, e.g. UGC entitled, NAAC grade, no-cost EMI.</td></tr>
+  </table></div></div>
+  <div class="wdg"><div class="wdg-h"><span class="wid">F4</span><b>Sign-up form</b><span class="wj"></span></div>
+  <div class="wrap"><table class="fixed wt"><colgroup><col style="width:24%"><col style="width:16%"><col style="width:12%"><col style="width:48%"></colgroup>
+    <tr><th>Element</th><th>Type</th><th>Source</th><th>What it is</th></tr>
+    <tr><td>Invite banner</td><td>Text</td><td>System</td><td>Who invited them and that the discount is applied. Figma: <i>Abhinav invited you</i>.</td></tr>
+    <tr><td>University name</td><td>Text</td><td>Rules</td><td>The university's name.</td></tr>
+    <tr><td>Line</td><td>Text</td><td>Fixed</td><td>One line on what happens next (counselling and EMI options).</td></tr>
+    <tr><td>Callback count</td><td>Photos + text</td><td>System</td><td>How many people asked for a callback today.</td></tr>
+    <tr><td>Admissions deadline</td><td>Date + countdown</td><td>Rules</td><td>When admissions close, with a live countdown.</td></tr>
+    <tr><td>Seats filled</td><td>Bar</td><td>Rules</td><td>How full the current batch is.</td></tr>
+    <tr><td>Form fields</td><td>Form</td><td>Fixed</td><td>See 7.3.</td></tr>
+    <tr><td>Sign Up button</td><td>Button</td><td>Fixed</td><td>Grey until every field is filled correctly.</td></tr>
+    <tr><td>Consent line</td><td>Text + links</td><td>Fixed</td><td>Agreement to the terms, privacy policy and being contacted.</td></tr>
+  </table></div></div>
+  <div class="wdg"><div class="wdg-h"><span class="wid">F5</span><b>University banner</b><span class="wj"></span></div>
+  <div class="wrap"><table class="fixed wt"><colgroup><col style="width:24%"><col style="width:16%"><col style="width:12%"><col style="width:48%"></colgroup>
+    <tr><th>Element</th><th>Type</th><th>Source</th><th>What it is</th></tr>
+    <tr><td>Heading</td><td>Text</td><td>Fixed</td><td>Invites the friend to learn more about the university.</td></tr>
+    <tr><td>Line</td><td>Text</td><td>Fixed</td><td>One line on what they'll find there.</td></tr>
+    <tr><td>Button</td><td>Button + link</td><td>Rules</td><td>Opens the university's main site in a new tab, carrying the referral with it (7.4).</td></tr>
+  </table></div></div>
+  </details>
+  <h3><span class="num">7.3</span>Sign-up form fields (F4)</h3>
+  <p class="mini">All fields are required. The OTP step works the same way as the referrer sign-up (5.5).</p>
+  <div class="wrap"><table class="fixed"><colgroup><col style="width:24%"><col style="width:46%"><col style="width:30%"></colgroup>
+    <tr><th>Field</th><th>Rule</th><th>Error message</th></tr>
+    <tr><td>Phone number</td><td>10 digits, starting with 6 to 9. Shown with +91.</td><td>"Enter a valid 10-digit mobile number."</td></tr>
+    <tr><td>Full name</td><td>Required</td><td>"Enter your name."</td></tr>
+    <tr><td>Email Id</td><td>Must look like an email address</td><td>"Enter a valid email address."</td></tr>
+    <tr><td>Highest qualification</td><td>Dropdown: 12th pass, Diploma, Graduate, Postgraduate, Other</td><td>"Select your highest qualification."</td></tr>
+    <tr><td>Select Course</td><td>Dropdown of the university's programmes. Pre-filled with the one picked in F2.</td><td>"Select a course."</td></tr>
+    <tr><td>OTP</td><td>Appears after the first tap on Sign Up. 4 digits, with Edit and "Resend in 0:30".</td><td>"Incorrect OTP. Try again."</td></tr>
+    <tr><td>Sign Up</td><td>First tap sends the OTP. Second tap checks it and submits.</td><td>—</td></tr>
+  </table></div>
+  <h3><span class="num">7.4</span>What happens after Sign Up</h3>
+  <p class="mini">The rules behind each case are in 3.2. This table only gives what each person sees.</p>
+  <div class="wrap"><table class="fixed"><colgroup><col style="width:30%"><col style="width:40%"><col style="width:30%"></colgroup>
+    <tr><th>Case</th><th>Friend sees</th><th>Referrer sees</th></tr>
+    <tr><td>Friend uses the referrer's own number</td><td>"Referrers can't use their own link."</td><td>Nothing</td></tr>
+    <tr><td>Number already referred by someone</td><td>"This number is already registered with a referral."</td><td>Nothing</td></tr>
+    <tr><td>Number already has a profile on the site</td><td>Sign-up goes through; the counsellor explains what applies</td><td>Row marked Void: not eligible</td></tr>
+    <tr><td>New friend</td><td>"You're in, &lt;name&gt;! Your &lt;discount&gt;% discount on &lt;programme&gt; is locked to &lt;mobile&gt;. You pay ₹Y instead of ₹X. A counsellor will call within 24 hours."</td><td>New row: Joined</td></tr>
+  </table></div>
+  <ul>
+    <li>A new friend gets a profile, with "referred by" set to the referrer.</li>
+    <li>They are added to the CRM as a lead, tagged with the referrer.</li>
+    <li>On phones, a sticky Sign Up button appears when the form scrolls out of view.</li>
+    <li><b>Paused</b> (4.1): the page opens without the discount or the "&lt;name&gt; invited you" banner. A sign-up is an ordinary lead with no referral credit. Sign-up time decides, so a friend who opened the link earlier but signs up while paused gets no credit.</li>
+  </ul>
+  <div class="callout ok">
+    <div class="ttl">⚙ Backend requirement</div>
+    The referral travels in the <b>URL</b>. The friend link page reads the code from <code>/r/&lt;CODE&gt;</code>. "Visit university website" opens the main site with <code>?ref=&lt;CODE&gt;</code> added, and the main site passes it on to its own sign-up. A sign-up with a valid code is credited to that referrer. A sign-up without one is not.
+  </div>
+  <div class="callout ok">
+    <div class="ttl">⚙ Backend requirement</div>
+    The friend's discount (from the campaign live when they signed up, e.g. 10%) is locked to the friend's phone number and must be <b>applied by the fee system when they pay</b>. It applies to whichever programme at this university they finally enrol in, not only the one they picked on this page.
+  </div>
+  <div class="callout info">
+    <div class="ttl">ℹ How long the discount lasts</div>
+    It never expires. A friend who signed up through the link gets their discount whenever they enrol, even in a later batch.
+  </div>
+  <div class="callout info">
+    <div class="ttl">ℹ Broken or mistyped links</div>
+    If the code in the link doesn't match any referrer, the page opens without the invite banner or discount and shows "This invite link isn't valid." Any sign-up from it is an ordinary lead.
+  </div>
+</section>
+
+<section id="profile">
+  <h2><span class="num">8.</span>Profile</h2>
+  <div class="callout info">
+    <div class="ttl">↔ How it connects</div>
+    Created by sign-up on the landing page (5.5) or the friend link (7.3). The dashboard (6) is a layer on top of it, and the portal (4.2) uses its lead ID.
+  </div>
+  <p>Everyone uses the same sign-up and gets the same kind of profile: one <code>user_id</code> per phone number. That includes referrers, friends and normal users. A profile becomes a referrer when it gets a link. The dashboard is a layer on top of the profile, not a separate account.</p>
+  <div class="callout ok">
+    <div class="ttl">⚙ Backend requirement</div>
+    The phone number, confirmed by OTP, is the profile's unique ID. It can't be changed, and every lead, referral and gift card is linked to it.
+  </div>
+  <div class="wrap"><table class="fixed"><colgroup><col style="width:22%"><col style="width:16%"><col style="width:18%"><col style="width:44%"></colgroup>
+    <tr><th>Field</th><th>Who has it</th><th>Can the user edit it?</th><th>Notes</th></tr>
+    <tr><td>Phone (+91)</td><td>Everyone</td><td>No</td><td>The unique ID. Confirmed by OTP at sign-up.</td></tr>
+    <tr><td>Name</td><td>Everyone</td><td>Yes</td><td>Shown to friends as "&lt;name&gt; invited you". Changing it doesn't change the link.</td></tr>
+    <tr><td>Email</td><td>Everyone</td><td>Yes</td><td>Where gift cards are emailed. Without it, cards go by SMS only.</td></tr>
+    <tr><td>Highest qualification</td><td>Everyone</td><td>Yes</td><td>Filled in for friends from their sign-up form.</td></tr>
+    <tr><td>Referred by</td><td>Friends</td><td>No</td><td>The referrer's phone number, set once at sign-up.</td></tr>
+    <tr><td>Referral link</td><td>Referrers</td><td>No</td><td>Created at sign-up. Having one is what makes a profile a referrer.</td></tr>
+  </table></div>
+  <ul>
+    <li><b>Friends of friends:</b> a friend who enrols can get their own link from the same profile. Only one level is rewarded.</li>
+    <li><b>Changing number:</b> not possible, and support doesn't move profiles. A new number means a new profile; the old one keeps running.</li>
+    <li><b>Who can be referred:</b> see 3.2.</li>
+  </ul>
+</section>
+
+<section id="edge-cases">
+  <h2><span class="num">9.</span>Edge cases and acceptance criteria</h2>
+
+  <h3><span class="num">9.1</span>Edge cases</h3>
+  <p class="mini">Only cases not covered elsewhere. See 3.4 for refunds and the maximum, 3.2 for eligibility, 5.5 for sign-ins, 7.4 for broken links and programme changes, 4.2 for voucher failures and 4.1 for the paused state.</p>
+  <div class="wrap"><table class="fixed"><colgroup><col style="width:44%"><col style="width:56%"></colgroup>
+    <tr><th>Situation</th><th>What happens</th></tr>
+    <tr><td>Friend opens the link but signs up later another way</td><td>No credit. Only sign-ups through the link count.</td></tr>
+    <tr><td>Friend taps Visit university website and signs up there</td><td>Credit given, as long as the URL still carries <code>?ref=&lt;CODE&gt;</code> when they sign up.</td></tr>
+    <tr><td>Friend signs up but never enrols</td><td>Stays Pending on the dashboard. No card, nothing to expire.</td></tr>
+  </table></div>
+  <h3><span class="num">9.2</span>Acceptance criteria</h3>
+  <p class="mini">Each line passes or fails. Given = starting point; When = action; Then = expected result.</p>
+  <h4 style="font-size:14.5px;margin:18px 0 6px">Landing page: referrer sign-up</h4>
+  <div class="wrap"><table class="fixed"><colgroup><col style="width:32%"><col style="width:24%"><col style="width:44%"></colgroup>
+    <tr><th>Given</th><th>When</th><th>Then</th></tr>
+    <tr><td>A visitor with a new phone number</td><td>enters name and phone and verifies the OTP</td><td>a profile and a lead are created, the link is shown, and the referrer can share it</td></tr>
+    <tr><td>A visitor whose number already has a link</td><td>verifies the OTP</td><td>they see their existing link; no second link is created</td></tr>
+    <tr><td>Two referrers with the same first name</td><td>both sign up</td><td>the second gets the same code with -2 on the end</td></tr>
+  </table></div>
+  <h4 style="font-size:14.5px;margin:18px 0 6px">Friend referral link: sign-up</h4>
+  <div class="wrap"><table class="fixed"><colgroup><col style="width:32%"><col style="width:24%"><col style="width:44%"></colgroup>
+    <tr><th>Given</th><th>When</th><th>Then</th></tr>
+    <tr><td>A friend opens a valid link</td><td>the page loads</td><td>the invite banner shows the referrer's name and the discount is applied to every programme price</td></tr>
+    <tr><td>A friend enters the referrer's own phone number</td><td>taps Sign Up</td><td>sign-up is blocked with "Referrers can't use their own link."</td></tr>
+    <tr><td>A friend whose number was already referred</td><td>taps Sign Up</td><td>sign-up is blocked with "This number is already registered with a referral."</td></tr>
+    <tr><td>A friend whose number already has a profile on the site</td><td>completes sign-up</td><td>the sign-up goes through, and the referrer's row shows Void: not eligible</td></tr>
+    <tr><td>A new friend</td><td>completes sign-up with a correct OTP</td><td>a lead is created tagged with the referrer, and the referrer's dashboard shows a new row: Joined, Pending</td></tr>
+    <tr><td>A friend opens a link with an unknown code</td><td>the page loads</td><td>no invite banner or discount is shown, and a sign-up is an ordinary lead</td></tr>
+  </table></div>
+  <h4 style="font-size:14.5px;margin:18px 0 6px">Shared rules: rewards</h4>
+  <div class="wrap"><table class="fixed"><colgroup><col style="width:32%"><col style="width:24%"><col style="width:44%"></colgroup>
+    <tr><th>Given</th><th>When</th><th>Then</th></tr>
+    <tr><td>A non-enrolled referrer whose 3rd friend's admission becomes Confirmed</td><td>the status change arrives</td><td>the friend gets place 3, and the card is held as Scheduled at place 3's amount (Silver in the suggested tiers)</td></tr>
+    <tr><td>A referrer whose cards held or sent have reached the maximum (end of the last range)</td><td>one more friend's admission becomes Confirmed</td><td>no card is held, the friend keeps their discount, and the row shows "No gift card (maximum reached)"</td></tr>
+    <tr><td>A friend whose reward is not yet approved</td><td>their admission becomes Cancelled</td><td>only that card turns Void; every other friend keeps their place and amount</td></tr>
+    <tr><td>A friend whose card has been sent</td><td>their admission becomes Cancelled</td><td>the reward doesn't change</td></tr>
+    <tr><td>A referrer whose own admission is Confirmed</td><td>a new friend signs up</td><td>that friend's referral goes to the existing campaign, not the new campaign type</td></tr>
+    <tr><td>The programme is paused (no live campaign)</td><td>a friend opens a referral link and signs up</td><td>no discount is shown or applied, and the sign-up is an ordinary lead with no referral credit. The landing page shows "Referrals are paused right now"</td></tr>
+    <tr><td>A friend signed up under campaign A</td><td>A is deactivated, then the friend enrols</td><td>they keep A's discount, and the card is held at A's amount for their place, checked against A's maximum</td></tr>
+    <tr><td>A referrer with 9 cards. Campaign A (ends at 11) has been replaced by campaign B (ends at 8)</td><td>a friend who signed up under B enrols</td><td>no card is held, because B's maximum is reached. A friend who signed up under A still gets a card at place 10</td></tr>
+    <tr><td>A campaign whose Start Date has passed</td><td>an admin opens it to edit</td><td>only Campaign Name can be changed; all other fields are read-only, and there is no End Date</td></tr>
+  </table></div>
+  <h4 style="font-size:14.5px;margin:18px 0 6px">Referral portal: approval</h4>
+  <div class="wrap"><table class="fixed"><colgroup><col style="width:32%"><col style="width:24%"><col style="width:44%"></colgroup>
+    <tr><th>Given</th><th>When</th><th>Then</th></tr>
+    <tr><td>Rows whose admission isn't Confirmed</td><td>the admin selects rows</td><td>those rows can't be ticked</td></tr>
+    <tr><td>Several ready rows</td><td>the admin bulk approves</td><td>a confirmation shows the count and total. After confirming, vouchers are issued, Transaction ID and Date of Disbursal fill in, and each dashboard shows Sent</td></tr>
+    <tr><td>An approved row whose voucher fails to issue</td><td>the vendor returns an error</td><td>the system marks the row Failed and retries; the referrer still sees Scheduled</td></tr>
+  </table></div>
+  <h4 style="font-size:14.5px;margin:18px 0 6px">Referral portal: campaign setup</h4>
+  <div class="wrap"><table class="fixed"><colgroup><col style="width:32%"><col style="width:24%"><col style="width:44%"></colgroup>
+    <tr><th>Given</th><th>When</th><th>Then</th></tr>
+    <tr><td>A Non-enrolled campaign is live for a university</td><td>an admin creates another with a future Start Date</td><td>it saves as waiting to start; on its Start Date it goes live and the old one is deactivated automatically</td></tr>
+    <tr><td>The programme is paused</td><td>a new campaign goes live, or the deactivated one is switched back on</td><td>existing referral links work again under the new campaign's terms; banner, footer link and share buttons reappear</td></tr>
+    <tr><td>A campaign waiting to start</td><td>an admin deletes it</td><td>it is removed; the live campaign (if any) carries on</td></tr>
+    <tr><td>The live campaign is deactivated with no replacement</td><td>someone opens the university homepage</td><td>the referral banner and footer link are hidden</td></tr>
+    <tr><td>A new campaign with different tiers goes live</td><td>someone opens the landing page</td><td>the rewards simulator (W7) shows the new tiers and amounts with no CMS edit</td></tr>
+    <tr><td>A university already has a campaign waiting to start</td><td>an admin creates another</td><td>the form refuses to save</td></tr>
+    <tr><td>A live Non-enrolled campaign</td><td>an admin switches its toggle off</td><td>it stops at once. New sign-ups get no discount or credit until a campaign is live again</td></tr>
+    <tr><td>A deactivated campaign, while another Non-enrolled campaign for the university is live or waiting</td><td>an admin switches its toggle back on</td><td>the toggle is refused, with a message naming the other campaign</td></tr>
+    <tr><td>An admin creates a Non-enrolled campaign</td><td>any range has no tier name, or ranges overlap or leave a gap</td><td>the form refuses to save and highlights the problem</td></tr>
+    <tr><td>A campaign with ranges named Gold for 7–9 and 10–11</td><td>the referrer opens the dashboard</td><td>they see one tier: Gold · Friends 7 to 11</td></tr>
+  </table></div>
+  <h4 style="font-size:14.5px;margin:18px 0 6px">Shared rules: fraud checks</h4>
+  <div class="wrap"><table class="fixed"><colgroup><col style="width:32%"><col style="width:24%"><col style="width:44%"></colgroup>
+    <tr><th>Given</th><th>When</th><th>Then</th></tr>
+    <tr><td>A friend signs up on the same device as their referrer</td><td>sign-up completes</td><td>the friend still gets their discount, and the referral is flagged in the admin list</td></tr>
+    <tr><td>A referrer's friends include 3 numbers differing only in the last 2 digits within 7 days</td><td>the third one signs up</td><td>all three referrals are flagged</td></tr>
+  </table></div>
+</section>
+
+<section id="data">
+  <h2><span class="num">10.</span>Data and integrations</h2>
+
+  <div class="wrap"><table class="fixed"><colgroup><col style="width:24%"><col style="width:76%"></colgroup>
+    <tr><th>What</th><th>Details</th></tr>
+    <tr><td>User profile</td><td>Phone (unique ID), name, email, qualification, referred by, created date.</td></tr>
+    <tr><td>Referrer details</td><td>Link code, link clicks, which entry point they came from, date they became a referrer.</td></tr>
+    <tr><td>Referral record</td><td><b>Friend:</b> name, phone, email, qualification, programme, lead ID.<br><b>Referral:</b> referrer's phone and lead ID, stage, enrolment date, place in line.<br><b>Gift card:</b> amount, status, reason if Void, Transaction ID, Date of Disbursal, who approved it and when.</td></tr>
+    <tr><td>Existing referral system</td><td>Runs the gift cards through campaigns (4.1) and supplies all dashboard data (6). Gets a new campaign type, Non-enrolled referral flow, with tier names and a friend discount.</td></tr>
+    <tr><td>CRM</td><td>Gives every referrer and friend a lead ID, which the reward list uses (4.2). Creates a lead when a referrer or a friend signs up. Its Lead Sales Status and Lead Admission Status set the friend's stage (3.3) and the referrer's type (4.1).</td></tr>
+    <tr><td>Fee system</td><td>Applies the friend's discount (the campaign's friend benefit) when they pay. A refund before approval cancels the card.</td></tr>
+    <tr><td>OTP and SMS</td><td>OTP for every sign-up. SMS for gift cards and friend confirmations.</td></tr>
+    <tr><td>Voucher vendor</td><td>The existing vendor. Issues the e-gift card when an admin approves it, and returns a Transaction ID.</td></tr>
+    <tr><td>Link tracking</td><td>Counts clicks on each referrer's link.</td></tr>
+    <tr><td>University settings</td><td>Name, logo, colours, referral domain, support phone, highlights, website link, admissions deadline.</td></tr>
+  </table></div>
+  <div class="callout info">
+    <div class="ttl">ℹ Engineering to decide</div>
+    OTP limits (attempts and resends), and which admin roles can approve rewards or edit campaigns.
+  </div>
+</section>
+
+<section id="lead-events">
+  <h2><span class="num">11.</span>When a lead is created</h2>
+
+  <div class="wrap"><table class="fixed"><colgroup><col style="width:40%"><col style="width:60%"></colgroup>
+    <tr><th>Event</th><th>Send a lead?</th></tr>
+    <tr><td>Friend completes sign-up</td><td>Yes, unless blocked (own number or already referred). If the number already has a profile, no new lead is created; the referral is marked not eligible.</td></tr>
+    <tr><td>Referrer signs up</td><td>Yes. The referrer becomes a lead (source: referrer sign-up). This gives them the Referrer Lead ID the reward list needs. If they already have a lead, it is reused.</td></tr>
+  </table></div>
+  <div class="callout ok">
+    <div class="ttl">⚙ Backend requirement</div>
+    Every friend lead carries: source = referral link, the referrer's phone number, the referral code and the programme picked. That way credit can be given without anyone matching records by hand.
+  </div>
+</section>
+
+<section id="release">
+  <h2><span class="num">12.</span>Release plan</h2>
+
+  <div class="wrap"><table class="fixed"><colgroup><col style="width:14%"><col style="width:86%"></colgroup>
+    <tr><th>Phase</th><th>What ships</th></tr>
+    <tr><td>v1</td><td>Landing page, sign-up with OTP, dashboard, friend link page with sign-up, gift cards with bulk admin approval. Top referrers entered by hand.</td></tr>
+    <tr><td>v1.1</td><td>Email preferences for referrers, reminders to nudge friends, link click reports.</td></tr>
+    <tr><td>v2</td><td>Notifications to referrers (friend signed up, friend enrolled, card approved), leaderboard from real data, time-limited bonus campaigns, more reward options.</td></tr>
+  </table></div>
+</section>
+
+<section id="tracking">
+  <h2><span class="num">A.</span>Appendix: event tracking</h2>
+  <p>Events to record on each page. Every event also carries <code>university_id</code> and, where known, the referrer's phone number (hashed).</p>
+  <div class="wrap">
+  <table class="event-table">
+    <colgroup><col style="width:27%"><col style="width:25%"><col style="width:22%"><col style="width:26%"></colgroup>
+    <tr><th>Event name</th><th>Fires when</th><th>Event parameter</th><th>Value</th></tr>
+
+    <tr><td colspan="4" class="mini"><b>Referral landing page</b></td></tr>
+    <tr><td rowspan="2"><code>referral_site_viewed</code></td><td rowspan="2">Landing page loads</td><td><code>entry_point</code></td><td>standalone, homepage_banner, footer, email, whatsapp</td></tr>
+    <tr><td><code>is_logged_in</code></td><td>true, false</td></tr>
+    <tr><td><code>start_referring_clicked</code></td><td>Any Start referring CTA tapped</td><td><code>cta_location</code></td><td>hero, how_it_works, top_referrers, closing, sticky</td></tr>
+    <tr><td><code>widget_viewed</code></td><td>A widget scrolls into view (once per page view)</td><td><code>widget_id</code></td><td>W2 to W12</td></tr>
+    <tr><td><code>simulator_used</code></td><td>Rewards slider changed</td><td><code>friends_count</code></td><td>Slider value</td></tr>
+    <tr><td><code>otp_sent</code></td><td>OTP sent in step 1</td><td><code>signup_surface</code></td><td>inline, modal</td></tr>
+    <tr><td rowspan="2"><code>otp_verified</code></td><td rowspan="2">OTP matches</td><td><code>attempts</code></td><td>Number of attempts</td></tr>
+    <tr><td><code>signup_surface</code></td><td>inline, modal</td></tr>
+    <tr><td><code>referral_link_created</code></td><td>Link created (step 3)</td><td><code>referral_code</code></td><td>e.g. HIMANSHU10</td></tr>
+    <tr><td><code>track_my_referral_clicked</code></td><td>Track My Referral tapped in W5</td><td><code>signup_surface</code></td><td>inline, modal</td></tr>
+
+    <tr><td colspan="4" class="mini"><b>Referral website dashboard</b></td></tr>
+    <tr><td rowspan="2"><code>dashboard_viewed</code></td><td rowspan="2">Dashboard loads</td><td><code>friends_count</code></td><td>Non-void friends</td></tr>
+    <tr><td><code>enrolled_count</code></td><td>Friends enrolled</td></tr>
+    <tr><td><code>friends_filter_applied</code></td><td>Filter tab changed</td><td><code>filter</code></td><td>all, in_progress, enrolled, sent</td></tr>
+    <tr><td rowspan="2"><code>link_shared</code></td><td rowspan="2">Any share channel tapped (W5 or dashboard)</td><td><code>channel</code></td><td>whatsapp, sms, email, share, telegram, x, facebook, copy</td></tr>
+    <tr><td><code>message_edited</code></td><td>true, false</td></tr>
+    <tr><td rowspan="2"><code>profile_updated</code></td><td rowspan="2">User saves their profile</td><td><code>fields_changed</code></td><td>name, email, qualification</td></tr>
+    <tr><td><code>profile_complete</code></td><td>true, false</td></tr>
+
+    <tr><td colspan="4" class="mini"><b>Friend referral link</b></td></tr>
+    <tr><td><code>referral_link_opened</code></td><td>Friend page loads from /r/&lt;CODE&gt;</td><td><code>referral_code</code></td><td>Code in URL</td></tr>
+    <tr><td><code>programme_chip_selected</code></td><td>Friend picks a programme</td><td><code>programme</code></td><td>MBA, MCA, BBA, BCA, M.Com, B.Com, MA (JMC), BA</td></tr>
+    <tr><td><code>friend_form_error</code></td><td>Validation or block shown</td><td><code>error_type</code></td><td>mobile, name, email, qualification, course, otp, self_referral, duplicate</td></tr>
+    <tr><td><code>university_website_clicked</code></td><td>Visit university website tapped</td><td><code>referral_code</code></td><td>Code in URL</td></tr>
+    <tr><td><code>friend_otp_sent</code></td><td>First tap on Sign Up with valid fields</td><td><code>referral_code</code></td><td>Code in URL</td></tr>
+    <tr><td rowspan="2"><code>friend_form_submitted</code></td><td rowspan="2">OTP verified and form submitted</td><td><code>programme</code></td><td>Selected course</td></tr>
+    <tr><td><code>eligibility</code></td><td>eligible, not_eligible</td></tr>
+
+    <tr><td colspan="4" class="mini"><b>Server-side reward events</b></td></tr>
+    <tr><td rowspan="2"><code>gift_card_reserved</code></td><td rowspan="2">Friend pays enrolment fee</td><td><code>tier_position</code></td><td>1, 2, 3 ...</td></tr>
+    <tr><td><code>amount</code></td><td>₹ value</td></tr>
+    <tr><td rowspan="2"><code>gift_card_approved</code></td><td rowspan="2">Admin approves (bulk or single)</td><td><code>batch_size</code></td><td>Rows approved together</td></tr>
+    <tr><td><code>amount</code></td><td>₹ value</td></tr>
+    <tr><td><code>gift_card_sent</code></td><td>Voucher issued after approval</td><td><code>delivery</code></td><td>email_sms, sms_only</td></tr>
+    <tr><td><code>gift_card_voided</code></td><td>Admission cancelled or refunded before approval</td><td><code>reason</code></td><td>cancelled_before_approval</td></tr>
+  </table>
+  </div>
+</section>
+
+<section id="changelog">
+  <h2><span class="num">B.</span>Appendix: change log</h2>
+  <div class="wrap"><table class="fixed"><colgroup><col style="width:22%"><col style="width:78%"></colgroup>
+    <tr><th>Date</th><th>Change</th></tr>
+    <tr><td>11 Oct 2026</td><td><ul style="margin:0;padding-left:18px">
+      <li>Reorganised into five parts (portal, landing page, dashboard, friend link, profile) with an end-to-end flowchart (3.1); duplicated content merged so each rule lives in one place.</li>
+      <li>Campaigns: new Non-enrolled referral flow type covering all batches and programmes; tier names, friend benefit and a read-only maximum added; every value admin-configurable, figures in this PRD are suggestions (4.1).</li>
+      <li>No separate reward cap: the end of the last range is the maximum, Default Amount fixed at ₹0 (4.1).</li>
+      <li>No End Date: a campaign runs until replaced or switched off with the existing toggle. Fallback is not used by this flow; a paused state covers the gap (4.1).</li>
+      <li>A live campaign is locked; each friend keeps the terms of the campaign active at their sign-up (4.1).</li>
+      <li>Rewards approved manually in bulk (existing); the system issues and retries vouchers. Lock-down period removed (4.2).</li>
+      <li>Status changes, stages and Referrer Type come from Lead Sales Status and Lead Admission Status (3.5). Referrers are leads (11).</li>
+      <li>Fraud checks defined, sign-up logs instead of speed limits, attribution in the URL (3.7, 7.4). Acceptance criteria added (9.2).</li>
+      <li>Rewards simulator built in and reading from the campaign; no amounts in images (5.3). Rewritten in plain language following GOV.UK and plain-language guidelines (short sentences, consistent terms, lists for rules); key terms added. Photo removed from the profile; referrer notifications moved to v2. Document layout: section links, sub-section contents, print layout, status card.</li>
+    </ul></td></tr>
+    <tr><td>10 Oct 2026</td><td>Refund window renamed to a configurable lock-down period. Capping added on top of the existing system. Device and number checks and the fraud policy moved into spec. Lock-down period added to the new campaign type. Friend's discount set to never expire. Rewritten in plain language. Added the summary, key terms and fraud controls. Decisions recorded in their sections. Event tracking moved to this appendix.</td></tr>
+    <tr><td>8 Oct 2026</td><td>Landing page, dashboard and friend link page aligned with the Figma.</td></tr>
+    <tr><td>7 Oct 2026</td><td>First draft.</td></tr>
+  </table></div>
+</section>
+
+<div class="foot-links">
+  <span>Refer and Earn · Product spec</span>
+  <a href="https://abhinavthak.github.io/refer-and-earn-prototype/" target="_blank" rel="noopener">Live prototype</a>
+</div>
+
+  </main>
+</div>
+
+<script>
+// ---- Heading ids, table of contents, section links ----
+(function(){
+  const slug = n => 'sec-' + n.replace(/\.$/,'').replace(/\./g,'-');
+  const ids = {};
+  document.querySelectorAll('section').forEach(sec => {
+    sec.querySelectorAll('h2 .num, h3 .num').forEach(num => {
+      const n = num.textContent.trim().replace(/\.$/,'');
+      const h = num.parentElement;
+      if (h.tagName === 'H2') { ids[n] = sec.id; }
+      else { h.id = h.id || slug(n); ids[n] = h.id; }
+    });
+  });
+  // TOC
+  const toc = document.getElementById('toc-card');
+  let html = '<div class="toc-h">On this page</div>';
+  document.querySelectorAll('section').forEach(sec => {
+    const h2 = sec.querySelector('h2'); if (!h2) return;
+    const clone = h2.cloneNode(true);
+    clone.querySelectorAll('.tag').forEach(t => t.remove());
+    const num = clone.querySelector('.num');
+    const idx = num ? num.textContent.replace('.', '') : '';
+    const label = clone.textContent.replace(/^[0-9A-Z]+\.\s*/, '').trim();
+    let sub = '';
+    sec.querySelectorAll('h3').forEach(h3 => {
+      const c = h3.cloneNode(true); c.querySelectorAll('.tag').forEach(t => t.remove());
+      const n = c.querySelector('.num'); const nt = n ? n.textContent : '';
+      if (n) n.remove();
+      sub += '<a href="#' + h3.id + '" data-t="' + h3.id + '"><span class="idx">' + nt + '</span><span class="lbl">' + c.textContent.trim() + '</span></a>';
+    });
+    html += '<div class="grp" data-sec="' + sec.id + '"><a href="#' + sec.id + '" data-t="' + sec.id + '"><span class="idx">' + idx + '</span><span class="lbl">' + label + '</span></a>' + (sub ? '<div class="sub">' + sub + '</div>' : '') + '</div>';
+  });
+  toc.innerHTML = html;
+  // Scroll spy
+  const heads = Array.from(document.querySelectorAll('section > h2, section h3')).filter(h => h.closest('section'));
+  let ticking = false;
+  function spy(){
+    ticking = false;
+    let cur = heads[0];
+    for (const h of heads) { if (h.getBoundingClientRect().top < 140) cur = h; else break; }
+    if (!cur) return;
+    const sec = cur.closest('section');
+    toc.querySelectorAll('.grp').forEach(g => g.classList.toggle('open', g.dataset.sec === sec.id));
+    toc.querySelectorAll('a').forEach(a => a.classList.remove('on'));
+    const top = toc.querySelector('.grp[data-sec="' + sec.id + '"] > a'); if (top) top.classList.add('on');
+    if (cur.tagName === 'H3') { const s2 = toc.querySelector('.sub a[data-t="' + cur.id + '"]'); if (s2) s2.classList.add('on'); }
+  }
+  window.addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(spy); } }, {passive:true});
+  spy();
+  // Clickable section references, e.g. (4.1), 3.4, (6)
+  const skip = el => el.closest('script,style,svg,code,a,button,input,select,textarea,#calc-root,.num,h2,h3,.toc');
+  const roots = [document.querySelector('.hero p'), document.getElementById('main')].filter(Boolean);
+  const re = /(\b\d{1,2}\.\d{1,2}\b)(?![\d%])|\((\d{1,2}|[AB])\)/g;
+  roots.forEach(root => {
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, { acceptNode: n => (!n.parentElement || skip(n.parentElement)) ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT });
+    const nodes = []; while (walker.nextNode()) nodes.push(walker.currentNode);
+    nodes.forEach(node => {
+      const t = node.nodeValue; re.lastIndex = 0; if (!re.test(t)) return; re.lastIndex = 0;
+      const frag = document.createDocumentFragment(); let last = 0, m, any = false;
+      while ((m = re.exec(t))) {
+        const key = m[1] || m[2]; const id = ids[key];
+        const before = t.slice(Math.max(0, m.index - 1), m.index);
+        if (!id || /[₹\d,.]/.test(before)) continue;
+        any = true;
+        const start = m[1] ? m.index : m.index + 1;
+        frag.appendChild(document.createTextNode(t.slice(last, start)));
+        const a = document.createElement('a'); a.className = 'xref'; a.href = '#' + id; a.textContent = key;
+        a.title = 'Go to ' + key;
+        frag.appendChild(a); last = start + key.length;
+      }
+      if (!any) return;
+      frag.appendChild(document.createTextNode(t.slice(last)));
+      node.parentNode.replaceChild(frag, node);
+    });
+  });
+  document.addEventListener('click', e => {
+    const a = e.target.closest('a.xref'); if (!a) return;
+    const el = document.getElementById(a.getAttribute('href').slice(1)); if (!el) return;
+    const h = el.tagName === 'SECTION' ? el.querySelector('h2') : el;
+    h.classList.remove('flash'); void h.offsetWidth; h.classList.add('flash');
+  });
+  // Print: open every collapsible
+  window.addEventListener('beforeprint', () => document.querySelectorAll('details').forEach(d => { d.dataset.wasOpen = d.open ? '1' : ''; d.open = true; }));
+  window.addEventListener('afterprint', () => document.querySelectorAll('details').forEach(d => { d.open = d.dataset.wasOpen === '1'; }));
+})();
+</script>
+
+<script>
+// ---- Live reward calculator with campaign settings ----
+(function(){
+  const SUGGESTED = {
+    ranges: [
+      {start:1, end:1,  amt:1000, name:"Starter"},
+      {start:2, end:6,  amt:5000, name:"Silver"},
+      {start:7, end:9,  amt:7000, name:"Gold"},
+      {start:10,end:11, amt:7000, name:"Gold"}
+    ],
+    disc: 10
+  };
+  const PRESETS = {
+    six:    {label:"6 friends",          friends:6,  refund:0},
+    full:   {label:"Maximum reached",    friends:13, refund:0},
+    refund: {label:"Friend 1 cancels",   friends:7,  refund:1}
+  };
+  const clone = o => JSON.parse(JSON.stringify(o));
+  let cfg = clone(SUGGESTED);
+  let state = Object.assign({}, PRESETS.six), active = "six";
+  const inr = v => "₹" + Number(v).toLocaleString("en-IN");
+  const esc = t => String(t).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+  const isBlank = r => r.start==='' && r.end==='' && r.amt==='' && !r.name;
+  function used(){ return cfg.ranges.filter(r=>!isBlank(r)); }
+  function maxCards(){ const u=used(); return u.length ? Math.max(...u.map(r=>Number(r.end)||0)) : 0; }
+  function tierNames(){ const n=[]; used().forEach(r=>{ if(r.name && n.indexOf(r.name)<0) n.push(r.name); }); return n; }
+  function amountFor(pos){
+    for (const r of used()) if (pos >= r.start && pos <= r.end) return {name:r.name||"—", amt:Number(r.amt)||0};
+    return {name:"No card", amt:0, cap:true};
+  }
+  function problems(){
+    const p=[]; const rs=used().slice().sort((a,b)=>a.start-b.start);
+    if (!rs.length) return ["at least one range is needed"];
+    let seenBlank=false; cfg.ranges.forEach(r=>{ if(isBlank(r)) seenBlank=true; else if(seenBlank) p.push("leave only the last ranges empty"); });
+    if (rs[0].start !== 1) p.push("ranges must start at 1");
+    for (let i=0;i<rs.length;i++){
+      if (rs[i].end < rs[i].start) p.push("range "+(i+1)+" ends before it starts");
+      if (i>0 && rs[i].start !== rs[i-1].end+1) p.push(rs[i].start <= rs[i-1].end ? "ranges overlap" : "there is a gap between ranges");
+      if (!(Number(rs[i].amt) > 0)) p.push("every range needs an amount above 0");
+      if (!rs[i].name) p.push("every range needs a tier name");
+    }
+    return [...new Set(p)];
+  }
+  function maxTotal(){ let t=0; for(let pos=1; pos<=maxCards(); pos++) t+=amountFor(pos).amt; return t; }
+  function compute(){
+    const cells=[]; let total=0, paid=0;
+    for (let i=1;i<=state.friends;i++){
+      if (i===state.refund){ cells.push({i, pos:i, void:true}); continue; }
+      const t=amountFor(i); if (t.amt>0) paid++; total+=t.amt;
+      cells.push({i, pos:i, tier:t.name, amt:t.amt, cap:t.cap});
+    }
+    return {cells,total,paid};
+  }
+  function render(){
+    const root=document.getElementById('calc-root');
+    const maxF=Math.max(15, maxCards()+3);
+    if (state.friends>maxF) state.friends=maxF;
+    if (state.refund>state.friends) state.refund=0;
+    const names=tierNames();
+    const {cells,total,paid}=compute();
+    const probs=problems();
+    const rows=cfg.ranges.map((r,i)=>
+      '<tr><td>Range '+(i+1)+'</td>'+
+      '<td><input type="number" min="1" data-r="'+i+'" data-f="start" value="'+r.start+'"></td>'+
+      '<td><input type="number" min="1" data-r="'+i+'" data-f="end" value="'+r.end+'"></td>'+
+      '<td><input type="number" min="0" step="500" data-r="'+i+'" data-f="amt" value="'+r.amt+'"></td>'+
+      '<td><input type="text" data-r="'+i+'" data-f="name" value="'+esc(r.name)+'"></td></tr>').join('');
+    const settings=
+      '<div class="cset"><div class="cset-h"><b>Campaign settings</b><span class="mini">What the admin enters in the portal (4.1). Edit any value to see the effect. Leave a range empty to use fewer than four. The maximum is the end of the last range.</span><button type="button" data-reset="1">Reset to suggested</button></div>'+
+      '<div class="wrap"><table class="cset-t"><tr><th></th><th>Start</th><th>End</th><th>Amount (₹)</th><th>Tier name</th></tr>'+rows+'</table></div>'+
+      '<div class="cset-row">'+
+                '<label>Friend benefit (%)<input type="number" min="1" max="100" data-c="disc" value="'+cfg.disc+'"></label>'+
+        '<div class="cset-ro"><span>Maximum (gift cards)</span><b>'+maxCards()+'</b></div>'+
+        '<div class="cset-ro"><span>Maximum total</span><b>'+inr(maxTotal())+'</b></div>'+
+      '</div>'+
+      (probs.length ? '<div class="cset-err">The portal would refuse to save: '+probs.join('; ')+'.</div>' : '')+
+      '<div class="mini" style="margin-top:8px">Tiers referrers see: '+names.map(n=>{const rs=used().filter(r=>r.name===n);const lo=Math.min(...rs.map(r=>r.start)),hi=Math.max(...rs.map(r=>r.end));return '<b>'+esc(n)+'</b> ('+(lo===hi?'friend '+lo:'friends '+lo+' to '+hi)+')';}).join(' · ')+'</div>'+
+      '</div>';
+    const btns=Object.keys(PRESETS).map(k=>'<button data-p="'+k+'" class="'+(k===active?'on':'')+'">'+PRESETS[k].label+'</button>').join('');
+    let refundOpts='<option value="0">No cancellation</option>';
+    for (let i=1;i<=state.friends;i++) refundOpts+='<option value="'+i+'"'+(state.refund===i?' selected':'')+'>Friend '+i+' cancels before approval</option>';
+    const grid=cells.length?cells.map(c=>c.void
+      ?'<div class="cell void"><div class="who">Friend '+c.i+' · place '+c.pos+'</div><div class="amt">Cancelled</div><span class="tier t-void">Void</span></div>'
+      :'<div class="cell"><div class="who">Friend '+c.i+' · place '+c.pos+'</div><div class="amt">'+inr(c.amt)+'</div><span class="tier '+(c.cap?'t-cap':'t-c'+(Math.max(0,names.indexOf(c.tier))%4))+'">'+esc(c.tier)+'</span></div>').join(''):'<div class="mini">No friends enrolled yet.</div>';
+    let result=paid+' gift card'+(paid===1?'':'s')+', '+inr(total)+' total.';
+    if (state.friends>maxCards()) result+=' Maximum reached: friends after place '+maxCards()+' still get their '+cfg.disc+'% discount, but no gift card.';
+    if (state.refund) result+=' Friend '+state.refund+"'s card is cancelled. Everyone else keeps their place and amount; place "+state.refund+' is not given to anyone else.';
+    root.innerHTML='<div class="calc">'+settings+
+      '<div class="calc-head" style="margin-top:18px"><div><h4>Gift card calculator</h4><p>Uses the settings above.</p></div><div class="presets">'+btns+'</div></div>'+
+      '<div class="controls">'+
+        '<div class="ctl"><label>Friends enrolled</label><div class="field"><input type="range" min="0" max="'+maxF+'" value="'+state.friends+'" data-k="friends"><span class="val">'+state.friends+'</span></div></div>'+
+        '<div class="ctl"><label>Cancelled before approval</label><div class="field"><select data-k="refund">'+refundOpts+'</select></div></div>'+
+      '</div>'+
+      '<div class="grid">'+grid+'</div>'+
+      '<div class="calc-result">'+result+'</div>'+
+      '<div class="calc-note">A cancellation before approval cancels only that card. Everyone else keeps their place and amount, and the cancelled place still counts towards the maximum.</div>'+
+    '</div>';
+    root.querySelectorAll('[data-k]').forEach(el=>{
+      if (el.type==='range') el.addEventListener('input',()=>{el.nextElementSibling.textContent=el.value;});
+      el.addEventListener('change',()=>{ state[el.getAttribute('data-k')]=Number(el.value); active=null; setTimeout(render,0); });
+    });
+    root.querySelectorAll('[data-r]').forEach(el=>el.addEventListener('change',()=>{
+      const r=cfg.ranges[+el.getAttribute('data-r')], f=el.getAttribute('data-f');
+      r[f]= f==='name' ? el.value.trim() : (el.value==='' ? '' : Number(el.value)); setTimeout(render,0);
+    }));
+    root.querySelectorAll('[data-c]').forEach(el=>el.addEventListener('change',()=>{ cfg[el.getAttribute('data-c')]=Number(el.value); setTimeout(render,0); }));
+    root.querySelector('[data-reset]').addEventListener('click',()=>{ cfg=clone(SUGGESTED); setTimeout(render,0); });
+    root.querySelectorAll('[data-p]').forEach(b=>b.addEventListener('click',()=>{ active=b.getAttribute('data-p'); state=Object.assign({},PRESETS[active]); setTimeout(render,0); }));
+  }
+  render();
+})();
+</script>
+</body>
+</html>
