@@ -257,7 +257,7 @@ section h2,section h3{scroll-margin-top:16px}
 <div class="hero"><div class="hero-in"><div>
   <div class="kicker">PRODUCT SPEC · UPGRAD GROWTH · PARTNER UNIVERSITY SITES</div>
   <h1>Refer and Earn</h1>
-  <p>Share a link. Your friend gets a discount on fees. You get a gift card when they enrol. This spec covers all five parts, from the admin portal to the friend's sign-up, with a live gift card calculator in 3.6.</p>
+  <p>Share a link. You get a gift card when your friend enrols. A fee discount for the friend follows in v3 (12.1). This spec covers all five parts, from the admin portal to the friend's sign-up, with a live gift card calculator in 3.6.</p>
   <div class="meta">
     <span><b>Owner</b>: Abhinav Thakur (PM)</span>
     <span><b>Design</b>: TBD</span>
@@ -267,7 +267,7 @@ section h2,section h3{scroll-margin-top:16px}
   </div>
   <div class="hero-status">
     <div class="hs-row"><span>Status</span><span class="hs-pill">In review</span></div>
-    <div class="hs-row"><span>Last updated</span><b>11 Oct 2026</b></div>
+    <div class="hs-row"><span>Last updated</span><b>12 Oct 2026</b></div>
     <div class="hs-row"><span>Sign-off</span><b>Pending: Product, Engineering, Design</b></div>
     <div class="hs-row"><span>Reward system POC</span><b>Jayesh Karli</b></div>
   </div>
@@ -281,8 +281,8 @@ section h2,section h3{scroll-margin-top:16px}
   <div class="tldr">
     <h4>At a glance</h4>
     <dl>
-      <dt>What</dt><dd>A personal referral link for partner university sites. The friend gets a discount on fees (10% by default). The referrer gets an e-gift card after the friend enrols and an admin approves it.</dd>
-      <dt>Rewards</dt><dd>The admin sets the tiers and the friend's discount in each campaign (4.1). The last tier decides the maximum number of gift cards. Suggested values, used in every example here: ₹1,000 for friend 1, ₹5,000 each for friends 2 to 6, ₹7,000 each for friends 7 to 11. That is at most 11 cards, or ₹61,000.</dd>
+      <dt>What</dt><dd>A personal referral link for partner university sites. The referrer gets an e-gift card after the friend enrols and an admin approves it. A fee discount for the friend (the friend benefit) ships in v3; v1 shows full fees (12.1).</dd>
+      <dt>Rewards</dt><dd>The admin sets the tiers in each campaign (4.1). The last tier decides the maximum number of gift cards. Suggested values, used in every example here: ₹1,000 for friend 1, ₹5,000 each for friends 2 to 6, ₹7,000 each for friends 7 to 11. That is at most 11 cards, or ₹61,000.</dd>
       <dt>Parts</dt><dd>Five parts: referral portal for admins (4), landing page (5), dashboard (6), friend link page (7) and profile (8).</dd>
       <dt>How to read</dt><dd>Section 3 holds the rules every part follows. Sections 4 to 8 cover one part each. Section 9 lists the tests that prove it works.</dd>
       <dt>Built on</dt><dd>Existing referral system (must accept non-enrolled referrers), existing voucher vendor, CRM, fee system, OTP/SMS.</dd>
@@ -291,11 +291,12 @@ section h2,section h3{scroll-margin-top:16px}
     </dl>
   </div>
   <div class="whatsnew">
-    <h4>What changed in this version · 11 Oct 2026</h4>
+    <h4>What changed in this version · 12 Oct 2026</h4>
     <ul>
+      <li><b>Friend benefit moved to v3.</b> v1 has no friend discount anywhere: full fees on every page, no discount in the fee system. Everything about the discount now lives in 12.1.</li>
       <li>New gift card status <b>Max reached</b> for friends who enrol after the referrer hits the maximum (0.2, 3.3, 3.5, 4.2, 6.4).</li>
       <li>Referrers now give their email at sign-up, so every gift card can be emailed (5.5, 8).</li>
-      <li>Friends who already have a profile get no discount (3.2, 7.4). Void and Max reached friends show in the friends table with their status (6.3). Sign-up modal defined (5.5).</li>
+      <li>Void and Max reached friends show in the friends table with their status (6.3). Sign-up modal defined (5.5).</li>
       <li>Every campaign value is set by the admin; figures in this PRD are suggested values (3.4, 4.1). The live example now shows the campaign settings panel (3.6).</li>
       <li>No separate reward cap: the end of the last range is the maximum (4.1).</li>
       <li>Non-enrolled referral flow campaigns have no End Date. They run until replaced or deactivated (4.1).</li>
@@ -310,7 +311,7 @@ section h2,section h3{scroll-margin-top:16px}
   </div>
   <h3><span class="num">0.1</span>Problem</h3>
   <p>Partner university sites have <b>no referral programme today</b>. Students, alumni and their families already recommend these degrees. But nobody tracks it, nobody gets credit, and there is no reason to recommend more. Referred people show up as ordinary leads, or not at all.</p>
-  <p>Refer and Earn fixes this with one personal link. The link proves who referred whom and gives the friend a visible discount. The referrer is paid only after the friend really enrols.</p>
+  <p>Refer and Earn fixes this with one personal link. The link proves who referred whom. The referrer is paid only after the friend really enrols.</p>
   <h3><span class="num">0.2</span>Key terms</h3>
   <div class="wrap"><table class="fixed"><colgroup><col style="width:26%"><col style="width:74%"></colgroup>
     <tr><th>Term</th><th>Meaning</th></tr>
@@ -321,7 +322,7 @@ section h2,section h3{scroll-margin-top:16px}
     <tr><td>Gift card status</td><td><b>Pending</b>: friend hasn't enrolled yet. <b>Scheduled</b>: friend paid; the card is waiting for admin approval. <b>Sent</b>: card delivered. <b>Max reached</b>: friend enrolled, but the referrer already has the maximum number of gift cards, so no card. <b>Void</b>: no card (friend not eligible, dropped out, refunded or cancelled).</td></tr>
     <tr><td>Referral portal</td><td>The admin screens at referral.lmscontent.in, where the team sets up campaigns and approves gift cards (4).</td></tr>
     <tr><td>Referral system</td><td>The existing backend behind the portal. It stores campaigns, referrals and gift cards, and feeds every page.</td></tr>
-    <tr><td>Campaign</td><td>The settings for one university: tiers, the friend's discount and a start date. One campaign is <b>live</b> at a time. With no live campaign, the programme is <b>paused</b> (4.1).</td></tr>
+    <tr><td>Campaign</td><td>The settings for one university: tiers and a start date (the friend's discount is added in v3). One campaign is <b>live</b> at a time. With no live campaign, the programme is <b>paused</b> (4.1).</td></tr>
     <tr><td>Place in line</td><td>The order in which a referrer's friends enrol. Friend 1 is the first to pay the enrolment fee. The place decides the gift card amount (3.4).</td></tr>
     <tr><td>Maximum</td><td>The most gift cards one referrer can earn. It is the end of the campaign's last tier, e.g. 11.</td></tr>
     <tr><td>Tier</td><td>A band of places that pays the same gift card amount, e.g. Silver = friends 2 to 6 at ₹5,000 each. The number of tiers, their places, amounts and names (e.g. Starter, Silver, Gold) are all set in campaign settings (4.1).</td></tr>
@@ -375,7 +376,8 @@ section h2,section h3{scroll-margin-top:16px}
   </ul>
   <h3><span class="num">2.3</span>Friend</h3>
   <ul>
-    <li>I want to know who invited me and that the discount is real.</li>
+    <li>I want to know who invited me.</li>
+    <li>I want a discount on my fees for being referred. <span class="tag ph">v3</span></li>
     <li>I want to see my price before giving my details.</li>
     <li>I want to speak to a counsellor before deciding.</li>
   </ul>
@@ -402,7 +404,7 @@ section h2,section h3{scroll-margin-top:16px}
   <p>Four ideas hold the whole programme together:</p>
   <ol>
     <li><b>The link is the proof.</b> A referral counts only if the friend signs up through the referrer's link. No codes, no manual claims.</li>
-    <li><b>The friend sees the discount straight away.</b> Opening the link applies the campaign's discount (e.g. 10%) to every programme price. If the programme is paused, the link opens without a discount (4.1).</li>
+    <li><b>The friend sees who invited them.</b> Opening the link shows the referrer's name. In v1 prices are full fees; the friend discount comes in v3 (12.1). If the programme is paused, the link opens as an ordinary page (4.1).</li>
     <li><b>Pay only after approval.</b> The gift card is held from the day the friend pays the enrolment fee. An admin approves it (4.2), and it goes out by email and SMS. The referrer never claims anything, and nothing is taken back.</li>
     <li><b>One account per phone number.</b> Students, leads and referrers all share the same kind of profile. A profile becomes a referrer the moment it gets a link (8).</li>
   </ol>
@@ -447,7 +449,7 @@ section h2,section h3{scroll-margin-top:16px}
 <text x="498" y="325" font-size="11" fill="#33394A">referrer shares it</text>
 <rect x="646" y="348" width="136" height="46" rx="8" fill="#FAFBFD" stroke="#1C6FA8" stroke-width="1.5"/>
 <text x="656" y="367" font-size="11.5" font-weight="700" fill="#14213D">6 · Friend opens link;</text>
-<text x="656" y="383" font-size="11" fill="#33394A">10% shown on prices</text>
+<text x="656" y="383" font-size="11" fill="#33394A">sees who invited them</text>
 <rect x="646" y="406" width="136" height="46" rx="8" fill="#FAFBFD" stroke="#1C6FA8" stroke-width="1.5"/>
 <text x="656" y="425" font-size="11.5" font-weight="700" fill="#14213D">7 · Friend signs up</text>
 <text x="656" y="441" font-size="11" fill="#33394A">with OTP</text>
@@ -491,14 +493,14 @@ section h2,section h3{scroll-margin-top:16px}
 <path d="M466,618 H635.0 V655.0 H803" fill="none" stroke="#92660C" stroke-width="1.3" stroke-dasharray="4 3" marker-end="url(#ahv)"/>
 </svg>
   </div>
-  <p class="mini">Read top to bottom. Each column is one part; arrows show the hand-offs. The dashboard updates at steps 8, 9, 10 and 12 as the friend moves along. Amounts, discount and maximum at every step come from step 1.</p>
+  <p class="mini">Read top to bottom. Each column is one part; arrows show the hand-offs. The dashboard updates at steps 8, 9, 10 and 12 as the friend moves along. Amounts and maximum at every step come from step 1.</p>
   <p>What each part takes in and hands on:</p>
   <div class="wrap"><table class="fixed"><colgroup><col style="width:26%"><col style="width:37%"><col style="width:37%"></colgroup>
     <tr><th>Part</th><th>Takes in</th><th>Hands on</th></tr>
-    <tr><td><b>Referral portal (admin)</b> · 4</td><td>The team's campaign settings; rewards that are ready to approve</td><td>Discount, tiers and maximum to every page; approved rewards to the voucher vendor</td></tr>
+    <tr><td><b>Referral portal (admin)</b> · 4</td><td>The team's campaign settings; rewards that are ready to approve</td><td>Tiers and maximum to every page; approved rewards to the voucher vendor</td></tr>
     <tr><td><b>Referral landing page</b> · 5</td><td>Campaign settings (for the copy); visitors from the entry points</td><td>A new profile and a referral link, then the visitor to the dashboard</td></tr>
     <tr><td><b>Referral website dashboard</b> · 6</td><td>The referrer's link, friends and rewards</td><td>The link, shared out to friends</td></tr>
-    <tr><td><b>Friend referral link</b> · 7</td><td>The referral code in the URL; campaign discount</td><td>A new friend profile and lead, tagged with the referrer</td></tr>
+    <tr><td><b>Friend referral link</b> · 7</td><td>The referral code in the URL</td><td>A new friend profile and lead, tagged with the referrer</td></tr>
     <tr><td><b>Profile</b> · 8</td><td>Sign-ups from the landing page and the friend link</td><td>One user_id and lead per phone number, used by every other part</td></tr>
   </table></div>
   <p class="mini">The rules below connect the friend link to the portal. CRM status changes move each friend through their stages (3.3, 3.5). The reward logic (3.4) decides when a gift card is ready to approve.</p>
@@ -506,14 +508,14 @@ section h2,section h3{scroll-margin-top:16px}
   <ul>
     <li>A referrer can't refer their own phone number.</li>
     <li>Each friend can have only one referrer: whoever's link they signed up through first.</li>
-    <li>A friend counts only if their phone number is <b>new to the site</b>. Anyone who already has a profile (a referrer, a lead, a past lead or a student) is not eligible, and <b>gets no discount</b>.</li>
+    <li>A friend counts only if their phone number is <b>new to the site</b>. Anyone who already has a profile (a referrer, a lead, a past lead or a student) is not eligible.</li>
     <li>No KYC or PAN is asked from referrers, however much they earn.</li>
   </ul>
   <h3><span class="num">3.3</span>User journey and friend's stages</h3>
 
   <div class="callout info">
     <div class="ttl">ℹ In one paragraph</div>
-    The referrer signs up with their name, phone number (confirmed by OTP) and email and gets a link. They share it. A friend opens the link, picks a programme, sees their discounted price and signs up (also with OTP). A counsellor calls the friend. When the friend pays the enrolment fee, the referrer's gift card is held. An admin approves it, and it is sent.
+    The referrer signs up with their name, phone number (confirmed by OTP) and email and gets a link. They share it. A friend opens the link, picks a programme, sees its fee and signs up (also with OTP). A counsellor calls the friend. When the friend pays the enrolment fee, the referrer's gift card is held. An admin approves it, and it is sent.
   </div>
   <div class="flows">
     <div class="flow">
@@ -527,10 +529,10 @@ section h2,section h3{scroll-margin-top:16px}
     <div class="flow">
       <div class="flow-h">Friend</div>
       <div class="step s1"><b>Opens the link</b><span>Sees who invited them</span></div>
-      <div class="step s2"><b>Picks a programme</b><span>Sees their discounted price</span></div>
+      <div class="step s2"><b>Picks a programme</b><span>Sees the fee</span></div>
       <div class="step s3"><b>Signs up</b><span>Details and OTP</span></div>
       <div class="step s4"><b>Talks to a counsellor</b><span>Call within 24 hours</span></div>
-      <div class="step s5"><b>Enrols and pays</b><span>Discount applied; reward ready to approve</span></div>
+      <div class="step s5"><b>Enrols and pays</b><span>Reward ready to approve</span></div>
     </div>
   </div>
   <h4 style="font-size:14.5px;margin:20px 0 6px">Friend's stages</h4>
@@ -544,9 +546,9 @@ section h2,section h3{scroll-margin-top:16px}
       <div class="jn c4"><div class="jk">5</div><div class="jt">Paid</div><div class="jd">Admin approved; gift card sent by email and SMS</div><span class="pill p-sent">Sent</span></div>
     </div>
     <div class="jvoid" style="grid-template-columns:repeat(5,minmax(0,1fr))">
-      <div class="jv" style="grid-column:1"><div class="jvf">At stage 1</div><div class="jt">Not eligible</div><div class="jd">Already referred, or already has a profile on the site. No discount</div><span class="pill p-void">Void</span></div>
+      <div class="jv" style="grid-column:1"><div class="jvf">At stage 1</div><div class="jt">Not eligible</div><div class="jd">Already referred, or already has a profile on the site</div><span class="pill p-void">Void</span></div>
       <div class="jv" style="grid-column:4"><div class="jvf">After stage 4</div><div class="jt">Refunded or cancelled</div><div class="jd">Refund or cancelled admission before approval. Only this card is cancelled</div><span class="pill p-void">Void</span></div>
-      <div class="jv" style="grid-column:5"><div class="jvf">At stage 4</div><div class="jt">Maximum reached</div><div class="jd">Friend enrolled, but the referrer already has the maximum number of gift cards. Friend keeps the discount</div><span class="pill p-max">Max reached</span></div>
+      <div class="jv" style="grid-column:5"><div class="jvf">At stage 4</div><div class="jt">Maximum reached</div><div class="jd">Friend enrolled, but the referrer already has the maximum number of gift cards</div><span class="pill p-max">Max reached</span></div>
     </div>
   </div>
   <p class="mini">A refund after the card is sent changes nothing: the card is kept.</p>
@@ -555,7 +557,7 @@ section h2,section h3{scroll-margin-top:16px}
 
   <div class="callout ok">
     <div class="ttl">⚙ Backend requirement</div>
-    Gift cards run on the <b>existing referral system</b>, through campaigns of a new type: Non-enrolled referral flow (4.1). The campaign holds the tiers, their amounts and names, and the friend's discount. The numbers below are the suggested settings. If the admin changes them, the amounts change too (try it in 3.6). Every page reads these values from the campaign; nothing is typed in by hand. The reward is always an <b>e-gift card</b> from the existing voucher vendor, never cash.
+    Gift cards run on the <b>existing referral system</b>, through campaigns of a new type: Non-enrolled referral flow (4.1). The campaign holds the tiers and their amounts and names. The numbers below are the suggested settings. If the admin changes them, the amounts change too (try it in 3.6). Every page reads these values from the campaign; nothing is typed in by hand. The reward is always an <b>e-gift card</b> from the existing voucher vendor, never cash.
   </div>
   <h4 style="font-size:14.5px;margin:20px 0 6px">Step 1: place in line</h4>
   <p>Each eligible friend who pays the enrolment fee gets a place in line. The first to enrol is place 1. Sign-up order doesn't matter. Friends who were not eligible get no place. A friend who is refunded keeps their place, and it isn't given to anyone else.</p>
@@ -617,7 +619,7 @@ section h2,section h3{scroll-margin-top:16px}
     <tr><td>Number pattern check</td><td>Looks at one referrer's friends who joined in the last 7 days. Flag the referrals when:<br>• <b>3 or more phone numbers differ only in the last 2 digits</b>, e.g. 98765432<b>10</b>, 98765432<b>11</b>, 98765432<b>12</b>, or<br>• <b>3 or more emails differ only by a number</b> at the same domain, e.g. rahul1@, rahul2@, rahul3@gmail.com.</td><td>In spec</td></tr>
     <tr><td>Fraud policy in the terms</td><td>States that self-referral and multiple accounts are banned and rewards can be cancelled</td><td>In spec</td></tr>
   </table></div>
-  <p class="mini">Thresholds above are starting values and should be adjustable without a release. A flag never blocks the friend's sign-up or discount; it only marks the referral in the admin list (4.2). The admin leaves flagged rows unapproved, or approves them if the flag turns out to be wrong.</p>
+  <p class="mini">Thresholds above are starting values and should be adjustable without a release. A flag never blocks the friend's sign-up; it only marks the referral in the admin list (4.2). The admin leaves flagged rows unapproved, or approves them if the flag turns out to be wrong.</p>
 </section>
 
 <section id="portal">
@@ -625,13 +627,13 @@ section h2,section h3{scroll-margin-top:16px}
   <p>The existing admin portal (referral.lmscontent.in), used by the team to set up rewards and approve them. No new screens: fields are added to existing ones.</p>
   <div class="callout info">
     <div class="ttl">↔ How it connects</div>
-    Its campaign settings feed the landing page copy (5), the dashboard tiers and maximum (6) and the friend's discount (7). It receives rewards once they are ready (3.4), and approved rewards show as Sent on the dashboard.
+    Its campaign settings feed the landing page copy (5) and the dashboard tiers and maximum (6). It receives rewards once they are ready (3.4), and approved rewards show as Sent on the dashboard.
   </div>
   <h3><span class="num">4.1</span>Setting up the campaign</h3>
   <p>Gift cards are set up as a <b>campaign</b> in the referral portal (Create new campaign). We add a new campaign type, <b>Non-enrolled referral flow</b>. A campaign of this type:</p>
   <ul>
     <li>covers one university, across all its batches and programmes</li>
-    <li>adds two settings: tier names and the friend's discount</li>
+    <li>adds one setting: tier names (the friend's discount follows in v3, 12.1)</li>
     <li>has no separate reward cap, because the last range sets the maximum</li>
     <li>has no End Date, and runs until it is replaced or switched off</li>
   </ul>
@@ -648,7 +650,7 @@ section h2,section h3{scroll-margin-top:16px}
     <tr><td>Tier name (per range)</td><td>—</td><td><span class="tag src">New</span> A name box next to each range, filled in by the admin. It is the label referrers see on the dashboard and landing page instead of numbers. Suggested: range 1 = <b>Starter</b>, range 2 = <b>Silver</b>, ranges 3 and 4 = <b>Gold</b>. Gold uses two ranges only because the form has four; when ranges next to each other share a name and amount, they show as one tier ("Gold · Friends 7 to 11"). Shown only for the new type.</td></tr>
     <tr><td>Default Amount</td><td>Amount for referrals after the last range</td><td><b>Hidden, fixed at ₹0</b> for the new type, so nothing is ever paid past the last range. This is what makes the last range the maximum.</td></tr>
     <tr><td>Maximum (read-only)</td><td>—</td><td><span class="tag src">New</span> Shown under the ranges for the new type: maximum gift cards (end of the last range, e.g. 11) and maximum total (e.g. ₹61,000). Not editable; it lets the admin check the ranges before saving.</td></tr>
-    <tr><td>Friend benefit</td><td>—</td><td><span class="tag src">New</span> Set by the admin per campaign; default <b>10% discount</b> on the programme fee, 1% to 100%. Shown only for the new type, next to the referral ranges.</td></tr>
+    <tr><td>Friend benefit <span class="tag ph">v3</span></td><td>—</td><td><b>Not in v1.</b> Added in v3 (12.1): set by the admin per campaign; default <b>10% discount</b> on the programme fee, 1% to 100%. Shown only for the new type, next to the referral ranges.</td></tr>
     <tr><td>Active toggle</td><td>On / off</td><td><span class="tag ex">Exists</span> Used as is to deactivate. Extra rules for this type are in the lifecycle table below.</td></tr>
     <tr><td>Delete</td><td>—</td><td><span class="tag src">New</span> Button with confirmation, only for a campaign waiting to start.</td></tr>
     <tr><td>All fields after Start Date</td><td>Editable</td><td><span class="tag src">New</span> Read-only except Campaign Name once the campaign is live (rule below).</td></tr>
@@ -658,18 +660,13 @@ section h2,section h3{scroll-margin-top:16px}
     <li>Counts every gift card that is held (Scheduled) or sent. A refunded place still counts.</li>
     <li>Checked when a friend pays the enrolment fee, so two friends enrolling at once can't both take the last place.</li>
     <li><b>Which maximum applies.</b> The maximum of the campaign that was live when the friend signed up. For example, campaign A ends at 11 and campaign B, which replaced it, ends at 8. A referrer already has 9 cards. A friend who signed up under B gets no card, because 9 is past B's maximum. A friend who signed up under A still gets one, at place 10.</li>
-    <li>Once reached, friends still get their discount, but no gift card is held. The friend's status is <b>Max reached</b>, and it is final: it never turns into a gift card later, because refunded places are not reused. The dashboard shows "No gift card (maximum reached)".</li>
+    <li>Once reached, no gift card is held. The friend's status is <b>Max reached</b>, and it is final: it never turns into a gift card later, because refunded places are not reused. The dashboard shows "No gift card (maximum reached)".</li>
     <li>The dashboard's "3 of 11 gift cards" line and progress bar use the live campaign's maximum. If the programme is paused, they use the last campaign's.</li>
   </ul>
   <h4 style="font-size:14.5px;margin:20px 0 6px">How tier names work</h4>
   <ul>
     <li>Referrers see the name typed for each range. It appears on the dashboard's gift card levels, its "Done" and "You're here" tags, and the landing page.</li>
     <li>Ranges with the same name show as one tier. So 7–9 and 10–11, both named Gold, appear as "Gold · Friends 7 to 11".</li>
-  </ul>
-  <h4 style="font-size:14.5px;margin:20px 0 6px">How the friend benefit works</h4>
-  <ul>
-    <li>This is the discount shown on the landing page, the friend link page and the price table.</li>
-    <li>The fee system applies the same discount when the friend pays.</li>
   </ul>
   <h4 style="font-size:14.5px;margin:20px 0 6px">No end date: a campaign runs until it is replaced or deactivated</h4>
   <p>A Non-enrolled referral flow campaign has a Start Date but <b>no End Date</b>. It runs until an admin switches it off or a new campaign replaces it.</p>
@@ -679,7 +676,7 @@ section h2,section h3{scroll-margin-top:16px}
     <tr><th>Situation</th><th>What happens</th></tr>
     <tr><td>Changing the rewards</td><td>The admin creates a new campaign with a future Start Date. On that date it goes live and the old one is <b>deactivated automatically</b>, so there is never a gap.</td></tr>
     <tr><td>Deactivate <span class="tag ex">Exists</span></td><td>Uses the existing on/off toggle in campaign settings, so there is nothing new to build. Switching it off ends the campaign at once. It can be switched back on only if no other campaign of this type is live or waiting for that university. It then resumes on its original terms. A replaced campaign is switched off automatically.</td></tr>
-    <tr><td>No live campaign (switched off with no replacement, or before the first Start Date)</td><td>The programme is <b>paused</b> for new referrals:<br>• Landing page: "Referrals are paused right now" replaces the Start Referring button.<br>• Friend links: open without the discount. A sign-up is an ordinary lead with no referral credit.<br>• Dashboard: still shows every friend and gift card. Share buttons are hidden behind the same note.<br><b>The backend handles this.</b> The referral system reports the programme as paused, and all three pages switch on their own.</td></tr>
+    <tr><td>No live campaign (switched off with no replacement, or before the first Start Date)</td><td>The programme is <b>paused</b> for new referrals:<br>• Landing page: "Referrals are paused right now" replaces the Start Referring button.<br>• Friend links: open without the invite banner. A sign-up is an ordinary lead with no referral credit.<br>• Dashboard: still shows every friend and gift card. Share buttons are hidden behind the same note.<br><b>The backend handles this.</b> The referral system reports the programme as paused, and all three pages switch on their own.</td></tr>
     <tr><td>Resuming after a pause</td><td>The programme resumes on its own when a campaign is live again, either a new one or the old one switched back on. Existing links work again, so nobody needs to re-share. The landing page, banner, footer link and share buttons come back automatically.</td></tr>
     <tr><td>Campaign waiting to start</td><td>Can be edited or deleted until its Start Date.</td></tr>
     <tr><td>Entry points while paused</td><td>The <b>backend</b> hides the homepage banner and the footer "Refer and Earn" link. <b>Marketing</b> pauses referral emails and WhatsApp messages. Anyone who still reaches the landing page sees the paused message.</td></tr>
@@ -688,17 +685,16 @@ section h2,section h3{scroll-margin-top:16px}
   <p class="mini">These apply only to this campaign type. General and Sales campaigns work as they do today.</p>
   <ul>
     <li><b>One count per referrer.</b> A referrer's place in line carries over from one campaign to the next at the same university.</li>
-    <li><b>Sign-up decides the terms.</b> A friend gets the discount, amounts and maximum of the campaign that was live when they signed up. This holds even if that campaign is later replaced or switched off. Their discount never expires.</li>
-    <li><b>A live campaign is locked.</b> Before its Start Date, everything can be edited. After it, only the Campaign Name can change. To change the tiers or discount, the admin schedules a new campaign, which replaces this one on its Start Date.</li>
+    <li><b>Sign-up decides the terms.</b> A friend's referral uses the amounts and maximum of the campaign that was live when they signed up. This holds even if that campaign is later replaced or switched off.</li>
+    <li><b>A live campaign is locked.</b> Before its Start Date, everything can be edited. After it, only the Campaign Name can change. To change the tiers, the admin schedules a new campaign, which replaces this one on its Start Date.</li>
     <li><b>Referrer Type comes from the referrer's lead.</b> A referrer is <b>Enrolled</b> if their Lead Admission Status is Confirmed (fee paid); otherwise <b>Non-enrolled</b>. It is checked when the friend's lead is created. Non-enrolled referrers use this campaign type; Enrolled referrers stay on the existing campaign, as today.</li>
     <li><b>Referrers who enrol mid-way.</b> Once a referrer's admission is Confirmed, their later friends go to the existing campaign. Count and maximum from this campaign type don't carry over. Accepted.</li>
-    <li><b>Same discount for every programme.</b> The discount applies to all programmes in the campaign. So a heading like "Get 10% off", built from the campaign's value, is true everywhere.</li>
   </ul>
   <h4 style="font-size:14.5px;margin:20px 0 6px">Form checks</h4>
   <div class="wrap"><table class="fixed"><colgroup><col style="width:30%"><col style="width:70%"></colgroup>
     <tr><th>Applies to</th><th>The form refuses to save unless</th></tr>
     <tr><td>All campaign types</td><td>Ranges start at 1, with no gaps or overlaps · each End is at least its Start · every amount is above ₹0 · End Date is after Start Date (General and Sales only)</td></tr>
-    <tr><td>Non-enrolled referral flow</td><td>Every used range has a tier name · empty ranges come only at the end · Default Amount is ₹0 · discount is 1% to 100% · Batch and Program are All · no End Date · the university has no other live campaign of this type, and at most one waiting to start</td></tr>
+    <tr><td>Non-enrolled referral flow</td><td>Every used range has a tier name · empty ranges come only at the end · Default Amount is ₹0 · Batch and Program are All · no End Date · the university has no other live campaign of this type, and at most one waiting to start</td></tr>
   </table></div>
   <h3><span class="num">4.2</span>Approving rewards</h3>
   <p>Gift cards are not sent on their own. Once a friend's admission is Confirmed, the reward waits in the existing <b>Referrals &amp; Rewards</b> list until an admin approves it. Approved rewards are then issued by the voucher vendor.</p>
@@ -750,7 +746,7 @@ section h2,section h3{scroll-margin-top:16px}
   <p>The public landing page that explains the offer and signs people up for a link.</p>
   <div class="callout info">
     <div class="ttl">↔ How it connects</div>
-    Reads its amounts and discount from the campaign (4.1). Signing up creates a profile and lead (8) and the referral link, then sends the referrer to the dashboard (6).
+    Reads its amounts from the campaign (4.1). Signing up creates a profile and lead (8) and the referral link, then sends the referrer to the dashboard (6).
   </div>
   <h3><span class="num">5.1</span>Entry points</h3>
 
@@ -782,7 +778,7 @@ section h2,section h3{scroll-margin-top:16px}
     <tr><td><span class="mini">W7</span></td><td><b>Rewards simulator</b></td><td>Slider showing how gift cards add up. Built in; reads the tiers from the live campaign.</td></tr>
     <tr><td><span class="mini">W8</span></td><td><b>How your friend joins</b></td><td>The friend's side in three steps.</td></tr>
     <tr><td><span class="mini">W9</span></td><td><b>Stories</b></td><td>Quotes from referrers.</td></tr>
-    <tr><td><span class="mini">W10</span></td><td><b>Programmes</b></td><td>Programmes with their discounted fee.</td></tr>
+    <tr><td><span class="mini">W10</span></td><td><b>Programmes</b></td><td>Programmes with their fees.</td></tr>
     <tr><td><span class="mini">W11</span></td><td><b>Closing CTA</b></td><td>Last push to start referring.</td></tr>
     <tr><td><span class="mini">W12</span></td><td><b>FAQ</b></td><td>Common questions.</td></tr>
     <tr><td><span class="mini">W13</span></td><td><b>Footer</b></td><td>Copied from the university site. Nothing to fill in.</td></tr>
@@ -790,7 +786,7 @@ section h2,section h3{scroll-margin-top:16px}
   <h3><span class="num">5.3</span>Numbers in the page copy</h3>
   <div class="callout ok">
     <div class="ttl">⚙ Backend requirement</div>
-    Never type amounts, the discount or the university name into the copy. Use these placeholders, which fill in from the campaign (4.1): <code>{university_name}</code>, <code>{discount_pct}</code>, <code>{max_tier_amount}</code>, <code>{link}</code>. When the campaign changes, every widget updates.
+    Never type amounts or the university name into the copy. Use these placeholders, which fill in from the campaign (4.1): <code>{university_name}</code>, <code>{max_tier_amount}</code>, <code>{link}</code>. <code>{discount_pct}</code> is added in v3 (12.1). When the campaign changes, every widget updates.
   </div>
   <div class="callout ok">
     <div class="ttl">⚙ Nothing on the page holds a fixed amount</div>
@@ -801,7 +797,7 @@ section h2,section h3{scroll-margin-top:16px}
     </ul>
   </div>
   <h3><span class="num">5.4</span>Widget fields: landing page</h3>
-  <p class="mini">Only what is in the Figma. <b>Required</b>: the widget won't publish without it. <b>Optional</b>: hidden if left empty. <b>Auto</b>: filled by the system. Amounts and the discount in any copy fill in automatically (5.3).</p>
+  <p class="mini">Only what is in the Figma. <b>Required</b>: the widget won't publish without it. <b>Optional</b>: hidden if left empty. <b>Auto</b>: filled by the system. Amounts in any copy fill in automatically (5.3).</p>
   <details class="fields"><summary>View fields for all 13 widgets</summary>
   <div class="wdg"><div class="wdg-h"><span class="wid">W1</span><b>Header</b><span class="wj">Copied from the university site.</span></div>
   <div class="wrap"><table class="fixed wt"><colgroup><col style="width:24%"><col style="width:16%"><col style="width:12%"><col style="width:48%"></colgroup>
@@ -849,7 +845,7 @@ section h2,section h3{scroll-margin-top:16px}
     <tr><td>Footnote</td><td>Text</td><td><span class="rq o">Optional</span></td><td>Small line under the button.</td></tr>
     <tr><td>Link step title</td><td>Text</td><td><span class="rq r">Required</span></td><td>Title once the link is ready. Figma: <i>Your invite link</i>.</td></tr>
     <tr><td>Message label</td><td>Text</td><td><span class="rq o">Optional</span></td><td>Label above the share message.</td></tr>
-    <tr><td>Default message</td><td>Text</td><td><span class="rq r">Required</span></td><td>The ready-made message friends receive. It includes the link and discount automatically.</td></tr>
+    <tr><td>Default message</td><td>Text</td><td><span class="rq r">Required</span></td><td>The ready-made message friends receive. It includes the link automatically.</td></tr>
     <tr><td>Dashboard button</td><td>Label</td><td><span class="rq r">Required</span></td><td>Opens the dashboard. Figma: <i>Track My Referral</i>.</td></tr>
     <tr><td>Form fields, link, share buttons</td><td>Fixed</td><td><span class="rq a">Auto</span></td><td>Built in, not edited in the CMS. See 5.5.</td></tr>
   </table></div></div>
@@ -888,13 +884,13 @@ section h2,section h3{scroll-margin-top:16px}
     <tr><td>Name</td><td>Text</td><td><span class="rq r">Required</span></td><td>Who said it.</td></tr>
     <tr><td>Role and city</td><td>Text</td><td><span class="rq r">Required</span></td><td>e.g. parent, student or referrer, and where they live.</td></tr>
   </table></div></div>
-  <div class="wdg"><div class="wdg-h"><span class="wid">W10</span><b>Programmes</b><span class="wj">Programmes with their discounted fee.</span></div>
+  <div class="wdg"><div class="wdg-h"><span class="wid">W10</span><b>Programmes</b><span class="wj">Programmes with their fees.</span></div>
   <div class="wrap"><table class="fixed wt"><colgroup><col style="width:24%"><col style="width:16%"><col style="width:12%"><col style="width:48%"></colgroup>
     <tr><th>Field</th><th>Type</th><th>Input</th><th>What it is</th></tr>
     <tr><td>Eyebrow</td><td>Text</td><td><span class="rq o">Optional</span></td><td>Small label above the heading.</td></tr>
     <tr><td>Heading</td><td>Text</td><td><span class="rq r">Required</span></td><td>Section title. Figma: <i>Programmes your friends can choose</i>.</td></tr>
     <tr><td>Subheading</td><td>Text</td><td><span class="rq o">Optional</span></td><td>One line under the title.</td></tr>
-    <tr><td>Table</td><td>System</td><td><span class="rq a">Auto</span></td><td>Each programme with its length, full fee, fee after discount and saving. Comes from the programme list.</td></tr>
+    <tr><td>Table</td><td>System</td><td><span class="rq a">Auto</span></td><td>Each programme with its length and fee. Comes from the programme list. The fee-after-discount and saving columns are added in v3 (12.1).</td></tr>
   </table></div></div>
   <div class="wdg"><div class="wdg-h"><span class="wid">W11</span><b>Closing CTA</b><span class="wj">Last push to start referring.</span></div>
   <div class="wrap"><table class="fixed wt"><colgroup><col style="width:24%"><col style="width:16%"><col style="width:12%"><col style="width:48%"></colgroup>
@@ -1002,7 +998,7 @@ section h2,section h3{scroll-margin-top:16px}
   <div class="wdg"><div class="wdg-h"><span class="wid">D3</span><b>Invite link card</b><span class="wj"></span></div>
   <div class="wrap"><table class="fixed wt"><colgroup><col style="width:22%"><col style="width:38%"><col style="width:40%"></colgroup>
     <tr><th>Element</th><th>Example</th><th>How it works</th></tr>
-    <tr><td>Banner</td><td>"Friends Save 10% With Your Link"</td><td>The campaign's friend benefit.</td></tr>
+    <tr><td>Banner <span class="tag ph">v3</span></td><td>—</td><td>Hidden in v1. From v3 it shows the friend benefit, e.g. "Friends Save 10% With Your Link" (12.1).</td></tr>
     <tr><td>Title</td><td>"Your invite link"</td><td>Fixed text.</td></tr>
     <tr><td>Link + Copy</td><td>https://refer.&lt;domain&gt;/r/&lt;CODE&gt;</td><td>Can't be edited. Copy copies it.</td></tr>
     <tr><td>Share buttons</td><td>WhatsApp, SMS, Email, Share, Telegram, X, Facebook</td><td>Each opens that app with the message below.</td></tr>
@@ -1059,17 +1055,17 @@ section h2,section h3{scroll-margin-top:16px}
 <section id="friend-link">
   <h2><span class="num">7.</span>Friend referral link</h2>
 
-  <p>The page a friend sees when they open a link. The discount comes from the link itself; there is no code to type. Like the dashboard, it is a <b>single fixed page</b>, not built from widgets.</p>
+  <p>The page a friend sees when they open a link. The referral comes from the link itself; there is no code to type. Like the dashboard, it is a <b>single fixed page</b>, not built from widgets.</p>
   <div class="callout info">
     <div class="ttl">↔ How it connects</div>
-    Opened from a referrer's link (6). Reads the discount from the campaign (4.1). Signing up creates the friend's profile and lead (8), which then moves through the stages (3.3) and appears on the referrer's dashboard (6).
+    Opened from a referrer's link (6). Signing up creates the friend's profile and lead (8), which then moves through the stages (3.3) and appears on the referrer's dashboard (6).
   </div>
   <h3><span class="num">7.1</span>Layout</h3>
   <p>On desktop, F2 and F3 sit on the left and the sign-up form (F4) on the right.</p>
   <div class="wrap"><table class="fixed"><colgroup><col style="width:9%"><col style="width:26%"><col style="width:65%"></colgroup>
     <tr><th>#</th><th>Block</th><th>What it shows</th></tr>
     <tr><td><span class="mini">F1</span></td><td><b>Header</b></td><td>Same as the university site.</td></tr>
-    <tr><td><span class="mini">F2</span></td><td><b>Price card</b></td><td>The friend's discounted price for the programme they pick.</td></tr>
+    <tr><td><span class="mini">F2</span></td><td><b>Price card</b></td><td>The fee for the programme they pick.</td></tr>
     <tr><td><span class="mini">F3</span></td><td><b>Highlights</b></td><td>Three trust points.</td></tr>
     <tr><td><span class="mini">F4</span></td><td><b>Sign-up form</b></td><td>Who invited them, and the friend's sign-up.</td></tr>
     <tr><td><span class="mini">F5</span></td><td><b>University banner</b></td><td>Link to the university's main site.</td></tr>
@@ -1082,13 +1078,13 @@ section h2,section h3{scroll-margin-top:16px}
   <div class="wdg"><div class="wdg-h"><span class="wid">F2</span><b>Price card</b><span class="wj"></span></div>
   <div class="wrap"><table class="fixed wt"><colgroup><col style="width:24%"><col style="width:16%"><col style="width:12%"><col style="width:48%"></colgroup>
     <tr><th>Element</th><th>Type</th><th>Source</th><th>What it is</th></tr>
-    <tr><td>Heading</td><td>Text</td><td>Campaign</td><td>The offer, with the discount from the campaign's friend benefit highlighted. Figma: <i>Get 10% off your online degree</i>.</td></tr>
+    <tr><td>Heading</td><td>Text</td><td>Fixed</td><td>Invites the friend to pick a programme. From v3 it highlights the discount, e.g. Figma: <i>Get 10% off your online degree</i> (12.1).</td></tr>
     <tr><td>Line</td><td>Text</td><td>Fixed</td><td>Tells the friend to pick a programme.</td></tr>
     <tr><td>Programme buttons</td><td>Buttons</td><td>Programmes</td><td>One per programme. The first is selected when the page opens.</td></tr>
     <tr><td>Programme details</td><td>Text</td><td>Programmes</td><td>Name, mode and length, e.g. MBA · Online · 2 years.</td></tr>
-    <tr><td>You save</td><td>Amount</td><td>System</td><td>The discount in rupees for the selected programme.</td></tr>
-    <tr><td>You pay</td><td>Amount</td><td>System</td><td>The fee after discount, with the full fee crossed out.</td></tr>
-    <tr><td>Footnote</td><td>Text</td><td>Fixed</td><td>Confirms the discount is already applied.</td></tr>
+    <tr><td>You save <span class="tag ph">v3</span></td><td>Amount</td><td>System</td><td>Hidden in v1. From v3: the discount in rupees for the selected programme.</td></tr>
+    <tr><td>Fee</td><td>Amount</td><td>System</td><td>The full fee in v1. From v3: the fee after discount, with the full fee crossed out.</td></tr>
+    <tr><td>Footnote <span class="tag ph">v3</span></td><td>Text</td><td>Fixed</td><td>Hidden in v1. From v3: confirms the discount is already applied.</td></tr>
   </table></div></div>
   <div class="wdg"><div class="wdg-h"><span class="wid">F3</span><b>Highlights</b><span class="wj"></span></div>
   <div class="wrap"><table class="fixed wt"><colgroup><col style="width:24%"><col style="width:16%"><col style="width:12%"><col style="width:48%"></colgroup>
@@ -1098,7 +1094,7 @@ section h2,section h3{scroll-margin-top:16px}
   <div class="wdg"><div class="wdg-h"><span class="wid">F4</span><b>Sign-up form</b><span class="wj"></span></div>
   <div class="wrap"><table class="fixed wt"><colgroup><col style="width:24%"><col style="width:16%"><col style="width:12%"><col style="width:48%"></colgroup>
     <tr><th>Element</th><th>Type</th><th>Source</th><th>What it is</th></tr>
-    <tr><td>Invite banner</td><td>Text</td><td>System</td><td>Who invited them and that the discount is applied. Figma: <i>Abhinav invited you</i>.</td></tr>
+    <tr><td>Invite banner</td><td>Text</td><td>System</td><td>Who invited them. Figma: <i>Abhinav invited you</i>.</td></tr>
     <tr><td>University name</td><td>Text</td><td>Rules</td><td>The university's name.</td></tr>
     <tr><td>Line</td><td>Text</td><td>Fixed</td><td>One line on what happens next (counselling and EMI options).</td></tr>
     <tr><td>Callback count</td><td>Photos + text</td><td>System</td><td>How many people asked for a callback today.</td></tr>
@@ -1134,30 +1130,22 @@ section h2,section h3{scroll-margin-top:16px}
     <tr><th>Case</th><th>Friend sees</th><th>Referrer sees</th></tr>
     <tr><td>Friend uses the referrer's own number</td><td>"Referrers can't use their own link."</td><td>Nothing</td></tr>
     <tr><td>Number already referred by someone</td><td>"This number is already registered with a referral."</td><td>Nothing</td></tr>
-    <tr><td>Number already has a profile on the site</td><td>"This number is already registered with us, so the referral discount doesn't apply. A counsellor will call you." No discount is applied, at sign-up or at payment</td><td>Row marked Void: not eligible</td></tr>
-    <tr><td>New friend</td><td>"You're in, &lt;name&gt;! Your &lt;discount&gt;% discount on &lt;programme&gt; is locked to &lt;mobile&gt;. You pay ₹Y instead of ₹X. A counsellor will call within 24 hours."</td><td>New row: Joined</td></tr>
+    <tr><td>Number already has a profile on the site</td><td>"This number is already registered with us. A counsellor will call you."</td><td>Row marked Void: not eligible</td></tr>
+    <tr><td>New friend</td><td>"You're in, &lt;name&gt;! A counsellor will call within 24 hours about &lt;programme&gt;."</td><td>New row: Joined</td></tr>
   </table></div>
   <ul>
     <li>A new friend gets a profile, with "referred by" set to the referrer.</li>
     <li>They are added to the CRM as a lead, tagged with the referrer.</li>
     <li>On phones, a sticky Sign Up button appears when the form scrolls out of view.</li>
-    <li><b>Paused</b> (4.1): the page opens without the discount or the "&lt;name&gt; invited you" banner. A sign-up is an ordinary lead with no referral credit. Sign-up time decides, so a friend who opened the link earlier but signs up while paused gets no credit.</li>
+    <li><b>Paused</b> (4.1): the page opens without the "&lt;name&gt; invited you" banner. A sign-up is an ordinary lead with no referral credit. Sign-up time decides, so a friend who opened the link earlier but signs up while paused gets no credit.</li>
   </ul>
   <div class="callout ok">
     <div class="ttl">⚙ Backend requirement</div>
     The referral travels in the <b>URL</b>. The friend link page reads the code from <code>/r/&lt;CODE&gt;</code>. "Visit university website" opens the main site with <code>?ref=&lt;CODE&gt;</code> added, and the main site passes it on to its own sign-up. A sign-up with a valid code is credited to that referrer. A sign-up without one is not.
   </div>
-  <div class="callout ok">
-    <div class="ttl">⚙ Backend requirement</div>
-    The friend's discount (from the campaign live when they signed up, e.g. 10%) is locked to the friend's phone number and must be <b>applied by the fee system when they pay</b>. It applies to whichever programme at this university they finally enrol in, not only the one they picked on this page.
-  </div>
-  <div class="callout info">
-    <div class="ttl">ℹ How long the discount lasts</div>
-    It never expires. A friend who signed up through the link gets their discount whenever they enrol, even in a later batch.
-  </div>
   <div class="callout info">
     <div class="ttl">ℹ Broken or mistyped links</div>
-    If the code in the link doesn't match any referrer, the page opens without the invite banner or discount and shows "This invite link isn't valid." Any sign-up from it is an ordinary lead.
+    If the code in the link doesn't match any referrer, the page opens without the invite banner and shows "This invite link isn't valid." Any sign-up from it is an ordinary lead.
   </div>
 </section>
 
@@ -1211,23 +1199,23 @@ section h2,section h3{scroll-margin-top:16px}
   <h4 style="font-size:14.5px;margin:18px 0 6px">Friend referral link: sign-up</h4>
   <div class="wrap"><table class="fixed"><colgroup><col style="width:32%"><col style="width:24%"><col style="width:44%"></colgroup>
     <tr><th>Given</th><th>When</th><th>Then</th></tr>
-    <tr><td>A friend opens a valid link</td><td>the page loads</td><td>the invite banner shows the referrer's name and the discount is applied to every programme price</td></tr>
+    <tr><td>A friend opens a valid link</td><td>the page loads</td><td>the invite banner shows the referrer's name, and every programme shows its full fee with no discount</td></tr>
     <tr><td>A friend enters the referrer's own phone number</td><td>taps Sign Up</td><td>sign-up is blocked with "Referrers can't use their own link."</td></tr>
     <tr><td>A friend whose number was already referred</td><td>taps Sign Up</td><td>sign-up is blocked with "This number is already registered with a referral."</td></tr>
-    <tr><td>A friend whose number already has a profile on the site</td><td>completes sign-up</td><td>they see the "already registered" message, no discount is applied, and the referrer's row shows Void: not eligible</td></tr>
+    <tr><td>A friend whose number already has a profile on the site</td><td>completes sign-up</td><td>they see the "already registered" message, and the referrer's row shows Void: not eligible</td></tr>
     <tr><td>A new friend</td><td>completes sign-up with a correct OTP</td><td>a lead is created tagged with the referrer, and the referrer's dashboard shows a new row: Joined, Pending</td></tr>
-    <tr><td>A friend opens a link with an unknown code</td><td>the page loads</td><td>no invite banner or discount is shown, and a sign-up is an ordinary lead</td></tr>
+    <tr><td>A friend opens a link with an unknown code</td><td>the page loads</td><td>no invite banner is shown, and a sign-up is an ordinary lead</td></tr>
   </table></div>
   <h4 style="font-size:14.5px;margin:18px 0 6px">Shared rules: rewards</h4>
   <div class="wrap"><table class="fixed"><colgroup><col style="width:32%"><col style="width:24%"><col style="width:44%"></colgroup>
     <tr><th>Given</th><th>When</th><th>Then</th></tr>
     <tr><td>A non-enrolled referrer whose 3rd friend's admission becomes Confirmed</td><td>the status change arrives</td><td>the friend gets place 3, and the card is held as Scheduled at place 3's amount (Silver in the suggested tiers)</td></tr>
-    <tr><td>A referrer whose cards held or sent have reached the maximum (end of the last range)</td><td>one more friend's admission becomes Confirmed</td><td>no card is held, the friend keeps their discount, and the row shows status Max reached with "No gift card (maximum reached)"</td></tr>
+    <tr><td>A referrer whose cards held or sent have reached the maximum (end of the last range)</td><td>one more friend's admission becomes Confirmed</td><td>no card is held, and the row shows status Max reached with "No gift card (maximum reached)"</td></tr>
     <tr><td>A friend whose reward is not yet approved</td><td>their admission becomes Cancelled</td><td>only that card turns Void; every other friend keeps their place and amount</td></tr>
     <tr><td>A friend whose card has been sent</td><td>their admission becomes Cancelled</td><td>the reward doesn't change</td></tr>
     <tr><td>A referrer whose own admission is Confirmed</td><td>a new friend signs up</td><td>that friend's referral goes to the existing campaign, not the new campaign type</td></tr>
-    <tr><td>The programme is paused (no live campaign)</td><td>a friend opens a referral link and signs up</td><td>no discount is shown or applied, and the sign-up is an ordinary lead with no referral credit. The landing page shows "Referrals are paused right now"</td></tr>
-    <tr><td>A friend signed up under campaign A</td><td>A is deactivated, then the friend enrols</td><td>they keep A's discount, and the card is held at A's amount for their place, checked against A's maximum</td></tr>
+    <tr><td>The programme is paused (no live campaign)</td><td>a friend opens a referral link and signs up</td><td>no invite banner is shown, and the sign-up is an ordinary lead with no referral credit. The landing page shows "Referrals are paused right now"</td></tr>
+    <tr><td>A friend signed up under campaign A</td><td>A is deactivated, then the friend enrols</td><td>the card is held at A's amount for their place, checked against A's maximum</td></tr>
     <tr><td>A referrer with 9 cards. Campaign A (ends at 11) has been replaced by campaign B (ends at 8)</td><td>a friend who signed up under B enrols</td><td>no card is held, because B's maximum is reached. A friend who signed up under A still gets a card at place 10</td></tr>
     <tr><td>A campaign whose Start Date has passed</td><td>an admin opens it to edit</td><td>only Campaign Name can be changed; all other fields are read-only, and there is no End Date</td></tr>
   </table></div>
@@ -1247,7 +1235,7 @@ section h2,section h3{scroll-margin-top:16px}
     <tr><td>The live campaign is deactivated with no replacement</td><td>someone opens the university homepage</td><td>the referral banner and footer link are hidden</td></tr>
     <tr><td>A new campaign with different tiers goes live</td><td>someone opens the landing page</td><td>the rewards simulator (W7) shows the new tiers and amounts with no CMS edit</td></tr>
     <tr><td>A university already has a campaign waiting to start</td><td>an admin creates another</td><td>the form refuses to save</td></tr>
-    <tr><td>A live Non-enrolled campaign</td><td>an admin switches its toggle off</td><td>it stops at once. New sign-ups get no discount or credit until a campaign is live again</td></tr>
+    <tr><td>A live Non-enrolled campaign</td><td>an admin switches its toggle off</td><td>it stops at once. New sign-ups get no referral credit until a campaign is live again</td></tr>
     <tr><td>A deactivated campaign, while another Non-enrolled campaign for the university is live or waiting</td><td>an admin switches its toggle back on</td><td>the toggle is refused, with a message naming the other campaign</td></tr>
     <tr><td>An admin creates a Non-enrolled campaign</td><td>any range has no tier name, or ranges overlap or leave a gap</td><td>the form refuses to save and highlights the problem</td></tr>
     <tr><td>A campaign with ranges named Gold for 7–9 and 10–11</td><td>the referrer opens the dashboard</td><td>they see one tier: Gold · Friends 7 to 11</td></tr>
@@ -1255,7 +1243,7 @@ section h2,section h3{scroll-margin-top:16px}
   <h4 style="font-size:14.5px;margin:18px 0 6px">Shared rules: fraud checks</h4>
   <div class="wrap"><table class="fixed"><colgroup><col style="width:32%"><col style="width:24%"><col style="width:44%"></colgroup>
     <tr><th>Given</th><th>When</th><th>Then</th></tr>
-    <tr><td>A friend signs up on the same device as their referrer</td><td>sign-up completes</td><td>the friend still gets their discount, and the referral is flagged in the admin list</td></tr>
+    <tr><td>A friend signs up on the same device as their referrer</td><td>sign-up completes</td><td>the sign-up goes through, and the referral is flagged in the admin list</td></tr>
     <tr><td>A referrer's friends include 3 numbers differing only in the last 2 digits within 7 days</td><td>the third one signs up</td><td>all three referrals are flagged</td></tr>
   </table></div>
 </section>
@@ -1268,9 +1256,9 @@ section h2,section h3{scroll-margin-top:16px}
     <tr><td>User profile</td><td>Phone (unique ID), name, email, qualification, referred by, created date.</td></tr>
     <tr><td>Referrer details</td><td>Link code, link clicks, which entry point they came from, date they became a referrer.</td></tr>
     <tr><td>Referral record</td><td><b>Friend:</b> name, phone, email, qualification, programme, lead ID.<br><b>Referral:</b> referrer's phone and lead ID, stage, enrolment date, place in line.<br><b>Gift card:</b> amount, status, reason if Void, Transaction ID, Date of Disbursal, who approved it and when.</td></tr>
-    <tr><td>Existing referral system</td><td>Runs the gift cards through campaigns (4.1) and supplies all dashboard data (6). Gets a new campaign type, Non-enrolled referral flow, with tier names and a friend discount.</td></tr>
+    <tr><td>Existing referral system</td><td>Runs the gift cards through campaigns (4.1) and supplies all dashboard data (6). Gets a new campaign type, Non-enrolled referral flow, with tier names (friend discount in v3, 12.1).</td></tr>
     <tr><td>CRM</td><td>Gives every referrer and friend a lead ID, which the reward list uses (4.2). Creates a lead when a referrer or a friend signs up. Its Lead Sales Status and Lead Admission Status set the friend's stage (3.3) and the referrer's type (4.1).</td></tr>
-    <tr><td>Fee system</td><td>Applies the friend's discount (the campaign's friend benefit) when they pay. A refund before approval cancels the card.</td></tr>
+    <tr><td>Fee system</td><td>No discount in v1. A refund before approval cancels the card. From v3 it also applies the friend's discount when they pay (12.1).</td></tr>
     <tr><td>OTP and SMS</td><td>OTP for every sign-up. SMS for gift cards and friend confirmations.</td></tr>
     <tr><td>Voucher vendor</td><td>The existing vendor. Issues the e-gift card when an admin approves it, and returns a Transaction ID.</td></tr>
     <tr><td>Link tracking</td><td>Counts clicks on each referrer's link.</td></tr>
@@ -1287,7 +1275,7 @@ section h2,section h3{scroll-margin-top:16px}
 
   <div class="wrap"><table class="fixed"><colgroup><col style="width:40%"><col style="width:60%"></colgroup>
     <tr><th>Event</th><th>Send a lead?</th></tr>
-    <tr><td>Friend completes sign-up</td><td>Yes, unless blocked (own number or already referred). If the number already has a profile, no new lead is created, no discount is locked, and the referral is marked not eligible.</td></tr>
+    <tr><td>Friend completes sign-up</td><td>Yes, unless blocked (own number or already referred). If the number already has a profile, no new lead is created, and the referral is marked not eligible.</td></tr>
     <tr><td>Referrer signs up</td><td>Yes. The referrer becomes a lead (source: referrer sign-up). This gives them the Referrer Lead ID the reward list needs. If they already have a lead, it is reused.</td></tr>
   </table></div>
   <div class="callout ok">
@@ -1304,6 +1292,42 @@ section h2,section h3{scroll-margin-top:16px}
     <tr><td>v1</td><td>Landing page, sign-up with OTP, dashboard, friend link page with sign-up, gift cards with bulk admin approval. Top referrers entered by hand.</td></tr>
     <tr><td>v1.1</td><td>Email preferences for referrers, reminders to nudge friends, link click reports.</td></tr>
     <tr><td>v2</td><td>Notifications to referrers (friend signed up, friend enrolled, card approved), leaderboard from real data, time-limited bonus campaigns, more reward options.</td></tr>
+    <tr><td>v3</td><td>Friend benefit: a fee discount for referred friends, set per campaign and applied by the fee system (12.1).</td></tr>
+  </table></div>
+  <h3><span class="num">12.1</span>Friend benefit (v3)</h3>
+  <p><b>Not in v1, v1.1 or v2.</b> Until v3, friends pay the full fee, and no page, message or system shows or applies a discount. This section holds everything the discount needs, so v3 can be built from it alone.</p>
+  <h4 style="font-size:14.5px;margin:20px 0 6px">The rule</h4>
+  <ul>
+    <li>A friend who signs up through a referral link gets a discount on the programme fee. The admin sets it per campaign: default <b>10%</b>, 1% to 100%.</li>
+    <li>The same discount applies to every programme in the campaign, so a heading like "Get 10% off" is true everywhere.</li>
+    <li>The discount comes from the campaign live when the friend signed up. It is locked to the friend's phone number and <b>never expires</b>, even for a later batch.</li>
+    <li>It applies to whichever programme at this university the friend finally enrols in, not only the one they picked on the link page.</li>
+    <li>Max reached and flagged referrals still get the discount. The referrer's cap and fraud flags never affect it.</li>
+  </ul>
+  <h4 style="font-size:14.5px;margin:20px 0 6px">Who doesn't get it</h4>
+  <ul>
+    <li>Anyone whose number already has a profile on the site. They see: "This number is already registered with us, so the referral discount doesn't apply. A counsellor will call you."</li>
+    <li>Anyone who signs up while the programme is paused, or through an invalid link.</li>
+    <li>Friends who signed up before v3 went live. Sign-up time decides.</li>
+  </ul>
+  <h4 style="font-size:14.5px;margin:20px 0 6px">What changes in v3</h4>
+  <div class="wrap"><table class="fixed"><colgroup><col style="width:30%"><col style="width:70%"></colgroup>
+    <tr><th>Where</th><th>Change</th></tr>
+    <tr><td>Campaign form (4.1)</td><td><b>Friend benefit</b> field next to the referral ranges, shown only for the Non-enrolled referral flow type. Form check: 1% to 100%. Locked once the campaign is live, like the other fields.</td></tr>
+    <tr><td>Fee system</td><td>Applies the locked discount when the friend pays.</td></tr>
+    <tr><td>Landing page (5)</td><td><code>{discount_pct}</code> placeholder for copy. W10 adds fee-after-discount and saving columns. The default share message includes the discount.</td></tr>
+    <tr><td>Dashboard (6)</td><td>D3 banner: "Friends Save &lt;discount&gt;% With Your Link".</td></tr>
+    <tr><td>Friend link page (7)</td><td>F2 heading highlights the discount ("Get 10% off your online degree"), with <b>You save</b>, <b>You pay</b> (full fee crossed out) and a footnote that the discount is applied. F4 invite banner adds "discount applied". Success message: "You're in, &lt;name&gt;! Your &lt;discount&gt;% discount on &lt;programme&gt; is locked to &lt;mobile&gt;. You pay ₹Y instead of ₹X. A counsellor will call within 24 hours."</td></tr>
+    <tr><td>Live example (3.6)</td><td>Friend benefit (%) input added to the campaign settings panel.</td></tr>
+  </table></div>
+  <h4 style="font-size:14.5px;margin:20px 0 6px">Acceptance criteria (v3)</h4>
+  <div class="wrap"><table class="fixed"><colgroup><col style="width:34%"><col style="width:26%"><col style="width:40%"></colgroup>
+    <tr><th>Given</th><th>When</th><th>Then</th></tr>
+    <tr><td>A friend opens a valid link</td><td>the page loads</td><td>the campaign's discount is shown on every programme price</td></tr>
+    <tr><td>A friend signed up under campaign A (10%)</td><td>A is replaced by B (15%), then the friend pays</td><td>the fee system applies 10%</td></tr>
+    <tr><td>A friend picked MBA on the link page</td><td>they enrol in MCA</td><td>the discount applies to MCA</td></tr>
+    <tr><td>A friend whose number already has a profile</td><td>completes sign-up</td><td>they see the "discount doesn't apply" message, and no discount is applied at payment</td></tr>
+    <tr><td>The referrer has reached the maximum</td><td>another friend pays</td><td>the friend still gets the discount</td></tr>
   </table></div>
 </section>
 
@@ -1361,6 +1385,7 @@ section h2,section h3{scroll-margin-top:16px}
   <h2><span class="num">B.</span>Appendix: change log</h2>
   <div class="wrap"><table class="fixed"><colgroup><col style="width:22%"><col style="width:78%"></colgroup>
     <tr><th>Date</th><th>Change</th></tr>
+    <tr><td>12 Oct 2026</td><td>Friend benefit (fee discount) moved to v3: removed from v1 pages, campaign form, fee system, messages and tests, and gathered in 12.1. v3 added to the release plan.</td></tr>
     <tr><td>11 Oct 2026</td><td><ul style="margin:0;padding-left:18px">
       <li>New gift card status Max reached (admin and dashboard), with its own event. Email added to the referrer sign-up; SMS-only delivery removed. No discount for friends with an existing profile. Void rows shown in the friends table and counted in All. Sign-up modal defined.</li>
       <li>Reorganised into five parts (portal, landing page, dashboard, friend link, profile) with an end-to-end flowchart (3.1); duplicated content merged so each rule lives in one place.</li>
@@ -1483,8 +1508,7 @@ section h2,section h3{scroll-margin-top:16px}
       {start:2, end:6,  amt:5000, name:"Silver"},
       {start:7, end:9,  amt:7000, name:"Gold"},
       {start:10,end:11, amt:7000, name:"Gold"}
-    ],
-    disc: 10
+    ]
   };
   const PRESETS = {
     six:    {label:"6 friends",          friends:6,  refund:0},
@@ -1546,7 +1570,6 @@ section h2,section h3{scroll-margin-top:16px}
       '<div class="cset"><div class="cset-h"><b>Campaign settings</b><span class="mini">What the admin enters in the portal (4.1). Edit any value to see the effect. Leave a range empty to use fewer than four. The maximum is the end of the last range.</span><button type="button" data-reset="1">Reset to suggested</button></div>'+
       '<div class="wrap"><table class="cset-t"><tr><th></th><th>Start</th><th>End</th><th>Amount (₹)</th><th>Tier name</th></tr>'+rows+'</table></div>'+
       '<div class="cset-row">'+
-                '<label>Friend benefit (%)<input type="number" min="1" max="100" data-c="disc" value="'+cfg.disc+'"></label>'+
         '<div class="cset-ro"><span>Maximum (gift cards)</span><b>'+maxCards()+'</b></div>'+
         '<div class="cset-ro"><span>Maximum total</span><b>'+inr(maxTotal())+'</b></div>'+
       '</div>'+
@@ -1560,7 +1583,7 @@ section h2,section h3{scroll-margin-top:16px}
       ?'<div class="cell void"><div class="who">Friend '+c.i+' · place '+c.pos+'</div><div class="amt">Cancelled</div><span class="tier t-void">Void</span></div>'
       :'<div class="cell"><div class="who">Friend '+c.i+' · place '+c.pos+'</div><div class="amt">'+inr(c.amt)+'</div><span class="tier '+(c.cap?'t-cap':'t-c'+(Math.max(0,names.indexOf(c.tier))%4))+'">'+esc(c.tier)+'</span></div>').join(''):'<div class="mini">No friends enrolled yet.</div>';
     let result=paid+' gift card'+(paid===1?'':'s')+', '+inr(total)+' total.';
-    if (state.friends>maxCards()) result+=' Maximum reached: friends after place '+maxCards()+' still get their '+cfg.disc+'% discount, but no gift card.';
+    if (state.friends>maxCards()) result+=' Maximum reached: friends after place '+maxCards()+' get no gift card.';
     if (state.refund) result+=' Friend '+state.refund+"'s card is cancelled. Everyone else keeps their place and amount; place "+state.refund+' is not given to anyone else.';
     root.innerHTML='<div class="calc">'+settings+
       '<div class="calc-head" style="margin-top:18px"><div><h4>Gift card calculator</h4><p>Uses the settings above.</p></div><div class="presets">'+btns+'</div></div>'+
